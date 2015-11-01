@@ -1,0 +1,3 @@
+[submodule "submodules/CommonTools"]
+	path = submodules/CommonTools
+	url = git@github.com:weimuhua/CommonTools.git

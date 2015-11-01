@@ -1,1 +1,4 @@
 include ':app'
+include ':CommonTools'
+
+project(':CommonTools').projectDir = file('submodules/CommonTools')
