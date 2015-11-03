@@ -5,7 +5,7 @@ import android.util.Log;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-public class Loghelper {
+public class LogHelper {
     public static final String TAG = "TestLibProject";
 
     public static void v(String subTag, String msg) {
