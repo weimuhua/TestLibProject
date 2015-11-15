@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">TestLibProject</string>
+    <array name="activity_item">
+        <item>UI</item>
+        <item>Service</item>
+        <item>ContentProvider</item>
+        <item>BroadCast</item>
+    </array>
 </resources>

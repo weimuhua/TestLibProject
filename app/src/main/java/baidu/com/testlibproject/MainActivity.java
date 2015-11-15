@@ -1,27 +1,52 @@
 package baidu.com.testlibproject;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import java.io.IOException;
 
 import baidu.com.commontools.http.HttpUtils;
 import baidu.com.commontools.threadpool.MhThreadPool;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
 
     private static final String TAG = "MainActivity";
     private static final boolean DEBUG = FeatureConfig.DEBUG;
 
     private static final String URL = "http://www.baidu.com";
 
+    private Context mContext;
+
+    private ListView mListView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mContext = this;
+
+        initView();
+        initData();
 
         testHttp();
+    }
+
+    private void initView() {
+        mListView = (ListView) findViewById(R.id.list_view);
+    }
+
+    private void initData() {
+        String[] strArr = getResources().getStringArray(R.array.activity_item);
+        SimpleAdapter adapter = new SimpleAdapter(mContext);
+        adapter.setStrArr(strArr);
+        mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(this);
     }
 
     private void testHttp() {
@@ -40,5 +65,17 @@ public class MainActivity extends Activity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        switch (position) {
+            case 0:
+                startActivity(new Intent(mContext, UiTestActivity.class));
+                break;
+            default:
+                break;
+        }
+
     }
 }
