@@ -16,6 +16,11 @@ public class SimpleAdapter extends BaseAdapter {
         mCxt = cxt;
     }
 
+    public SimpleAdapter(Context cxt, String[] strArr) {
+        mCxt = cxt;
+        mStrArr = strArr;
+    }
+
     public void setStrArr(String[] strArr) {
         mStrArr = strArr;
     }

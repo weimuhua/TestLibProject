@@ -20,7 +20,12 @@
         </activity>
 
         <activity
-            android:name=".UiTestActivity"
+            android:name=".ui.UiTestActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.TestAutoCompleteTvActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
     </application>

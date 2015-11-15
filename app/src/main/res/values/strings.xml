@@ -6,4 +6,7 @@
         <item>ContentProvider</item>
         <item>BroadCast</item>
     </array>
+    <array name="ui_test_item">
+        <item>AutoCompleteTextView</item>
+    </array>
 </resources>

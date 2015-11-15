@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import baidu.com.commontools.http.HttpUtils;
 import baidu.com.commontools.threadpool.MhThreadPool;
+import baidu.com.testlibproject.ui.UiTestActivity;
 
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
 
@@ -20,6 +21,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private static final boolean DEBUG = FeatureConfig.DEBUG;
 
     private static final String URL = "http://www.baidu.com";
+    private static final int INTENT_UI_ACTIVITY = 0;
 
     private Context mContext;
 
@@ -70,7 +72,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
-            case 0:
+            case INTENT_UI_ACTIVITY:
                 startActivity(new Intent(mContext, UiTestActivity.class));
                 break;
             default:
