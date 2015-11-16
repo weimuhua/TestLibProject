@@ -9,4 +9,14 @@
     <array name="ui_test_item">
         <item>AutoCompleteTextView</item>
     </array>
+    <array name="auto_complete_arr">
+        <item>163.com</item>
+        <item>126.com</item>
+        <item>qq.com</item>
+        <item>gmail.com</item>
+        <item>yeah.net</item>
+        <item>yahoo.com</item>
+        <item>sina.com</item>
+        <item>hotmail.com</item>
+    </array>
 </resources>
