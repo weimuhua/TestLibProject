@@ -14,6 +14,7 @@ import baidu.com.testlibproject.SimpleAdapter;
 public class UiTestActivity extends Activity implements AdapterView.OnItemClickListener {
 
     private static final int INTENT_AUTO_COMPLETE_TEXTVIEW = 0;
+    private static final int INTENT_TEST_GRID_VIEW = 1;
 
     private ListView mListView;
 
@@ -41,6 +42,9 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
         switch (position) {
             case INTENT_AUTO_COMPLETE_TEXTVIEW:
                 startActivity(new Intent(this, TestAutoCompleteTvActivity.class));
+                break;
+            case INTENT_TEST_GRID_VIEW:
+                startActivity(new Intent(this, TestGridViewActivity.class));
                 break;
             default:
                 break;
