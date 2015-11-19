@@ -3,6 +3,9 @@ package baidu.com.testlibproject;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.io.IOException;
+import java.util.List;
 
 import baidu.com.commontools.http.HttpUtils;
 import baidu.com.commontools.threadpool.MhThreadPool;
@@ -59,6 +63,16 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                     String resp = HttpUtils.commonGet(URL);
                     if (DEBUG) {
                         Log.d(TAG, "commonGet resp : " + resp);
+                    }
+
+                    PackageManager pm = mContext.getPackageManager();
+                    List<PackageInfo> infoList = pm.getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES);
+                    if (DEBUG) {
+                        for (PackageInfo info : infoList ) {
+                            if ((info.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+                                LogHelper.d(TAG, "info : " + info.packageName + ",appName : " + info.applicationInfo.loadLabel(pm));
+                            }
+                        }
                     }
                 } catch (IOException e) {
                     if (DEBUG) {
