@@ -9,6 +9,7 @@
     <array name="ui_test_item">
         <item>AutoCompleteTextView</item>
         <item>GridView</item>
+        <item>Spinner</item>
     </array>
     <array name="auto_complete_arr">
         <item>\&#064;163.com</item>
@@ -19,5 +20,11 @@
         <item>\&#064;yahoo.com</item>
         <item>\&#064;sina.com</item>
         <item>\&#064;hotmail.com</item>
+    </array>
+    <array name="test_spinner">
+        <item>James Bond</item>
+        <item>Jason Bourne</item>
+        <item>Bruce Wayne</item>
+        <item>Kevin Durant</item>
     </array>
 </resources>

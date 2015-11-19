@@ -15,6 +15,7 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
 
     private static final int INTENT_AUTO_COMPLETE_TEXTVIEW = 0;
     private static final int INTENT_TEST_GRID_VIEW = 1;
+    private static final int INTENT_TEST_SPINNER_ACTIVITY = 2;
 
     private ListView mListView;
 
@@ -45,6 +46,9 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
                 break;
             case INTENT_TEST_GRID_VIEW:
                 startActivity(new Intent(this, TestGridViewActivity.class));
+                break;
+            case INTENT_TEST_SPINNER_ACTIVITY:
+                startActivity(new Intent(this, TestSpinnerActivity.class));
                 break;
             default:
                 break;
