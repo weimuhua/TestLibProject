@@ -10,6 +10,7 @@
         <item>AutoCompleteTextView</item>
         <item>GridView</item>
         <item>SpinnerGallery</item>
+        <item>Toast</item>
     </array>
     <array name="auto_complete_arr">
         <item>\&#064;163.com</item>
@@ -27,4 +28,5 @@
         <item>Bruce Wayne</item>
         <item>Kevin Durant</item>
     </array>
+    <string name="show_toast">show toast</string>
 </resources>
