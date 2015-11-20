@@ -31,6 +31,7 @@ public class TestSpinnerActivity extends Activity implements Handler.Callback, A
 
     private Handler mHandler;
     private Context mContext;
+    /* Android已经将Gallery废弃掉了，推荐使用HorizontalScrollVIew和ViewPager代替*/
     private Gallery mGallery;
     private ImageView mImageView;
     private GalleryAdapter mAdapter;
