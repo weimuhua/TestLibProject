@@ -7,4 +7,4 @@ fi
 
 MSG=$1
 BRANCH=$2
-git add . && git commit -m $MSG && git push origin $BRANCH
+git add . && git commit -m "$MSG" && git push origin $BRANCH
