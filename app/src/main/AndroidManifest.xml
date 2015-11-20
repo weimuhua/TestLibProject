@@ -43,6 +43,11 @@
             android:name=".ui.TestToastActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.DateTimePickerActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

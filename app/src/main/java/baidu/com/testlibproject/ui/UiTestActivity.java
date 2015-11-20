@@ -14,9 +14,10 @@ import baidu.com.testlibproject.SimpleAdapter;
 public class UiTestActivity extends Activity implements AdapterView.OnItemClickListener {
 
     private static final int INTENT_AUTO_COMPLETE_TEXTVIEW = 0;
-    private static final int INTENT_TEST_GRID_VIEW = 1;
+    private static final int INTENT_TEST_GRID_VIEW_ACTIVITY = 1;
     private static final int INTENT_TEST_SPINNER_ACTIVITY = 2;
     private static final int INTENT_TEST_TOAST_ACTIVITY = 3;
+    private static final int INTENT_TEST_DATE_TIME_PICKET = 4;
 
     private ListView mListView;
 
@@ -45,7 +46,7 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
             case INTENT_AUTO_COMPLETE_TEXTVIEW:
                 startActivity(new Intent(this, TestAutoCompleteTvActivity.class));
                 break;
-            case INTENT_TEST_GRID_VIEW:
+            case INTENT_TEST_GRID_VIEW_ACTIVITY:
                 startActivity(new Intent(this, TestGridViewActivity.class));
                 break;
             case INTENT_TEST_SPINNER_ACTIVITY:
@@ -53,6 +54,9 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
                 break;
             case INTENT_TEST_TOAST_ACTIVITY:
                 startActivity(new Intent(this, TestToastActivity.class));
+                break;
+            case INTENT_TEST_DATE_TIME_PICKET:
+                startActivity(new Intent(this, DateTimePickerActivity.class));
                 break;
             default:
                 break;
