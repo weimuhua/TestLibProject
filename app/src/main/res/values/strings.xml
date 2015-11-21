@@ -31,4 +31,14 @@
         <item>Kevin Durant</item>
     </array>
     <string name="show_toast">show toast</string>
+    <array name="search_view_arr">
+        <item>abc</item>
+        <item>abcabc</item>
+        <item>abdabd</item>
+        <item>bdebfe</item>
+        <item>cdedfsdf</item>
+        <item>fsdfimdd</item>
+        <item>hinfhinl</item>
+    </array>
+    <string name="search">search</string>
 </resources>
