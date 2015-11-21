@@ -18,6 +18,7 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
     private static final int INTENT_TEST_SPINNER_ACTIVITY = 2;
     private static final int INTENT_TEST_TOAST_ACTIVITY = 3;
     private static final int INTENT_TEST_DATE_TIME_PICKET = 4;
+    private static final int INTENT_SEARCH_VIEW_ACTIVITY = 5;
 
     private ListView mListView;
 
@@ -57,6 +58,9 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
                 break;
             case INTENT_TEST_DATE_TIME_PICKET:
                 startActivity(new Intent(this, DateTimePickerActivity.class));
+                break;
+            case INTENT_SEARCH_VIEW_ACTIVITY:
+                startActivity(new Intent(this, SearchViewActivity.class));
                 break;
             default:
                 break;
