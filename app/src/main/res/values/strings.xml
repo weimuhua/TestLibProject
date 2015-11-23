@@ -14,6 +14,7 @@
         <item>DateTimePicker</item>
         <item>SearchView</item>
         <item>Notification</item>
+        <item>PopupWindow</item>
     </array>
     <array name="auto_complete_arr">
         <item>\&#064;163.com</item>
