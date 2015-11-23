@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/actionbar_title1"
+        app:showAsAction="always|withText">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/font_10"
+                    android:title="@string/font_10" />
+                <item
+                    android:id="@+id/font_12"
+                    android:title="@string/font_12" />
+                <item
+                    android:id="@+id/font_14"
+                    android:title="@string/font_14" />
+                <item
+                    android:id="@+id/font_16"
+                    android:title="@string/font_16" />
+            </group>
+        </menu>
+    </item>
+    <item
+        android:icon="@mipmap/titlebar_settings"
+        android:title="@string/actionbar_title2"
+        app:showAsAction="ifRoom" />
+</menu>

@@ -15,6 +15,7 @@
         <item>SearchView</item>
         <item>Notification</item>
         <item>PopupWindow</item>
+        <item>ActionBar</item>
     </array>
     <array name="auto_complete_arr">
         <item>\&#064;163.com</item>
@@ -51,4 +52,13 @@
     <string name="popup_window_inside_text1">popup_window_inside_tv1</string>
     <string name="popup_window_inside_text2">popup_window_inside_tv2</string>
     <string name="popup_window_inside_text3">popup_window_inside_tv3</string>
+    <string name="actionbar_title1">title1</string>
+    <string name="font_10">font_10</string>
+    <string name="font_12">font_12</string>
+    <string name="font_14">font_14</string>
+    <string name="font_16">font_16</string>
+    <string name="actionbar_title2">title2</string>
+    <string name="font_red">font_red</string>
+    <string name="font_green">font_green</string>
+    <string name="font_blue">font_blue</string>
 </resources>

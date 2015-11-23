@@ -21,6 +21,7 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
     private static final int INTENT_SEARCH_VIEW_ACTIVITY = 5;
     private static final int INTENT_NOTIFICATION_TEST = 6;
     private static final int INTENT_POPUP_WINDOW_ACTIVITY = 7;
+    private static final int INTENT_ACTION_BAR_ACTIVITY = 8;
 
     private ListView mListView;
 
@@ -69,6 +70,9 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
                 break;
             case INTENT_POPUP_WINDOW_ACTIVITY:
                 startActivity(new Intent(this, PopupWindowActivity.class));
+                break;
+            case INTENT_ACTION_BAR_ACTIVITY:
+                startActivity(new Intent(this, ActionBarActivity.class));
                 break;
             default:
                 break;
