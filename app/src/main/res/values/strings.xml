@@ -48,4 +48,7 @@
     <string name="notify_ticker">有新通知</string>
     <string name="notify_title">一条新通知</string>
     <string name="notify_text">升T了升T了升T了！！！</string>
+    <string name="popup_window_inside_text1">popup_window_inside_tv1</string>
+    <string name="popup_window_inside_text2">popup_window_inside_tv2</string>
+    <string name="popup_window_inside_text3">popup_window_inside_tv3</string>
 </resources>

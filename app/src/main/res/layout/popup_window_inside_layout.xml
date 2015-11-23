@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/popup_window_inside_tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/popup_window_inside_text1"
+        android:textColor="@color/common_dark"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/popup_window_inside_tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/popup_window_inside_text2"
+        android:textColor="@color/common_dark"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/popup_window_inside_tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/popup_window_inside_text3"
+        android:textColor="@color/common_dark"
+        android:textSize="16sp" />
+</LinearLayout>
