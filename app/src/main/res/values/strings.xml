@@ -13,6 +13,7 @@
         <item>Toast</item>
         <item>DateTimePicker</item>
         <item>SearchView</item>
+        <item>Notification</item>
     </array>
     <array name="auto_complete_arr">
         <item>\&#064;163.com</item>
@@ -41,4 +42,9 @@
         <item>hinfhinl</item>
     </array>
     <string name="search">search</string>
+    <string name="send_no_btn">发送通知</string>
+    <string name="cancel_no_btn">取消通知</string>
+    <string name="notify_ticker">有新通知</string>
+    <string name="notify_title">一条新通知</string>
+    <string name="notify_text">升T了升T了升T了！！！</string>
 </resources>
