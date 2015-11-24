@@ -65,7 +65,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.ActionBarActivity"
+            android:name=".ui.TestActionBarActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
     </application>

@@ -12,9 +12,9 @@ import baidu.com.testlibproject.FeatureConfig;
 import baidu.com.testlibproject.LogHelper;
 import baidu.com.testlibproject.R;
 
-public class ActionBarActivity extends AppCompatActivity {
+public class TestActionBarActivity extends AppCompatActivity {
 
-    private static final String TAG = "ActionBarActivity";
+    private static final String TAG = "TestActionBarActivity";
     private static final boolean DEBUG = FeatureConfig.DEBUG;
 
     @Override

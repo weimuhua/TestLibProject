@@ -72,7 +72,7 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
                 startActivity(new Intent(this, PopupWindowActivity.class));
                 break;
             case INTENT_ACTION_BAR_ACTIVITY:
-                startActivity(new Intent(this, ActionBarActivity.class));
+                startActivity(new Intent(this, TestActionBarActivity.class));
                 break;
             default:
                 break;
