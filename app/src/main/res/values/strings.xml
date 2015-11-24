@@ -16,7 +16,7 @@
         <item>Notification</item>
         <item>PopupWindow</item>
         <item>ActionBar</item>
-        <item>Configuration</item>
+        <item>ConfigurationAndIntent</item>
     </array>
     <array name="auto_complete_arr">
         <item>\&#064;163.com</item>
