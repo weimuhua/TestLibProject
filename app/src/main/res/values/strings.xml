@@ -2,6 +2,7 @@
     <string name="app_name">TestLibProject</string>
     <array name="activity_item">
         <item>UI</item>
+        <item>Intent</item>
         <item>Service</item>
         <item>ContentProvider</item>
         <item>BroadCast</item>

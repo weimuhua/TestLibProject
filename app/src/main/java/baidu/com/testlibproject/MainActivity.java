@@ -17,6 +17,7 @@ import java.util.List;
 
 import baidu.com.commontools.http.HttpUtils;
 import baidu.com.commontools.threadpool.MhThreadPool;
+import baidu.com.testlibproject.intent.IntentTestActivity;
 import baidu.com.testlibproject.ui.UiTestActivity;
 
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
@@ -25,7 +26,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private static final boolean DEBUG = FeatureConfig.DEBUG;
 
     private static final String URL = "http://www.baidu.com";
-    private static final int INTENT_UI_ACTIVITY = 0;
+    private static final int INTENT_TEST_UI_ACTIVITY = 0;
+    private static final int INTENT_TEST_INTENT_ACTIVITY = 1;
 
     private Context mContext;
 
@@ -68,7 +70,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                     PackageManager pm = mContext.getPackageManager();
                     List<PackageInfo> infoList = pm.getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES);
                     if (DEBUG) {
-                        for (PackageInfo info : infoList ) {
+                        for (PackageInfo info : infoList) {
                             if ((info.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
                                 LogHelper.d(TAG, "info : " + info.packageName + ",appName : " + info.applicationInfo.loadLabel(pm));
                             }
@@ -86,8 +88,11 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
-            case INTENT_UI_ACTIVITY:
+            case INTENT_TEST_UI_ACTIVITY:
                 startActivity(new Intent(mContext, UiTestActivity.class));
+                break;
+            case INTENT_TEST_INTENT_ACTIVITY:
+                startActivity(new Intent(mContext, IntentTestActivity.class));
                 break;
             default:
                 break;

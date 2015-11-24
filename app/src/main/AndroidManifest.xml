@@ -73,6 +73,11 @@
             android:name=".ui.ConfigurationTest"
             android:exported="false"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".intent.IntentTestActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
