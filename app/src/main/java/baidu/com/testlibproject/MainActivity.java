@@ -4,11 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import baidu.com.commontools.threadpool.MhThreadPool;
 import baidu.com.testlibproject.intent.IntentTestActivity;
+import baidu.com.testlibproject.service.MainServiceClient;
+import baidu.com.testlibproject.service.ServiceNotAvailable;
 import baidu.com.testlibproject.ui.UiTestActivity;
 
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
@@ -61,6 +65,19 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         adapter.setStrArr(strArr);
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(this);
+        MhThreadPool.getInstance().addBkgTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    int result = MainServiceClient.getInstance(mContext).add(2, 3, true);
+                    if (DEBUG) LogHelper.d(TAG, "Service add, result : " + result);
+                } catch (RemoteException e) {
+                    if (DEBUG) LogHelper.e(TAG, "RemoteException : ", e);
+                } catch (ServiceNotAvailable e) {
+                    if (DEBUG) LogHelper.e(TAG, "ServiceNotAvailable : ", e);
+                }
+            }
+        });
     }
 
     @Override

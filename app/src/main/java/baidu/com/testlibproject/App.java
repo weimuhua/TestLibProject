@@ -9,6 +9,7 @@ import android.app.ActivityManager.RunningAppProcessInfo;
 import java.util.List;
 
 import baidu.com.testlibproject.service.MainService;
+import baidu.com.testlibproject.service.MainServiceClient;
 
 public class App extends Application {
 
@@ -27,7 +28,7 @@ public class App extends Application {
         int processType = getProcessType();
         switch (processType) {
             case PROCESS_UI:
-                //TODO
+                MainServiceClient.getInstance(this).tryToConnect();
                 break;
             case PROCESS_BKG:
                 Intent intent = new Intent(this, MainService.class);
