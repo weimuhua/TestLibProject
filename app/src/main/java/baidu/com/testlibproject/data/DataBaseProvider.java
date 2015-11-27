@@ -17,7 +17,7 @@ public class DataBaseProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         if (DEBUG) LogHelper.d(TAG, "DataBaseProvider onCreate");
-        return false;
+        return true;
     }
 
     @Nullable
