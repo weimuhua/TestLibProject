@@ -1,4 +1,4 @@
-package baidu.com.testlibproject.data;
+package baidu.com.testlibproject.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

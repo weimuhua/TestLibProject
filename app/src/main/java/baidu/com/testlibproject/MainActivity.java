@@ -12,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import baidu.com.commontools.threadpool.MhThreadPool;
-import baidu.com.testlibproject.data.StationDbFactory;
+import baidu.com.testlibproject.db.StationDbFactory;
 import baidu.com.testlibproject.intent.IntentTestActivity;
 import baidu.com.testlibproject.service.MainServiceClient;
 import baidu.com.testlibproject.service.ServiceNotAvailable;
