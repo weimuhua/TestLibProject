@@ -79,6 +79,7 @@ public class MainServiceClient {
 
         Intent intent = new Intent(mAppContext, MainService.class);
         if (DEBUG) LogHelper.d(TAG, "try connect service");
+        //此方法不能在Broadcast中调用，在Broadcast需要调用startService
         if (!mAppContext.bindService(intent, connection, Context.BIND_AUTO_CREATE)) {
             if (DEBUG) LogHelper.d(TAG, "cannot connect service");
             mIsConnecting.set(false);

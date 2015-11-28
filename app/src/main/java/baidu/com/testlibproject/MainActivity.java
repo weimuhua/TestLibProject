@@ -1,8 +1,10 @@
 package baidu.com.testlibproject;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.view.View;
@@ -34,6 +36,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         mContext = this;
         initView();
         initData();
+        testProvider();
     }
 
     @Override
@@ -78,6 +81,11 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 }
             }
         });
+    }
+
+    private void testProvider() {
+        ContentResolver resolver = mContext.getContentResolver();
+        resolver.query(Uri.withAppendedPath(Constants.AUTHORITY_URI, "test"), null, null, null, null);
     }
 
     @Override
