@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import baidu.com.commontools.threadpool.MhThreadPool;
+import baidu.com.testlibproject.data.StationDbFactory;
 import baidu.com.testlibproject.intent.IntentTestActivity;
 import baidu.com.testlibproject.service.MainServiceClient;
 import baidu.com.testlibproject.service.ServiceNotAvailable;
@@ -85,7 +86,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     private void testProvider() {
         ContentResolver resolver = mContext.getContentResolver();
-        resolver.query(Uri.withAppendedPath(Constants.AUTHORITY_URI, "test"), null, null, null, null);
+        Uri url = Uri.withAppendedPath(Constants.AUTHORITY_URI, StationDbFactory.class.getName() + "/" + "test");
+        resolver.query(url, null, null, null, null);
     }
 
     @Override
