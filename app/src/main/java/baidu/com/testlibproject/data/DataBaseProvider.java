@@ -35,6 +35,7 @@ public class DataBaseProvider extends ContentProvider {
         if (DEBUG) LogHelper.d(TAG, "DataBaseProvider query, uri : " + uri.toString());
         Pair<String, String> pair = parseUri(uri);
         DatabaseMgr.getInstance(mContext).getDatabase(pair.first);
+        DatabaseMgr.getInstance(mContext).releaseDatabase(pair.first);
         return null;
     }
 
