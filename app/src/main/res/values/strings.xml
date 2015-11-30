@@ -4,6 +4,7 @@
         <item>UI</item>
         <item>Intent</item>
         <item>TelephonyMgr</item>
+        <item>SmsManager</item>
     </array>
     <array name="ui_test_item">
         <item>AutoCompleteTextView</item>

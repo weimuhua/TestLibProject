@@ -16,6 +16,7 @@ import baidu.com.testlibproject.db.StationDbFactory;
 import baidu.com.testlibproject.intent.IntentTestActivity;
 import baidu.com.testlibproject.service.MainServiceClient;
 import baidu.com.testlibproject.service.ServiceNotAvailable;
+import baidu.com.testlibproject.service.SmsMgrActivity;
 import baidu.com.testlibproject.service.TelephonyMgrActivity;
 import baidu.com.testlibproject.ui.UiTestActivity;
 
@@ -27,6 +28,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private static final int INTENT_TEST_UI_ACTIVITY = 0;
     private static final int INTENT_TEST_INTENT_ACTIVITY = 1;
     private static final int INTENT_TELEPHONY_MANAGER = 2;
+    private static final int INTENT_SMS_MANAGER = 3;
 
     private Context mContext;
 
@@ -103,6 +105,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 break;
             case INTENT_TELEPHONY_MANAGER:
                 startActivity(new Intent(mContext, TelephonyMgrActivity.class));
+                break;
+            case INTENT_SMS_MANAGER:
+                startActivity(new Intent(mContext, SmsMgrActivity.class));
                 break;
             default:
                 break;
