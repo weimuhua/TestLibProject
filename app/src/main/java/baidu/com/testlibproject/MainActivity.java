@@ -14,6 +14,7 @@ import android.widget.ListView;
 import baidu.com.commontools.threadpool.MhThreadPool;
 import baidu.com.testlibproject.db.StationDbFactory;
 import baidu.com.testlibproject.intent.IntentTestActivity;
+import baidu.com.testlibproject.service.AudioMgrActivity;
 import baidu.com.testlibproject.service.MainServiceClient;
 import baidu.com.testlibproject.service.ServiceNotAvailable;
 import baidu.com.testlibproject.service.SmsMgrActivity;
@@ -29,6 +30,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private static final int INTENT_TEST_INTENT_ACTIVITY = 1;
     private static final int INTENT_TELEPHONY_MANAGER = 2;
     private static final int INTENT_SMS_MANAGER = 3;
+    private static final int INTENT_AUDIO_MANAGER = 4;
 
     private Context mContext;
 
@@ -108,6 +110,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 break;
             case INTENT_SMS_MANAGER:
                 startActivity(new Intent(mContext, SmsMgrActivity.class));
+                break;
+            case INTENT_AUDIO_MANAGER:
+                startActivity(new Intent(mContext, AudioMgrActivity.class));
                 break;
             default:
                 break;
