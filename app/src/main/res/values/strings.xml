@@ -71,4 +71,8 @@
         <item>SIM卡国别：</item>
         <item>SIM卡序列号：</item>
     </array>
+    <string name="play_music">play music</string>
+    <string name="volume_up">volume up</string>
+    <string name="volume_down">volume down</string>
+    <string name="mute">mute</string>
 </resources>
