@@ -6,6 +6,7 @@
         <item>TelephonyMgr</item>
         <item>SmsManager</item>
         <item>AudioMgr</item>
+        <item>Vibrator</item>
     </array>
     <array name="ui_test_item">
         <item>AutoCompleteTextView</item>

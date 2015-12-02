@@ -19,6 +19,7 @@ import baidu.com.testlibproject.service.MainServiceClient;
 import baidu.com.testlibproject.service.ServiceNotAvailable;
 import baidu.com.testlibproject.service.SmsMgrActivity;
 import baidu.com.testlibproject.service.TelephonyMgrActivity;
+import baidu.com.testlibproject.service.VibratorActivity;
 import baidu.com.testlibproject.ui.UiTestActivity;
 
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
@@ -31,6 +32,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private static final int INTENT_TELEPHONY_MANAGER = 2;
     private static final int INTENT_SMS_MANAGER = 3;
     private static final int INTENT_AUDIO_MANAGER = 4;
+    private static final int INTENT_VIBRATOR_ACTIVITY = 5;
 
     private Context mContext;
 
@@ -113,6 +115,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 break;
             case INTENT_AUDIO_MANAGER:
                 startActivity(new Intent(mContext, AudioMgrActivity.class));
+                break;
+            case INTENT_VIBRATOR_ACTIVITY:
+                startActivity(new Intent(mContext, VibratorActivity.class));
                 break;
             default:
                 break;
