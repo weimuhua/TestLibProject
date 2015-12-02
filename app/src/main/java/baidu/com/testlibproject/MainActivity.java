@@ -14,6 +14,7 @@ import android.widget.ListView;
 import baidu.com.commontools.threadpool.MhThreadPool;
 import baidu.com.testlibproject.db.StationDbFactory;
 import baidu.com.testlibproject.intent.IntentTestActivity;
+import baidu.com.testlibproject.sensor.CompassActivity;
 import baidu.com.testlibproject.service.AudioMgrActivity;
 import baidu.com.testlibproject.service.MainServiceClient;
 import baidu.com.testlibproject.service.ServiceNotAvailable;
@@ -33,6 +34,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private static final int INTENT_SMS_MANAGER = 3;
     private static final int INTENT_AUDIO_MANAGER = 4;
     private static final int INTENT_VIBRATOR_ACTIVITY = 5;
+    private static final int INTENT_COMPASS_ACTIVITY = 6;
 
     private Context mContext;
 
@@ -118,6 +120,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 break;
             case INTENT_VIBRATOR_ACTIVITY:
                 startActivity(new Intent(mContext, VibratorActivity.class));
+                break;
+            case INTENT_COMPASS_ACTIVITY:
+                startActivity(new Intent(mContext, CompassActivity.class));
                 break;
             default:
                 break;
