@@ -17,7 +17,7 @@ public class SmsMgrActivity extends Activity implements Handler.Callback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sms_mgr_layout);
-        sendMessage();
+//        sendMessage();
     }
 
     private void sendMessage() {
