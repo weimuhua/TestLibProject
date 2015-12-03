@@ -8,6 +8,7 @@
         <item>AudioMgr</item>
         <item>Vibrator</item>
         <item>Compass</item>
+        <item>GPS</item>
     </array>
     <array name="ui_test_item">
         <item>AutoCompleteTextView</item>

@@ -110,6 +110,11 @@
             android:exported="false"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".sensor.LocationMgrActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
         <provider
             android:name=".data.DataBaseProvider"
             android:authorities="baidu.com.testlibproject.db.provider"
