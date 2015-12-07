@@ -3,6 +3,10 @@
     package="baidu.com.testlibproject"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -25,92 +29,74 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.UiTestActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.TestAutoCompleteTvActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.TestGridViewActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.TestSpinnerActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.TestToastActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.DateTimePickerActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.SearchViewActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".service.NotificationActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.PopupWindowActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.TestActionBarActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.ConfigurationTest"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".intent.IntentTestActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".service.TelephonyMgrActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".service.SmsMgrActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".service.AudioMgrActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".service.VibratorActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".sensor.CompassActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".sensor.LocationMgrActivity"
             android:exported="false"
@@ -126,6 +112,9 @@
             android:name=".service.MainService"
             android:exported="false"
             android:process=":bkg" />
+
+        <activity android:name=".sensor.CameraActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -14,6 +14,7 @@ import android.widget.ListView;
 import baidu.com.commontools.threadpool.MhThreadPool;
 import baidu.com.testlibproject.db.StationDbFactory;
 import baidu.com.testlibproject.intent.IntentTestActivity;
+import baidu.com.testlibproject.sensor.CameraActivity;
 import baidu.com.testlibproject.sensor.CompassActivity;
 import baidu.com.testlibproject.sensor.LocationMgrActivity;
 import baidu.com.testlibproject.service.AudioMgrActivity;
@@ -37,6 +38,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private static final int INTENT_VIBRATOR_ACTIVITY = 5;
     private static final int INTENT_COMPASS_ACTIVITY = 6;
     private static final int INTENT_LOCATION_MANAGER = 7;
+    private static final int INTENT_CAMERA_ACTIVITY = 8;
 
     private Context mContext;
 
@@ -128,6 +130,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 break;
             case INTENT_LOCATION_MANAGER:
                 startActivity(new Intent(mContext, LocationMgrActivity.class));
+                break;
+            case INTENT_CAMERA_ACTIVITY:
+                startActivity(new Intent(mContext, CameraActivity.class));
                 break;
             default:
                 break;
