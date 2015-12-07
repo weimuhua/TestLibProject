@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import baidu.com.testlibproject.R;
 import baidu.com.testlibproject.SimpleAdapter;
+import baidu.com.testlibproject.service.NotificationActivity;
 
 public class UiTestActivity extends Activity implements AdapterView.OnItemClickListener {
 

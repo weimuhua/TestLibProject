@@ -62,7 +62,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.NotificationActivity"
+            android:name=".service.NotificationActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 

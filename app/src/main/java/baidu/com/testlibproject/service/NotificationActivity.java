@@ -1,4 +1,4 @@
-package baidu.com.testlibproject.ui;
+package baidu.com.testlibproject.service;
 
 import android.app.Activity;
 import android.app.Notification;
