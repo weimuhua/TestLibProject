@@ -100,7 +100,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     private void testProvider() {
         ContentResolver resolver = mContext.getContentResolver();
-        Uri url = Uri.withAppendedPath(Constants.AUTHORITY_URI, StationDbFactory.class.getName() + "/" + "test");
+        Uri url = Uri.withAppendedPath(Constants.DB_AUTHORITY_URI, StationDbFactory.class.getName() + "/" + "test");
         resolver.query(url, null, null, null, null);
     }
 

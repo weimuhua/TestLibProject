@@ -108,6 +108,13 @@
             android:exported="false"
             android:process=":bkg" />
 
+        <provider
+            android:name=".data.TestFileProvider"
+            android:authorities="baidu.com.testlibproject.file.provider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            android:process=":bkg" />
+
         <service
             android:name=".service.MainService"
             android:exported="false"
