@@ -20,6 +20,7 @@ allprojects {
 
 ext {
     DEBUG_LOG = "true"
+    SUPPORT_V7_VER = "23.2.1"
 }
 
 task clean(type: Delete) {
