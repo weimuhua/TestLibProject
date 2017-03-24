@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.os.RemoteException;
 import android.view.View;
 import android.widget.AdapterView;
@@ -89,6 +90,15 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 try {
                     int result = MainServiceClient.getInstance(mContext).add(2, 3, true);
                     if (DEBUG) LogHelper.d(TAG, "Service add, result : " + result);
+
+                    IBinder subBinderA = MainServiceClient.getInstance(mContext).getSubInterfaceA(true);
+                    ISubInterfaceA subInterfaceA = ISubInterfaceA.Stub.asInterface(subBinderA);
+                    subInterfaceA.methodA1();
+                    subInterfaceA.methodB1();
+                    subInterfaceA.methodC1();
+                    if (DEBUG) {
+                        LogHelper.d(TAG, "complete invoke SubInterfaceA!");
+                    }
                 } catch (RemoteException e) {
                     if (DEBUG) LogHelper.e(TAG, "RemoteException : ", e);
                 } catch (ServiceNotAvailable e) {

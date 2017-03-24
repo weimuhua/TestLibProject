@@ -138,4 +138,43 @@ public class MainServiceClient {
             throw new ServiceNotAvailable();
         }
     }
+
+    public IBinder getSubInterfaceA(boolean waitForConnected) throws RemoteException, ServiceNotAvailable {
+        if (waitForConnected) {
+            waitForConnected();
+        } else {
+            connectServiceIfNeeded();
+        }
+        if (mService != null) {
+            return mService.getInterfaceA();
+        } else {
+            throw new ServiceNotAvailable();
+        }
+    }
+
+    public IBinder getSubInterfaceB(boolean waitForConnected) throws RemoteException, ServiceNotAvailable {
+        if (waitForConnected) {
+            waitForConnected();
+        } else {
+            connectServiceIfNeeded();
+        }
+        if (mService != null) {
+            return mService.getInterfaceB();
+        } else {
+            throw new ServiceNotAvailable();
+        }
+    }
+
+    public IBinder getSubInterfaceC(boolean waitForConnected) throws RemoteException, ServiceNotAvailable {
+        if (waitForConnected) {
+            waitForConnected();
+        } else {
+            connectServiceIfNeeded();
+        }
+        if (mService != null) {
+            return mService.getInterfaceC();
+        } else {
+            throw new ServiceNotAvailable();
+        }
+    }
 }

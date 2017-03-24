@@ -9,4 +9,8 @@ interface IMainService {
      * and return values in AIDL.
      */
     int add(int a, int b);
+
+    IBinder getInterfaceA();
+    IBinder getInterfaceB();
+    IBinder getInterfaceC();
 }

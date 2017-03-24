@@ -9,6 +9,9 @@ import android.support.annotation.Nullable;
 import baidu.com.testlibproject.FeatureConfig;
 import baidu.com.testlibproject.IMainService;
 import baidu.com.testlibproject.LogHelper;
+import baidu.com.testlibproject.service.stub.SubInterfaceAStub;
+import baidu.com.testlibproject.service.stub.SubInterfaceBSub;
+import baidu.com.testlibproject.service.stub.SubInterfaceCSub;
 
 public class MainService extends Service {
 
@@ -17,13 +20,22 @@ public class MainService extends Service {
 
     private IMainService.Stub mBinder = new IMainService.Stub() {
         @Override
+        public IBinder getInterfaceA() throws RemoteException {
+            return new SubInterfaceAStub();
+        }
+
+        @Override
+        public IBinder getInterfaceB() throws RemoteException {
+            return new SubInterfaceBSub();
+        }
+
+        @Override
+        public IBinder getInterfaceC() throws RemoteException {
+            return new SubInterfaceCSub();
+        }
+
+        @Override
         public int add(int a, int b) throws RemoteException {
-            try {
-                //should not sleep, just for test!!!
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                if (DEBUG) LogHelper.e(TAG, "thread sleep failed", e);
-            }
             return a + b;
         }
     };
