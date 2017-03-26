@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 
 class BinderParcelable implements Parcelable {
 
-    public IBinder mIBinder;
+    public IBinder iBinder;
 
     public static final Creator<BinderParcelable> CREATOR = new Creator<BinderParcelable>() {
         @Override
@@ -22,11 +22,11 @@ class BinderParcelable implements Parcelable {
     };
 
     public BinderParcelable(@NonNull IBinder iBinder) {
-        mIBinder = iBinder;
+        this.iBinder = iBinder;
     }
 
     public BinderParcelable(Parcel parcel) {
-        mIBinder = parcel.readStrongBinder();
+        iBinder = parcel.readStrongBinder();
     }
 
     @Override
@@ -36,6 +36,6 @@ class BinderParcelable implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeStrongBinder(mIBinder);
+        parcel.writeStrongBinder(iBinder);
     }
 }

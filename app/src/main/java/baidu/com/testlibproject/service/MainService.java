@@ -10,8 +10,8 @@ import baidu.com.testlibproject.FeatureConfig;
 import baidu.com.testlibproject.IMainService;
 import baidu.com.testlibproject.LogHelper;
 import baidu.com.testlibproject.service.stub.SubInterfaceAStub;
-import baidu.com.testlibproject.service.stub.SubInterfaceBSub;
-import baidu.com.testlibproject.service.stub.SubInterfaceCSub;
+import baidu.com.testlibproject.service.stub.SubInterfaceBStub;
+import baidu.com.testlibproject.service.stub.SubInterfaceCStub;
 
 public class MainService extends Service {
 
@@ -26,12 +26,12 @@ public class MainService extends Service {
 
         @Override
         public IBinder getInterfaceB() throws RemoteException {
-            return new SubInterfaceBSub();
+            return new SubInterfaceBStub();
         }
 
         @Override
         public IBinder getInterfaceC() throws RemoteException {
-            return new SubInterfaceCSub();
+            return new SubInterfaceCStub();
         }
 
         @Override

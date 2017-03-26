@@ -15,6 +15,7 @@ import android.widget.ListView;
 import baidu.com.commontools.threadpool.MhThreadPool;
 import baidu.com.testlibproject.db.StationDbFactory;
 import baidu.com.testlibproject.intent.IntentTestActivity;
+import baidu.com.testlibproject.provider.BinderHelper;
 import baidu.com.testlibproject.sensor.CameraActivity;
 import baidu.com.testlibproject.sensor.CompassActivity;
 import baidu.com.testlibproject.sensor.LocationMgrActivity;
@@ -99,6 +100,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                     if (DEBUG) {
                         LogHelper.d(TAG, "complete invoke SubInterfaceA!");
                     }
+
+                    IBinder binder = BinderHelper.getBinder(mContext, BinderHelper.BINDER_NAME_A);
+                    ISubInterfaceA subInterface = ISubInterfaceA.Stub.asInterface(binder);
+                    subInterface.methodA1();
+                    subInterface.methodB1();
+                    subInterface.methodC1();
                 } catch (RemoteException e) {
                     if (DEBUG) LogHelper.e(TAG, "RemoteException : ", e);
                 } catch (ServiceNotAvailable e) {

@@ -8,7 +8,7 @@ import baidu.com.testlibproject.ISubInterfaceC;
  * Created by Wayne on 2017/3/24.
  */
 
-public class SubInterfaceCSub extends ISubInterfaceC.Stub {
+public class SubInterfaceCStub extends ISubInterfaceC.Stub {
     @Override
     public void methodA3() throws RemoteException {
 
