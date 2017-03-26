@@ -1,13 +1,9 @@
 package baidu.com.testlibproject;
 
-import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Intent;
-import android.os.Process;
-import android.app.ActivityManager.RunningAppProcessInfo;
 
-import java.util.List;
-
+import baidu.com.commontools.utils.ProcessUtils;
 import baidu.com.testlibproject.service.MainService;
 import baidu.com.testlibproject.service.MainServiceClient;
 
@@ -23,7 +19,8 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        if (DEBUG) LogHelper.d(TAG, "Application onCreate, process : " + getProcessName());
+        if (DEBUG)
+            LogHelper.d(TAG, "Application onCreate, process : " + ProcessUtils.getProcessName(this));
 
         int processType = getProcessType();
         switch (processType) {
@@ -38,7 +35,7 @@ public class App extends Application {
     }
 
     private int getProcessType() {
-        String processName = getProcessName();
+        String processName = ProcessUtils.getProcessName(this);
         if (Constants.PACKAGE_NAME.equals(processName)) {
             return PROCESS_UI;
         } else if (Constants.BKG_PROCESS_NAME.equals(processName)) {
@@ -46,18 +43,5 @@ public class App extends Application {
         } else {
             return PROCESS_UNKNOWN;
         }
-    }
-
-    private String getProcessName() {
-        int pid = Process.myPid();
-        ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-        List<RunningAppProcessInfo> runningApps = am.getRunningAppProcesses();
-        if (runningApps != null && !runningApps.isEmpty()) {
-            for (RunningAppProcessInfo info : runningApps) {
-                if (info.pid == pid) return info.processName;
-            }
-        }
-
-        return null;
     }
 }

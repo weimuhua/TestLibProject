@@ -7,6 +7,8 @@ public class Constants {
     public static final String BKG_PROCESS_NAME = PACKAGE_NAME + ":bkg";
     public static final String DB_AUTHORITY = PACKAGE_NAME + ".db.provider";
     public static final String FILE_AUTHORITY = PACKAGE_NAME + ".file.provider";
+    public static final String BINDER_AUTHORITY = PACKAGE_NAME + ".binder.provider";
     public static final Uri DB_AUTHORITY_URI = Uri.parse("content://" + DB_AUTHORITY);
     public static final Uri FILE_AUTHORITY_URI = Uri.parse("content://" + FILE_AUTHORITY);
+    public static final Uri BINDER_AUTHORITY_URI = Uri.parse("content://" + BINDER_AUTHORITY);
 }

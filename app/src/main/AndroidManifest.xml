@@ -113,6 +113,12 @@
             android:exported="false"
             android:process=":bkg" />
 
+        <provider
+            android:name=".provider.BinderProvider"
+            android:authorities="baidu.com.testlibproject.binder.provider"
+            android:exported="false"
+            android:process=":bkg" />
+
         <activity android:name=".sensor.CameraActivity">
         </activity>
     </application>
