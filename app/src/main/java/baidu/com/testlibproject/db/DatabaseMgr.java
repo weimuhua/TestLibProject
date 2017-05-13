@@ -1,5 +1,6 @@
 package baidu.com.testlibproject.db;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -15,6 +16,7 @@ public class DatabaseMgr {
     private static final String TAG = "DatabaseMgr";
     private static final boolean DEBUG = FeatureConfig.DEBUG;
 
+    @SuppressLint("StaticFieldLeak")
     private static DatabaseMgr sInstance;
 
     private Context mAppContext;
@@ -36,6 +38,7 @@ public class DatabaseMgr {
         mInfoMap = new HashMap<>();
     }
 
+    @SuppressWarnings("unchecked")
     public SQLiteDatabase getDatabase(String className) {
         try {
             Class clazz = Class.forName(className);
