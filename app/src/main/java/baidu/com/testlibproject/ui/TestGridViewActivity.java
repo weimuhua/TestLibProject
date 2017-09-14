@@ -69,7 +69,7 @@ public class TestGridViewActivity extends Activity {
                 List<View> views = new ArrayList<>();
                 List<PackageInfo> tempList = new ArrayList<>(adapterDataList);
                 for (int i = 0; i < tempList.size(); i++) {
-                    if ((i != 0 && i % (PAGE_SIZE - 1) == 0) || i == tempList.size() - 1) {
+                    if ((i != 0 && i % PAGE_SIZE == 0) || i == tempList.size() - 1) {
                         int curIndex = views.size() * PAGE_SIZE;
 
                         View view = LayoutInflater.from(mCxt).inflate(R.layout.layout_gridview, null);
