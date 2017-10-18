@@ -115,6 +115,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         });
     }
 
+    @SuppressWarnings({"unchecked", "ConfusingArgumentToVarargsMethod"})
     private void testLoadJarFile() {
         //编译出jar包之后，需要注意，要调用./dx --dex --output=target.jar Secret.jar
         File jarFile = new File("/data/local/tmp/target.jar");
