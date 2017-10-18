@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    package="baidu.com.testlibproject"
+<manifest package="baidu.com.testlibproject"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-feature
@@ -114,6 +113,8 @@
             android:process=":bkg" />
 
         <activity android:name=".sensor.CameraActivity">
+        </activity>
+        <activity android:name=".plugin.PluginActivity">
         </activity>
     </application>
 

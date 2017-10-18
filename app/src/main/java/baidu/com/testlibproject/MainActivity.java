@@ -8,18 +8,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import java.io.File;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 
 import baidu.com.commontools.threadpool.MhThreadPool;
 import baidu.com.testlibproject.db.StationDbFactory;
 import baidu.com.testlibproject.intent.IntentTestActivity;
+import baidu.com.testlibproject.plugin.PluginActivity;
 import baidu.com.testlibproject.sensor.CameraActivity;
 import baidu.com.testlibproject.sensor.CompassActivity;
 import baidu.com.testlibproject.sensor.LocationMgrActivity;
@@ -30,11 +27,10 @@ import baidu.com.testlibproject.service.SmsMgrActivity;
 import baidu.com.testlibproject.service.TelephonyMgrActivity;
 import baidu.com.testlibproject.service.VibratorActivity;
 import baidu.com.testlibproject.ui.UiTestActivity;
-import dalvik.system.DexClassLoader;
 
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "MainActivity|TAG";
     private static final boolean DEBUG = FeatureConfig.DEBUG;
 
     private static final int INTENT_TEST_UI_ACTIVITY = 0;
@@ -46,6 +42,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private static final int INTENT_COMPASS_ACTIVITY = 6;
     private static final int INTENT_LOCATION_MANAGER = 7;
     private static final int INTENT_CAMERA_ACTIVITY = 8;
+    private static final int INTENT_PLUGIN_ACTIVITY = 9;
 
     private Context mContext;
 
@@ -56,9 +53,18 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext = this;
+
+        ClassLoader classLoader = getClassLoader();
+        if (classLoader != null) {
+            Log.i(TAG, "[onCreate] classLoader " + " : " + classLoader.toString());
+            while (classLoader.getParent() != null) {
+                classLoader = classLoader.getParent();
+                Log.i(TAG, "[onCreate] classLoader " + " : " + classLoader.toString());
+            }
+        }
+
         initView();
         initData();
-        testLoadJarFile();
         testProvider();
     }
 
@@ -115,33 +121,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         });
     }
 
-    @SuppressWarnings({"unchecked", "ConfusingArgumentToVarargsMethod"})
-    private void testLoadJarFile() {
-        //编译出jar包之后，需要注意，要调用./dx --dex --output=target.jar Secret.jar
-        File jarFile = new File("/data/local/tmp/target.jar");
-
-        File dexOutputDir = getDir("dex", 0);
-        ClassLoader classLoader = new DexClassLoader(jarFile.getAbsolutePath(), dexOutputDir.getAbsolutePath(),
-                null, getClassLoader());
-        try {
-            Class clazz = classLoader.loadClass("me.wayne.Main");
-            Constructor constructor = clazz.getConstructor();
-            Object obj = constructor.newInstance();
-
-            Method helloMethod = clazz.getMethod("getMessage", null);
-            helloMethod.setAccessible(true);
-            Object content = helloMethod.invoke(obj, null);
-            if (DEBUG) {
-                LogHelper.d(TAG, "content : " + content);
-            }
-            Toast.makeText(this, content.toString(), Toast.LENGTH_LONG).show();
-        } catch (Exception exception) {
-            if (DEBUG) {
-                LogHelper.w(TAG, "Exception ", exception);
-            }
-        }
-    }
-
     private void testProvider() {
         ContentResolver resolver = mContext.getContentResolver();
         Uri url = Uri.withAppendedPath(Constants.DB_AUTHORITY_URI, StationDbFactory.class.getName() + "/" + "test");
@@ -177,6 +156,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 break;
             case INTENT_CAMERA_ACTIVITY:
                 startActivity(new Intent(mContext, CameraActivity.class));
+                break;
+            case INTENT_PLUGIN_ACTIVITY:
+                startActivity(new Intent(mContext, PluginActivity.class));
                 break;
             default:
                 break;

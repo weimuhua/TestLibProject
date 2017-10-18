@@ -10,6 +10,7 @@
         <item>Compass</item>
         <item>GPS</item>
         <item>Camera</item>
+        <item>Plugin</item>
     </array>
     <array name="ui_test_item">
         <item>AutoCompleteTextView</item>
