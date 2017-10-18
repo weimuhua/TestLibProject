@@ -11,6 +11,11 @@ import android.os.RemoteException;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 
 import baidu.com.commontools.threadpool.MhThreadPool;
 import baidu.com.testlibproject.db.StationDbFactory;
@@ -25,6 +30,7 @@ import baidu.com.testlibproject.service.SmsMgrActivity;
 import baidu.com.testlibproject.service.TelephonyMgrActivity;
 import baidu.com.testlibproject.service.VibratorActivity;
 import baidu.com.testlibproject.ui.UiTestActivity;
+import dalvik.system.DexClassLoader;
 
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
 
@@ -52,6 +58,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         mContext = this;
         initView();
         initData();
+        testLoadJarFile();
         testProvider();
     }
 
@@ -75,7 +82,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
 
     private void initView() {
-        mListView = (ListView) findViewById(R.id.list_view);
+        mListView = findViewById(R.id.list_view);
     }
 
     private void initData() {
@@ -106,6 +113,32 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 }
             }
         });
+    }
+
+    private void testLoadJarFile() {
+        //编译出jar包之后，需要注意，要调用./dx --dex --output=target.jar Secret.jar
+        File jarFile = new File("/data/local/tmp/target.jar");
+
+        File dexOutputDir = getDir("dex", 0);
+        ClassLoader classLoader = new DexClassLoader(jarFile.getAbsolutePath(), dexOutputDir.getAbsolutePath(),
+                null, getClassLoader());
+        try {
+            Class clazz = classLoader.loadClass("me.wayne.Main");
+            Constructor constructor = clazz.getConstructor();
+            Object obj = constructor.newInstance();
+
+            Method helloMethod = clazz.getMethod("getMessage", null);
+            helloMethod.setAccessible(true);
+            Object content = helloMethod.invoke(obj, null);
+            if (DEBUG) {
+                LogHelper.d(TAG, "content : " + content);
+            }
+            Toast.makeText(this, content.toString(), Toast.LENGTH_LONG).show();
+        } catch (Exception exception) {
+            if (DEBUG) {
+                LogHelper.w(TAG, "Exception ", exception);
+            }
+        }
     }
 
     private void testProvider() {
