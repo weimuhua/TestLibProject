@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import baidu.com.testlibproject.BuildConfig;
@@ -83,6 +84,17 @@ public class PluginActivity extends Activity implements View.OnClickListener {
             testLoadJarFile();
         } else if (v.getId() == R.id.start_activity_tv ) {
             startActivity(new Intent(this, TargetActivity.class));
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            AMSHookHelper.stopHookActivityManagerNative();
+            AMSHookHelper.stopHookActivityThreadHandler();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

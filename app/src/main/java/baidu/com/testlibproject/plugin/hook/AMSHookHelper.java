@@ -54,6 +54,25 @@ public class AMSHookHelper {
 
     }
 
+    public static void stopHookActivityManagerNative() throws ClassNotFoundException,
+            NoSuchMethodException, InvocationTargetException,
+            IllegalAccessException, NoSuchFieldException {
+
+        Class<?> activityManagerNativeClass = Class.forName("android.app.ActivityManagerNative");
+
+        Field gDefaultField = activityManagerNativeClass.getDeclaredField("gDefault");
+        gDefaultField.setAccessible(true);
+
+        Object gDefault = gDefaultField.get(null);
+
+        // gDefault是一个 android.util.Singleton对象; 我们取出这个单例里面的字段
+        Class<?> singleton = Class.forName("android.util.Singleton");
+        Field mInstanceField = singleton.getDeclaredField("mInstance");
+        mInstanceField.setAccessible(true);
+
+        mInstanceField.set(gDefault, null);
+    }
+
     /**
      * 由于之前我们用替身欺骗了AMS; 现在我们要换回我们真正需要启动的Activity
      * <p/>
@@ -80,5 +99,25 @@ public class AMSHookHelper {
 
         mCallBackField.set(mH, new ActivityThreadHandlerCallback(mH));
 
+    }
+
+
+    public static void stopHookActivityThreadHandler() throws Exception {
+
+        // 先获取到当前的ActivityThread对象
+        Class<?> activityThreadClass = Class.forName("android.app.ActivityThread");
+        Field currentActivityThreadField = activityThreadClass.getDeclaredField("sCurrentActivityThread");
+        currentActivityThreadField.setAccessible(true);
+        Object currentActivityThread = currentActivityThreadField.get(null);
+
+        // 由于ActivityThread一个进程只有一个,我们获取这个对象的mH
+        Field mHField = activityThreadClass.getDeclaredField("mH");
+        mHField.setAccessible(true);
+        Handler mH = (Handler) mHField.get(currentActivityThread);
+
+        Field mCallBackField = Handler.class.getDeclaredField("mCallback");
+        mCallBackField.setAccessible(true);
+
+        mCallBackField.set(mH, null);
     }
 }
