@@ -2,6 +2,7 @@ package baidu.com.testlibproject.plugin;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import java.io.File;
@@ -13,7 +14,7 @@ import baidu.com.testlibproject.LogHelper;
 import baidu.com.testlibproject.R;
 import dalvik.system.DexClassLoader;
 
-public class PluginActivity extends Activity {
+public class PluginActivity extends Activity implements View.OnClickListener {
 
     private static final String TAG = "PluginActivity";
     private static final boolean DEBUG = BuildConfig.DEBUG;
@@ -22,7 +23,11 @@ public class PluginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plugin);
-        testLoadJarFile();
+        initView();
+    }
+
+    private void initView() {
+        findViewById(R.id.load_jar_tv).setOnClickListener(this);
     }
 
     @Override
@@ -54,6 +59,13 @@ public class PluginActivity extends Activity {
             if (DEBUG) {
                 LogHelper.w(TAG, "Exception ", exception);
             }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.load_jar_tv) {
+            testLoadJarFile();
         }
     }
 }
