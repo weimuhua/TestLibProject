@@ -1,6 +1,8 @@
 package baidu.com.testlibproject.plugin;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -12,12 +14,24 @@ import java.lang.reflect.Method;
 import baidu.com.testlibproject.BuildConfig;
 import baidu.com.testlibproject.LogHelper;
 import baidu.com.testlibproject.R;
+import baidu.com.testlibproject.plugin.hook.AMSHookHelper;
 import dalvik.system.DexClassLoader;
 
 public class PluginActivity extends Activity implements View.OnClickListener {
 
     private static final String TAG = "PluginActivity";
     private static final boolean DEBUG = BuildConfig.DEBUG;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(newBase);
+        try {
+            AMSHookHelper.hookActivityManagerNative();
+            AMSHookHelper.hookActivityThreadHandler();
+        } catch (Throwable throwable) {
+            throw new RuntimeException("hook failed", throwable);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +42,7 @@ public class PluginActivity extends Activity implements View.OnClickListener {
 
     private void initView() {
         findViewById(R.id.load_jar_tv).setOnClickListener(this);
+        findViewById(R.id.start_activity_tv).setOnClickListener(this);
     }
 
     @Override
@@ -66,6 +81,8 @@ public class PluginActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.load_jar_tv) {
             testLoadJarFile();
+        } else if (v.getId() == R.id.start_activity_tv ) {
+            startActivity(new Intent(this, TargetActivity.class));
         }
     }
 }
