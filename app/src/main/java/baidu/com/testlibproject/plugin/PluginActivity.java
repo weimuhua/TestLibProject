@@ -81,6 +81,7 @@ public class PluginActivity extends Activity implements View.OnClickListener {
         if (sPluginClassloader == null) {
             initPluginClassloader();
         }
+
         try {
             Class clazz = sPluginClassloader.loadClass("wayne.me.testapplication.Main");
             Constructor constructor = clazz.getConstructor();
@@ -107,6 +108,12 @@ public class PluginActivity extends Activity implements View.OnClickListener {
             File dexOutputDir = getDir("dex", 0);
             sPluginClassloader = new DexClassLoader(jarFile.getAbsolutePath(),
                     dexOutputDir.getAbsolutePath(), null, getClassLoader());
+
+            try {
+                DexUtils.injectDexAtFirst(sPluginClassloader);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -117,11 +124,6 @@ public class PluginActivity extends Activity implements View.OnClickListener {
     private void startPluginActivity() {
         if (sPluginClassloader == null) {
             initPluginClassloader();
-            try {
-                DexUtils.injectDexAtFirst(sPluginClassloader);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
 
         Intent intent = new Intent();
