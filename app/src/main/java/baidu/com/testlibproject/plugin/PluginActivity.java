@@ -15,6 +15,7 @@ import baidu.com.testlibproject.BuildConfig;
 import baidu.com.testlibproject.LogHelper;
 import baidu.com.testlibproject.R;
 import baidu.com.testlibproject.plugin.hook.AMSHookHelper;
+import baidu.com.testlibproject.plugin.hook.DexUtils;
 import dalvik.system.DexClassLoader;
 
 public class PluginActivity extends Activity implements View.OnClickListener {
@@ -22,14 +23,16 @@ public class PluginActivity extends Activity implements View.OnClickListener {
     private static final String TAG = "PluginActivity";
     private static final boolean DEBUG = BuildConfig.DEBUG;
 
+    private static ClassLoader sPluginClassloader;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(newBase);
         try {
             AMSHookHelper.hookActivityManagerNative();
             AMSHookHelper.hookActivityThreadHandler();
-        } catch (Throwable throwable) {
-            throw new RuntimeException("hook failed", throwable);
+        } catch (Throwable ignore) {
+            ignore.printStackTrace();
         }
     }
 
@@ -43,6 +46,7 @@ public class PluginActivity extends Activity implements View.OnClickListener {
     private void initView() {
         findViewById(R.id.load_jar_tv).setOnClickListener(this);
         findViewById(R.id.start_activity_tv).setOnClickListener(this);
+        findViewById(R.id.start_plugin_activity_tv).setOnClickListener(this);
     }
 
     @Override
@@ -56,6 +60,8 @@ public class PluginActivity extends Activity implements View.OnClickListener {
             testLoadApkFile();
         } else if (v.getId() == R.id.start_activity_tv) {
             startUnregisteredActivity();
+        } else if (v.getId() == R.id.start_plugin_activity_tv) {
+            startPluginActivity();
         }
     }
 
@@ -72,14 +78,11 @@ public class PluginActivity extends Activity implements View.OnClickListener {
 
     @SuppressWarnings({"unchecked"})
     private void testLoadApkFile() {
-        //编译出apk之后，adb push app/build/outputs/apk/debug/app-debug.apk /data/local/tmp
-        File jarFile = new File("/data/local/tmp/app-debug.apk");
-
-        File dexOutputDir = getDir("dex", 0);
-        ClassLoader classLoader = new DexClassLoader(jarFile.getAbsolutePath(), dexOutputDir.getAbsolutePath(),
-                null, getClassLoader());
+        if (sPluginClassloader == null) {
+            initPluginClassloader();
+        }
         try {
-            Class clazz = classLoader.loadClass("wayne.me.testapplication.Main");
+            Class clazz = sPluginClassloader.loadClass("wayne.me.testapplication.Main");
             Constructor constructor = clazz.getConstructor();
             Object obj = constructor.newInstance();
 
@@ -97,7 +100,32 @@ public class PluginActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    private void initPluginClassloader() {
+        if (sPluginClassloader == null) {
+            //编译出apk之后，adb push app/build/outputs/apk/debug/app-debug.apk /data/local/tmp
+            File jarFile = new File("/data/local/tmp/app-debug.apk");
+            File dexOutputDir = getDir("dex", 0);
+            sPluginClassloader = new DexClassLoader(jarFile.getAbsolutePath(),
+                    dexOutputDir.getAbsolutePath(), null, getClassLoader());
+        }
+    }
+
     private void startUnregisteredActivity() {
         startActivity(new Intent(this, TargetActivity.class));
+    }
+
+    private void startPluginActivity() {
+        if (sPluginClassloader == null) {
+            initPluginClassloader();
+            try {
+                DexUtils.injectDexAtFirst(sPluginClassloader);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        Intent intent = new Intent();
+        intent.setClassName("wayne.me.testapplication", "wayne.me.testapplication.MainActivity");
+        startActivity(intent);
     }
 }
