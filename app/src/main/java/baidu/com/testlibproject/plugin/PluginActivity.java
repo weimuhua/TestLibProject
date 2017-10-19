@@ -50,6 +50,26 @@ public class PluginActivity extends Activity implements View.OnClickListener {
         finish();
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.load_jar_tv) {
+            testLoadApkFile();
+        } else if (v.getId() == R.id.start_activity_tv) {
+            startUnregisteredActivity();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            AMSHookHelper.stopHookActivityManagerNative();
+            AMSHookHelper.stopHookActivityThreadHandler();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @SuppressWarnings({"unchecked"})
     private void testLoadApkFile() {
         //编译出apk之后，adb push app/build/outputs/apk/debug/app-debug.apk /data/local/tmp
@@ -59,7 +79,7 @@ public class PluginActivity extends Activity implements View.OnClickListener {
         ClassLoader classLoader = new DexClassLoader(jarFile.getAbsolutePath(), dexOutputDir.getAbsolutePath(),
                 null, getClassLoader());
         try {
-            Class clazz = classLoader.loadClass("baidu.com.testlibproject.Main");
+            Class clazz = classLoader.loadClass("wayne.me.testapplication.Main");
             Constructor constructor = clazz.getConstructor();
             Object obj = constructor.newInstance();
 
@@ -77,23 +97,7 @@ public class PluginActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.load_jar_tv) {
-            testLoadApkFile();
-        } else if (v.getId() == R.id.start_activity_tv) {
-            startActivity(new Intent(this, TargetActivity.class));
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        try {
-            AMSHookHelper.stopHookActivityManagerNative();
-            AMSHookHelper.stopHookActivityThreadHandler();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void startUnregisteredActivity() {
+        startActivity(new Intent(this, TargetActivity.class));
     }
 }
