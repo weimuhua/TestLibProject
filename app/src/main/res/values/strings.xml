@@ -81,6 +81,6 @@
     <string name="volume_down">volume down</string>
     <string name="mute">mute</string>
     <string name="take_photo">take photo</string>
-    <string name="load_jar">load jar file</string>
+    <string name="load_jar">load apk file</string>
     <string name="start_activity">start non-registered activity</string>
 </resources>

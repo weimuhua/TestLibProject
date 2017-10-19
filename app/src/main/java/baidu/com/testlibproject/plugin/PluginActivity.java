@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import baidu.com.testlibproject.BuildConfig;
@@ -51,22 +50,22 @@ public class PluginActivity extends Activity implements View.OnClickListener {
         finish();
     }
 
-    @SuppressWarnings({"unchecked", "ConfusingArgumentToVarargsMethod"})
-    private void testLoadJarFile() {
-        //编译出jar包之后，需要注意，要调用./dx --dex --output=target.jar Secret.jar
-        File jarFile = new File("/data/local/tmp/target.jar");
+    @SuppressWarnings({"unchecked"})
+    private void testLoadApkFile() {
+        //编译出apk之后，adb push app/build/outputs/apk/debug/app-debug.apk /data/local/tmp
+        File jarFile = new File("/data/local/tmp/app-debug.apk");
 
         File dexOutputDir = getDir("dex", 0);
         ClassLoader classLoader = new DexClassLoader(jarFile.getAbsolutePath(), dexOutputDir.getAbsolutePath(),
                 null, getClassLoader());
         try {
-            Class clazz = classLoader.loadClass("me.wayne.Main");
+            Class clazz = classLoader.loadClass("baidu.com.testlibproject.Main");
             Constructor constructor = clazz.getConstructor();
             Object obj = constructor.newInstance();
 
-            Method helloMethod = clazz.getMethod("getMessage", null);
+            Method helloMethod = clazz.getMethod("getMessage");
             helloMethod.setAccessible(true);
-            Object content = helloMethod.invoke(obj, null);
+            Object content = helloMethod.invoke(obj);
             if (DEBUG) {
                 LogHelper.d(TAG, "content : " + content);
             }
@@ -81,8 +80,8 @@ public class PluginActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.load_jar_tv) {
-            testLoadJarFile();
-        } else if (v.getId() == R.id.start_activity_tv ) {
+            testLoadApkFile();
+        } else if (v.getId() == R.id.start_activity_tv) {
             startActivity(new Intent(this, TargetActivity.class));
         }
     }
