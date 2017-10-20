@@ -52,7 +52,7 @@ public class SimpleAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(mCxt);
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.main_activity_item, null);
+            convertView = inflater.inflate(R.layout.main_activity_item, parent, false);
         }
         if (mStrArr != null && position <= mStrArr.length) {
             ((TextView) convertView.findViewById(R.id.item_textview)).setText(mStrArr[position]);
