@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import baidu.com.testlibproject.BuildConfig;
-import baidu.com.testlibproject.LogHelper;
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.R;
 
 public class TargetActivity extends Activity {

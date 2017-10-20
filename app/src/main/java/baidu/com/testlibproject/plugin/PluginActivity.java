@@ -12,7 +12,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 import baidu.com.testlibproject.BuildConfig;
-import baidu.com.testlibproject.LogHelper;
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.R;
 import baidu.com.testlibproject.plugin.hook.AMSHookHelper;
 import baidu.com.testlibproject.plugin.hook.DexUtils;

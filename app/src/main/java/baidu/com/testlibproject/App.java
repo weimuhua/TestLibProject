@@ -1,13 +1,14 @@
 package baidu.com.testlibproject;
 
 import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Application;
 import android.content.Intent;
 import android.os.Process;
-import android.app.ActivityManager.RunningAppProcessInfo;
 
 import java.util.List;
 
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.service.MainService;
 import baidu.com.testlibproject.service.MainServiceClient;
 
@@ -24,6 +25,8 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         if (DEBUG) LogHelper.d(TAG, "Application onCreate, process : " + getProcessName());
+
+        LogHelper.setTag("TestLibProject");
 
         int processType = getProcessType();
         switch (processType) {

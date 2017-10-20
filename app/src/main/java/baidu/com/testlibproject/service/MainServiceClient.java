@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import baidu.com.commontools.utils.AsyncHandler;
 import baidu.com.testlibproject.FeatureConfig;
 import baidu.com.testlibproject.IMainService;
-import baidu.com.testlibproject.LogHelper;
+import baidu.com.commontools.utils.LogHelper;
 
 public class MainServiceClient {
 

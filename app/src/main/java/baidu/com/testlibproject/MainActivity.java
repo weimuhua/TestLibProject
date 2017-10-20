@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import baidu.com.commontools.threadpool.MhThreadPool;
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.db.StationDbFactory;
 import baidu.com.testlibproject.intent.IntentTestActivity;
 import baidu.com.testlibproject.plugin.PluginActivity;

@@ -11,7 +11,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import baidu.com.testlibproject.FeatureConfig;
-import baidu.com.testlibproject.LogHelper;
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.R;
 
 public class EmailAutoCompleteTv extends AutoCompleteTextView implements View.OnFocusChangeListener {
