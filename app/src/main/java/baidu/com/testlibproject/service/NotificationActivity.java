@@ -28,8 +28,8 @@ public class NotificationActivity extends Activity implements View.OnClickListen
     }
 
     private void initView() {
-        mSendBtn = (Button) findViewById(R.id.send_btn);
-        mCancelBtn = (Button) findViewById(R.id.cancel_btn);
+        mSendBtn = findViewById(R.id.send_btn);
+        mCancelBtn = findViewById(R.id.cancel_btn);
         mSendBtn.setOnClickListener(this);
         mCancelBtn.setOnClickListener(this);
     }

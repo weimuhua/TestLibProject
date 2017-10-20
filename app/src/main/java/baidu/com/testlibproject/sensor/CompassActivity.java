@@ -40,7 +40,7 @@ public class CompassActivity extends Activity implements SensorEventListener {
     }
 
     private void initView() {
-        mCompass = (ImageView) findViewById(R.id.compass);
+        mCompass = findViewById(R.id.compass);
     }
 
     private void initData() {

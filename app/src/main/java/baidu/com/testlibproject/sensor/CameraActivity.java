@@ -26,9 +26,9 @@ public class CameraActivity extends Activity implements View.OnClickListener {
     }
 
     private void initView() {
-        mButton = (Button) findViewById(R.id.take_photo_btn);
+        mButton = findViewById(R.id.take_photo_btn);
         mButton.setOnClickListener(this);
-        mImageView = (ImageView) findViewById(R.id.photo);
+        mImageView = findViewById(R.id.photo);
     }
 
     @Override

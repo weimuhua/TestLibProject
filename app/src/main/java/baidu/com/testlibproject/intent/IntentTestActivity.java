@@ -45,7 +45,7 @@ public class IntentTestActivity extends Activity implements Handler.Callback, Ad
     }
 
     private void initView() {
-        mListView = (ListView) findViewById(R.id.contract_list_view);
+        mListView = findViewById(R.id.contract_list_view);
         mListView.setOnItemClickListener(this);
     }
 

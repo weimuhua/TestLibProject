@@ -22,12 +22,12 @@ public class SearchViewActivity extends Activity implements SearchView.OnQueryTe
     }
 
     private void initView() {
-        SearchView searchView = (SearchView) findViewById(R.id.search_view);
+        SearchView searchView = findViewById(R.id.search_view);
         searchView.setQueryHint(getString(R.string.search));
         searchView.setSubmitButtonEnabled(true);
         searchView.setOnQueryTextListener(this);
 
-        mListView = (ListView) findViewById(R.id.search_view_listview);
+        mListView = findViewById(R.id.search_view_listview);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.main_activity_item,
                 getResources().getStringArray(R.array.search_view_arr));
         mListView.setAdapter(adapter);

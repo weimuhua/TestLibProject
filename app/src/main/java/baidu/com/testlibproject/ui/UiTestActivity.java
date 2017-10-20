@@ -36,7 +36,7 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
     }
 
     private void initView() {
-        mListView = (ListView) findViewById(R.id.list_view);
+        mListView = findViewById(R.id.list_view);
     }
 
     private void initData() {

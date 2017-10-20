@@ -29,13 +29,13 @@ public class DateTimePickerActivity extends Activity implements DatePicker.OnDat
 
     private void initView() {
         Calendar cal = Calendar.getInstance();
-        DatePicker datePicker = (DatePicker) findViewById(R.id.date_picker);
+        DatePicker datePicker = findViewById(R.id.date_picker);
         datePicker.init(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH), this);
-        TimePicker timePicker = (TimePicker) findViewById(R.id.time_picker);
+        TimePicker timePicker = findViewById(R.id.time_picker);
         timePicker.setIs24HourView(true);
         timePicker.setOnTimeChangedListener(this);
-        mTextView = (TextView) findViewById(R.id.select_time);
+        mTextView = findViewById(R.id.select_time);
     }
 
     @Override
