@@ -52,4 +52,10 @@ public class MainService extends Service {
         if (DEBUG) LogHelper.d(TAG, "MainService onBind");
         return mBinder;
     }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        super.onTaskRemoved(rootIntent);
+        if (DEBUG) LogHelper.d(TAG, "onTaskRemoved");
+    }
 }
