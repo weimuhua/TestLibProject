@@ -25,6 +25,7 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
     private static final int INTENT_ACTION_BAR_ACTIVITY = 8;
     private static final int INTENT_CONFIGURATION_TEST = 9;
     private static final int INTENT_CONSTRAIN_LAYOUT_ACTIVITY = 10;
+    private static final int INTENT_TEST_WEBVIEW_ACTIVITY = 11;
 
     private ListView mListView;
 
@@ -82,6 +83,9 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
                 break;
             case INTENT_CONSTRAIN_LAYOUT_ACTIVITY:
                 startActivity(new Intent(this, ConstrainLayoutActivity.class));
+                break;
+            case INTENT_TEST_WEBVIEW_ACTIVITY:
+                startActivity(new Intent(this, WebViewActivity.class));
                 break;
             default:
                 break;
