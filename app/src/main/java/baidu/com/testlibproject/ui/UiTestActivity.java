@@ -27,6 +27,7 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
     private static final int INTENT_CONSTRAIN_LAYOUT_ACTIVITY = 10;
     private static final int INTENT_TEST_WEBVIEW_ACTIVITY = 11;
     private static final int INTENT_TEST_VIDEO_VIEW_ACTIVITY = 12;
+    private static final int INTENT_TEST_SURFACE_VIEW_ACTIVITY = 13;
 
     private ListView mListView;
 
@@ -90,6 +91,9 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
                 break;
             case INTENT_TEST_VIDEO_VIEW_ACTIVITY:
                 startActivity(new Intent(this, VideoViewActivity.class));
+                break;
+            case INTENT_TEST_SURFACE_VIEW_ACTIVITY:
+                startActivity(new Intent(this, SurfaceViewActivity.class));
                 break;
             default:
                 break;

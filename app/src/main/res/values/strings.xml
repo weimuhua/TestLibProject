@@ -26,6 +26,7 @@
         <item>ConstrainLayout</item>
         <item>WebView</item>
         <item>VideoView</item>
+        <item>SurfaceView</item>
     </array>
     <array name="auto_complete_arr">
         <item>\&#064;163.com</item>
