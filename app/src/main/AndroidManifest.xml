@@ -119,15 +119,26 @@
             android:exported="false"
             android:process=":bkg" />
 
-        <activity android:name=".sensor.CameraActivity">
-        </activity>
-        <activity android:name=".plugin.PluginActivity">
-        </activity>
-        <activity android:name=".plugin.ProxyActivity">
-        </activity>
-        <activity android:name=".ui.ConstrainLayoutActivity">
-        </activity>
-
+        <activity
+            android:name=".sensor.CameraActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".plugin.PluginActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".plugin.ProxyActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ConstrainLayoutActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.VideoViewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
