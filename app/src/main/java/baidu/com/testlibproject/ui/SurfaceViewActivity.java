@@ -32,7 +32,13 @@ public class SurfaceViewActivity extends Activity {
                 mMediaPlayer = new MediaPlayer();
                 mMediaPlayer.setSurface(holder.getSurface());
 
-                String path = "android.resource://" + getPackageName() + "/" + R.raw.vid_bigbuckbunny;
+//                String path = "android.resource://" + getPackageName() + "/" + R.raw.vid_bigbuckbunny;
+                String path = "http://mediatest.qq.com/qqstocdnd?filekey=828a9844a4f1369517949a9e1b4bc0ac" +
+                        "&fileid=3062020103045b3059020100041231343431313531393838353039313631363102030f424" +
+                        "1020424253db702045a1e7917042038323861393834346134663133363935313739343961396531623" +
+                        "4626330616302010002020902020300c3520201000400&bid=10011&setnum=50002&authkey=30400" +
+                        "201010439303702010102010102040dc3f35002030f4241020424253db7020424253db702030f4df90" +
+                        "20429253db702010002045a26621502047ec0a34a0400&filetype=2306";
                 try {
                     mMediaPlayer.setDataSource(SurfaceViewActivity.this, Uri.parse(path));
                     mMediaPlayer.prepare();
