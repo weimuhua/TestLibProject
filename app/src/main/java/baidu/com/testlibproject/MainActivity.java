@@ -1,6 +1,5 @@
 package baidu.com.testlibproject;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,7 +29,7 @@ import baidu.com.testlibproject.service.TelephonyMgrActivity;
 import baidu.com.testlibproject.service.VibratorActivity;
 import baidu.com.testlibproject.ui.UiTestActivity;
 
-public class MainActivity extends Activity implements AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private static final String TAG = "MainActivity|TAG";
     private static final boolean DEBUG = FeatureConfig.DEBUG;

@@ -1,9 +1,9 @@
 package baidu.com.testlibproject.ui;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -12,7 +12,7 @@ import baidu.com.testlibproject.R;
 import baidu.com.testlibproject.SimpleAdapter;
 import baidu.com.testlibproject.service.NotificationActivity;
 
-public class UiTestActivity extends Activity implements AdapterView.OnItemClickListener {
+public class UiTestActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private static final int INTENT_AUTO_COMPLETE_TEXTVIEW = 0;
     private static final int INTENT_TEST_GRID_VIEW_ACTIVITY = 1;
