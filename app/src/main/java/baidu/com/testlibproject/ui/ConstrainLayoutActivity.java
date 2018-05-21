@@ -67,7 +67,7 @@ public class ConstrainLayoutActivity extends Activity {
                 } else if (id == 4) {
                     addConstraintChains();
                 } else if (id == 5) {
-
+                    addConstraintGuideLine();
                 }
             }
 
@@ -125,6 +125,11 @@ public class ConstrainLayoutActivity extends Activity {
 
     private void addConstraintChains() {
         View subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_chains, mFrameLayout, false);
+        mFrameLayout.addView(subView);
+    }
+
+    private void addConstraintGuideLine() {
+        View subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_guideline, mFrameLayout, false);
         mFrameLayout.addView(subView);
     }
 }
