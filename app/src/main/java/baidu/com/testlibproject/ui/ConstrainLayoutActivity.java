@@ -63,7 +63,7 @@ public class ConstrainLayoutActivity extends Activity {
                 } else if (id == 2) {
                     addConstraintBias();
                 } else if (id == 3) {
-
+                    addConstraintRatio();
                 } else if (id == 4) {
                     addConstraintChains();
                 } else if (id == 5) {
@@ -115,6 +115,11 @@ public class ConstrainLayoutActivity extends Activity {
 
     private void addConstraintBias() {
         View subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_bias, mFrameLayout, false);
+        mFrameLayout.addView(subView);
+    }
+
+    private void addConstraintRatio() {
+        View subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_ratio, mFrameLayout, false);
         mFrameLayout.addView(subView);
     }
 
