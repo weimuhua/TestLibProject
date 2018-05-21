@@ -61,7 +61,7 @@ public class ConstrainLayoutActivity extends Activity {
                 } else if (id == 1) {
                     addConstraintGoneMargin();
                 } else if (id == 2) {
-
+                    addConstraintBias();
                 } else if (id == 3) {
 
                 } else if (id == 4) {
@@ -86,7 +86,6 @@ public class ConstrainLayoutActivity extends Activity {
     private void addConstraintGoneMargin() {
         View subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_margin, mFrameLayout, false);
         Button normalMarginBtn = subView.findViewById(R.id.normal_margin_btn);
-        TextView normalTvA = subView.findViewById(R.id.normal_tv_a);
         final TextView normalTvB = subView.findViewById(R.id.normal_tv_b);
         normalMarginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +110,11 @@ public class ConstrainLayoutActivity extends Activity {
                 }
             }
         });
+        mFrameLayout.addView(subView);
+    }
+
+    private void addConstraintBias() {
+        View subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_bias, mFrameLayout, false);
         mFrameLayout.addView(subView);
     }
 
