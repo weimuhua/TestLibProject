@@ -2,6 +2,7 @@ package baidu.com.testlibproject.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,14 +17,30 @@ import baidu.com.testlibproject.R;
 
 public class ConstrainLayoutActivity extends Activity {
 
-    private static final String[] TEST_PROGRAM_ARRAY = {
-            "相对位置demo",
-            "Margin demo",
-            "bias demo",
-            "ratio demo",
-            "chains demo",
-            "guideline demo"
-    };
+    private static final String[] TEST_PROGRAM_ARRAY;
+
+    static {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            TEST_PROGRAM_ARRAY = new String[]{
+                    "相对位置demo",
+                    "Margin demo",
+                    "bias demo",
+                    "ratio demo",
+                    "chains demo",
+                    "guideline demo",
+                    "性能测试"
+            };
+        } else {
+            TEST_PROGRAM_ARRAY = new String[]{
+                    "相对位置demo",
+                    "Margin demo",
+                    "bias demo",
+                    "ratio demo",
+                    "chains demo",
+                    "guideline demo"
+            };
+        }
+    }
 
     private Spinner mTestSpinner;
     private TextView mSpinnerTv;
@@ -68,6 +85,8 @@ public class ConstrainLayoutActivity extends Activity {
                     addConstraintChains();
                 } else if (id == 5) {
                     addConstraintGuideLine();
+                } else if (id == 6) {
+                    addConstraintTest();
                 }
             }
 
@@ -130,6 +149,11 @@ public class ConstrainLayoutActivity extends Activity {
 
     private void addConstraintGuideLine() {
         View subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_guideline, mFrameLayout, false);
+        mFrameLayout.addView(subView);
+    }
+
+    private void addConstraintTest() {
+        View subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_test, mFrameLayout, false);
         mFrameLayout.addView(subView);
     }
 }
