@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -152,8 +153,9 @@ public class ConstrainLayoutActivity extends Activity {
         mFrameLayout.addView(subView);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void addConstraintTest() {
-        View subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_test, mFrameLayout, false);
-        mFrameLayout.addView(subView);
+        ConstraintLayoutTestLayout testLayout = new ConstraintLayoutTestLayout(this);
+        mFrameLayout.addView(testLayout);
     }
 }
