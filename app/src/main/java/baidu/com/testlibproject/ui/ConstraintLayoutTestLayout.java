@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.FrameMetrics;
 import android.view.View;
 import android.view.Window;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -28,7 +29,7 @@ public class ConstraintLayoutTestLayout extends LinearLayout implements View.OnC
 
     private static final String TAG = ConstraintLayoutTestLayout.class.getSimpleName();
 
-    private static final int COUNT = 1000;
+    private static final int COUNT = 200;
 
     private Button mButton;
     private RelativeLayout mRelativeLayout;
@@ -49,7 +50,39 @@ public class ConstraintLayoutTestLayout extends LinearLayout implements View.OnC
     private int mCount;
     private long mTotalCount;
 
-    private Handler mHandler = new Handler();
+    private boolean mIsScrolling = false;
+
+    private Handler mWorkHandler;
+    private Handler mMainHandler = new Handler();
+    private Window.OnFrameMetricsAvailableListener mMetricsAvailableListener
+            = new Window.OnFrameMetricsAvailableListener() {
+        @Override
+        public void onFrameMetricsAvailable(Window window, FrameMetrics frameMetrics, int dropCountSinceLastInvocation) {
+            if (!mIsScrolling) return;
+            final long duration = frameMetrics.getMetric(FrameMetrics.LAYOUT_MEASURE_DURATION);
+            if (mCount == 0) {
+                Log.d(TAG, "mCount == 0, mTotalCount : " + mTotalCount);
+            }
+            mCount++;
+            mTotalCount += duration;
+
+            if (mCount % 10 == 0 || mCount > COUNT) {
+                mMainHandler.post(new Runnable() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void run() {
+                        long avg = mCount == 0 ? mTotalCount : (mTotalCount / mCount);
+
+                        Log.d(TAG, "duration : " + duration + " mCount : " + mCount
+                                + " mTotalCount : " + mTotalCount + " avg : " + avg);
+
+                        mCurDurationTv.setText("cur : " + duration);
+                        mAvgDurationTv.setText(String.format("avg : %s", avg));
+                    }
+                });
+            }
+        }
+    };
 
     public ConstraintLayoutTestLayout(Context context) {
         super(context);
@@ -70,6 +103,10 @@ public class ConstraintLayoutTestLayout extends LinearLayout implements View.OnC
         if (getContext() instanceof Activity) {
             mActivity = (Activity) getContext();
         }
+
+        HandlerThread thread = new HandlerThread("addOnFrameMetricsAvailableListener");
+        thread.start();
+        mWorkHandler = new Handler(thread.getLooper());
 
         inflate(getContext(), R.layout.constraint_test_layout, this);
 
@@ -101,32 +138,30 @@ public class ConstraintLayoutTestLayout extends LinearLayout implements View.OnC
         initRLListView();
 
         if (mActivity != null) {
-            HandlerThread thread = new HandlerThread("addOnFrameMetricsAvailableListener");
-            thread.start();
-            Handler handler = new Handler(thread.getLooper());
-            mActivity.getWindow().addOnFrameMetricsAvailableListener(new Window.OnFrameMetricsAvailableListener() {
-                @SuppressLint("SetTextI18n")
-                @Override
-                public void onFrameMetricsAvailable(Window window, FrameMetrics frameMetrics, int dropCountSinceLastInvocation) {
-                    final long layoutMeasureDuration = frameMetrics.getMetric(FrameMetrics.LAYOUT_MEASURE_DURATION);
-                    mCount++;
-                    mTotalCount += layoutMeasureDuration;
-
-                    Log.d(TAG, "layoutMeasureDuration : " + layoutMeasureDuration +
-                            " mCount : " + mCount + " mTotalCount : " + mTotalCount);
-                    if (mCount % 10 == 0) {
-//                        mHandler.post(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                long avg = mTotalCount / mCount;
-//                                mCurDurationTv.setText("cur : " + layoutMeasureDuration);
-//                                mAvgDurationTv.setText(String.format("avg : %s", avg));
-//                            }
-//                        });
-                    }
-                }
-            }, handler);
+            mActivity.getWindow().addOnFrameMetricsAvailableListener(mMetricsAvailableListener, mWorkHandler);
         }
+
+        mRLListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                mIsScrolling = scrollState != SCROLL_STATE_IDLE;
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            }
+        });
+        mCLListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                mIsScrolling = scrollState != SCROLL_STATE_IDLE;
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
     }
 
     @Override
@@ -154,27 +189,33 @@ public class ConstraintLayoutTestLayout extends LinearLayout implements View.OnC
 
             initRLListView();
         }
+
+        if (mActivity != null) {
+            mActivity.getWindow().addOnFrameMetricsAvailableListener(mMetricsAvailableListener, mWorkHandler);
+        }
     }
 
     private void initRLListView() {
-        mCount = 0;
-        mTotalCount = 0;
         mRLListView.setSelection(0);
         mRLListView.post(new Runnable() {
             @Override
             public void run() {
+                Log.d(TAG, "smoothScrollToPosition");
+                mCount = 0;
+                mTotalCount = 0;
                 mRLListView.smoothScrollToPosition(mRLListView.getCount() - 1);
             }
         });
     }
 
     private void initCLListView() {
-        mCount = 0;
-        mTotalCount = 0;
         mCLListView.setSelection(0);
         mCLListView.post(new Runnable() {
             @Override
             public void run() {
+                Log.d(TAG, "smoothScrollToPosition");
+                mCount = 0;
+                mTotalCount = 0;
                 mCLListView.smoothScrollToPosition(mCLListView.getCount() - 1);
             }
         });
