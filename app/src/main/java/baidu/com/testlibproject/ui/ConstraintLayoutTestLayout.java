@@ -29,7 +29,7 @@ public class ConstraintLayoutTestLayout extends LinearLayout implements View.OnC
 
     private static final String TAG = ConstraintLayoutTestLayout.class.getSimpleName();
 
-    private static final int COUNT = 200;
+    private static final int COUNT = 2000;
 
     private Button mButton;
     private RelativeLayout mRelativeLayout;
@@ -60,11 +60,10 @@ public class ConstraintLayoutTestLayout extends LinearLayout implements View.OnC
         public void onFrameMetricsAvailable(Window window, FrameMetrics frameMetrics, int dropCountSinceLastInvocation) {
             if (!mIsScrolling) return;
             final long duration = frameMetrics.getMetric(FrameMetrics.LAYOUT_MEASURE_DURATION);
-            if (mCount == 0) {
-                Log.d(TAG, "mCount == 0, mTotalCount : " + mTotalCount);
-            }
             mCount++;
             mTotalCount += duration;
+            Log.d(TAG, "duration : " + duration + " mCount : " + mCount
+                    + " mTotalCount : " + mTotalCount);
 
             if (mCount % 10 == 0 || mCount > COUNT) {
                 mMainHandler.post(new Runnable() {
@@ -73,8 +72,8 @@ public class ConstraintLayoutTestLayout extends LinearLayout implements View.OnC
                     public void run() {
                         long avg = mCount == 0 ? mTotalCount : (mTotalCount / mCount);
 
-                        Log.d(TAG, "duration : " + duration + " mCount : " + mCount
-                                + " mTotalCount : " + mTotalCount + " avg : " + avg);
+//                        Log.d(TAG, "duration : " + duration + " mCount : " + mCount
+//                                + " mTotalCount : " + mTotalCount + " avg : " + avg);
 
                         mCurDurationTv.setText("cur : " + duration);
                         mAvgDurationTv.setText(String.format("avg : %s", avg));
@@ -135,7 +134,8 @@ public class ConstraintLayoutTestLayout extends LinearLayout implements View.OnC
         mCLAdapter.setStrArr(mCLStringArr);
         mCLListView.setAdapter(mCLAdapter);
 
-        initRLListView();
+        switchView();
+        initCLListView();
 
         if (mActivity != null) {
             mActivity.getWindow().addOnFrameMetricsAvailableListener(mMetricsAvailableListener, mWorkHandler);
