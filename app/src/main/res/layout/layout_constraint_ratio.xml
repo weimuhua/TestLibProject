@@ -6,27 +6,24 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:text="2:5，高度300dp,宽度调整"
+        android:textSize="18dp"
+        app:layout_constraintDimensionRatio="W,2:5"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:layout_width="180dp"
         android:layout_height="0dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorAccent"
         android:gravity="center"
         android:text="4:3,宽度180dp，高度调整"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="4:3"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="4:3，宽度调整"
-        android:textSize="18dp"
-        app:layout_constraintDimensionRatio="W,4:3"
+        app:layout_constraintDimensionRatio="H,4:3"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 </android.support.constraint.ConstraintLayout>
