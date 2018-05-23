@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:wayne="http://schemas.android.com/apk/res/android"
+    wayne:layout_width="match_parent"
+    wayne:layout_height="match_parent">
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="300dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="2:5，高度300dp,宽度调整"
-        android:textSize="18dp"
+        wayne:layout_width="0dp"
+        wayne:layout_height="300dp"
+        wayne:background="@color/colorPrimary"
+        wayne:gravity="center"
+        wayne:text="2:5，高度300dp,宽度调整"
+        wayne:textSize="18dp"
         app:layout_constraintDimensionRatio="W,2:5"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="1:8，高度0dp,宽度0dp,宽度调整"
-        android:textSize="18dp"
+        wayne:layout_width="0dp"
+        wayne:layout_height="0dp"
+        wayne:background="@color/colorPrimary"
+        wayne:gravity="center"
+        wayne:text="1:8，高度0dp,宽度0dp,宽度调整"
+        wayne:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="W,1:8"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="180dp"
-        android:layout_height="0dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="4:3,宽度180dp，高度调整"
-        android:textSize="18dp"
+        wayne:layout_width="180dp"
+        wayne:layout_height="0dp"
+        wayne:background="@color/colorPrimary"
+        wayne:gravity="center"
+        wayne:text="4:3,宽度180dp，高度调整"
+        wayne:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="H,4:3"
         app:layout_constraintLeft_toLeftOf="parent"
