@@ -29,7 +29,8 @@ public class ConstrainLayoutActivity extends Activity {
                     "ratio demo",
                     "chains demo",
                     "guideline demo",
-                    "性能测试"
+                    "RL性能测试",
+                    "CL性能测试"
             };
         } else {
             TEST_PROGRAM_ARRAY = new String[]{
@@ -38,7 +39,7 @@ public class ConstrainLayoutActivity extends Activity {
                     "bias demo",
                     "ratio demo",
                     "chains demo",
-                    "guideline demo"
+                    "guideline demo",
             };
         }
     }
@@ -70,6 +71,7 @@ public class ConstrainLayoutActivity extends Activity {
         mTestSpinner.setAdapter(adapter);
         mTestSpinner.setSelection(0);
         mTestSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mSpinnerTv.setText(TEST_PROGRAM_ARRAY[position]);
@@ -87,7 +89,9 @@ public class ConstrainLayoutActivity extends Activity {
                 } else if (id == 5) {
                     addConstraintGuideLine();
                 } else if (id == 6) {
-                    addConstraintTest();
+                    addRelativeLayoutTest();
+                } else if (id == 7) {
+                    addConstraintLayoutTest();
                 }
             }
 
@@ -154,8 +158,16 @@ public class ConstrainLayoutActivity extends Activity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void addConstraintTest() {
+    private void addRelativeLayoutTest() {
         ConstraintLayoutTestLayout testLayout = new ConstraintLayoutTestLayout(this);
+        testLayout.testRelativeLayout();
+        mFrameLayout.addView(testLayout);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void addConstraintLayoutTest() {
+        ConstraintLayoutTestLayout testLayout = new ConstraintLayoutTestLayout(this);
+        testLayout.testConstraintLayout();
         mFrameLayout.addView(testLayout);
     }
 }
