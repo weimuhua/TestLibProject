@@ -29,6 +29,7 @@ public class ConstrainLayoutActivity extends Activity {
                     "ratio demo",
                     "chains demo",
                     "guideline demo",
+                    "尺寸约束",
                     "RL性能测试",
                     "CL性能测试"
             };
@@ -38,6 +39,7 @@ public class ConstrainLayoutActivity extends Activity {
                     "Margin demo",
                     "bias demo",
                     "ratio demo",
+                    "尺寸约束",
                     "chains demo",
                     "guideline demo",
             };
@@ -89,8 +91,10 @@ public class ConstrainLayoutActivity extends Activity {
                 } else if (id == 5) {
                     addConstraintGuideLine();
                 } else if (id == 6) {
-                    addRelativeLayoutTest();
+                    addConstraintDimension();
                 } else if (id == 7) {
+                    addRelativeLayoutTest();
+                } else if (id == 8) {
                     addConstraintLayoutTest();
                 }
             }
@@ -154,6 +158,11 @@ public class ConstrainLayoutActivity extends Activity {
 
     private void addConstraintGuideLine() {
         View subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_guideline, mFrameLayout, false);
+        mFrameLayout.addView(subView);
+    }
+
+    private void addConstraintDimension() {
+        View subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_dimension, mFrameLayout, false);
         mFrameLayout.addView(subView);
     }
 
