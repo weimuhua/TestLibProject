@@ -24,7 +24,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        if (DEBUG) LogHelper.d(TAG, "Application onCreate, process : " + getProcessName());
+        if (DEBUG) LogHelper.d(TAG, "Application onCreate, process : " + getAppProcessName());
 
         LogHelper.setTag("TestLibProject");
 
@@ -41,7 +41,7 @@ public class App extends Application {
     }
 
     private int getProcessType() {
-        String processName = getProcessName();
+        String processName = getAppProcessName();
         if (Constants.PACKAGE_NAME.equals(processName)) {
             return PROCESS_UI;
         } else if (Constants.BKG_PROCESS_NAME.equals(processName)) {
@@ -51,7 +51,7 @@ public class App extends Application {
         }
     }
 
-    private String getProcessName() {
+    private String getAppProcessName() {
         int pid = Process.myPid();
         ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         List<RunningAppProcessInfo> runningApps = am.getRunningAppProcesses();
