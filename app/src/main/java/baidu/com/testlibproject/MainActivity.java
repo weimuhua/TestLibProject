@@ -98,26 +98,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         adapter.setStrArr(strArr);
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(this);
-        MhThreadPool.getInstance().addBkgTask(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    int result = MainServiceClient.getInstance(mContext).add(2, 3, true);
-                    if (DEBUG) LogHelper.d(TAG, "Service add, result : " + result);
+        MhThreadPool.getInstance().addBkgTask(() -> {
+            try {
+                int result = MainServiceClient.getInstance(mContext).add(2, 3, true);
+                if (DEBUG) LogHelper.d(TAG, "Service add, result : " + result);
 
-                    IBinder subBinderA = MainServiceClient.getInstance(mContext).getSubInterfaceA(true);
-                    ISubInterfaceA subInterfaceA = ISubInterfaceA.Stub.asInterface(subBinderA);
-                    subInterfaceA.methodA1();
-                    subInterfaceA.methodB1();
-                    subInterfaceA.methodC1();
-                    if (DEBUG) {
-                        LogHelper.d(TAG, "complete invoke SubInterfaceA!");
-                    }
-                } catch (RemoteException e) {
-                    if (DEBUG) LogHelper.e(TAG, "RemoteException : ", e);
-                } catch (ServiceNotAvailable e) {
-                    if (DEBUG) LogHelper.e(TAG, "ServiceNotAvailable : ", e);
+                IBinder subBinderA = MainServiceClient.getInstance(mContext).getSubInterfaceA(true);
+                ISubInterfaceA subInterfaceA = ISubInterfaceA.Stub.asInterface(subBinderA);
+                subInterfaceA.methodA1();
+                subInterfaceA.methodB1();
+                subInterfaceA.methodC1();
+                if (DEBUG) {
+                    LogHelper.d(TAG, "complete invoke SubInterfaceA!");
                 }
+            } catch (RemoteException | ServiceNotAvailable e) {
+                if (DEBUG) LogHelper.e(TAG, "Exception : ", e);
             }
         });
     }

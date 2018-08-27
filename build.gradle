@@ -18,6 +18,10 @@ allprojects {
         jcenter()
         maven { url 'https://maven.google.com' }
     }
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }
 
 ext {
@@ -27,6 +31,8 @@ ext {
     buildToolsVersion = "28.0.2"
     minSdkVersion = 14
     targetSdkVersion = 22
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 task clean(type: Delete) {
