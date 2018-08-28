@@ -23,7 +23,7 @@ public class TestToastActivity extends Activity {
     }
 
     private void initView() {
-        Button btn1 = (Button) findViewById(R.id.toast_btn1);
+        Button btn1 = findViewById(R.id.toast_btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,7 +31,7 @@ public class TestToastActivity extends Activity {
             }
         });
 
-        Button btn2 = (Button) findViewById(R.id.toast_btn2);
+        Button btn2 = findViewById(R.id.toast_btn2);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +48,7 @@ public class TestToastActivity extends Activity {
         Toast toast = new Toast(this);
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.toast_type2_layout, null);
-        TextView textView = (TextView) view.findViewById(R.id.text);
+        TextView textView = view.findViewById(R.id.text);
         String text = "toastType2, toastType2, toastType2!!!";
         textView.setText(text);
         toast.setView(view);

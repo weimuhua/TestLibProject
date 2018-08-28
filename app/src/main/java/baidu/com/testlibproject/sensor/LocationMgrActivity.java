@@ -33,8 +33,8 @@ public class LocationMgrActivity extends Activity implements LocationListener, A
     }
 
     private void initView() {
-        mListView = (ListView) findViewById(R.id.location_provider_listview);
-        mLocationTv = (TextView) findViewById(R.id.location_textview);
+        mListView = findViewById(R.id.location_provider_listview);
+        mLocationTv = findViewById(R.id.location_textview);
     }
 
     private void initData() {

@@ -11,7 +11,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import baidu.com.testlibproject.FeatureConfig;
-import baidu.com.testlibproject.LogHelper;
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.R;
 
 public class EmailAutoCompleteTv extends AutoCompleteTextView implements View.OnFocusChangeListener {
@@ -91,7 +91,7 @@ public class EmailAutoCompleteTv extends AutoCompleteTextView implements View.On
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 convertView = inflater.inflate(R.layout.main_activity_item, null);
             }
-            TextView tv = (TextView) convertView.findViewById(R.id.item_textview);
+            TextView tv = convertView.findViewById(R.id.item_textview);
             String text = EmailAutoCompleteTv.this.getText().toString();
             int index = text.indexOf("@");
             if (index != -1) {

@@ -12,7 +12,7 @@ import android.util.Pair;
 import java.util.List;
 
 import baidu.com.testlibproject.FeatureConfig;
-import baidu.com.testlibproject.LogHelper;
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.db.DatabaseMgr;
 
 public class DataBaseProvider extends ContentProvider {

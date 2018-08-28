@@ -10,6 +10,7 @@
         <item>Compass</item>
         <item>GPS</item>
         <item>Camera</item>
+        <item>Plugin</item>
     </array>
     <array name="ui_test_item">
         <item>AutoCompleteTextView</item>
@@ -22,6 +23,10 @@
         <item>PopupWindow</item>
         <item>ActionBar</item>
         <item>ConfigurationAndIntent</item>
+        <item>ConstrainLayout</item>
+        <item>WebView</item>
+        <item>VideoView</item>
+        <item>SurfaceView</item>
     </array>
     <array name="auto_complete_arr">
         <item>\&#064;163.com</item>
@@ -80,4 +85,7 @@
     <string name="volume_down">volume down</string>
     <string name="mute">mute</string>
     <string name="take_photo">take photo</string>
+    <string name="load_jar">load apk file</string>
+    <string name="start_activity">start non-registered activity</string>
+    <string name="start_plugin_activity">start plugin activity</string>
 </resources>

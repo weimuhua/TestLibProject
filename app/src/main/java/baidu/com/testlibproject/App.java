@@ -1,9 +1,15 @@
 package baidu.com.testlibproject;
 
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Process;
 
+import java.util.List;
+
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.commontools.utils.ProcessUtils;
 import baidu.com.testlibproject.provider.BinderHelper;
 import baidu.com.testlibproject.provider.BinderManager;
@@ -29,8 +35,9 @@ public class App extends Application {
         super.onCreate();
         sApp = this;
 
-        if (DEBUG)
-            LogHelper.d(TAG, "Application onCreate, process : " + ProcessUtils.getProcessName(this));
+        if (DEBUG) LogHelper.d(TAG, "Application onCreate, process : " + getAppProcessName());
+
+        LogHelper.setTag("TestLibProject");
 
         int processType = getProcessType();
         switch (processType) {
@@ -61,5 +68,18 @@ public class App extends Application {
 
     public static Context getContext() {
         return sApp.getApplicationContext();
+    }
+
+    private String getAppProcessName() {
+        int pid = Process.myPid();
+        ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        List<RunningAppProcessInfo> runningApps = am.getRunningAppProcesses();
+        if (runningApps != null && !runningApps.isEmpty()) {
+            for (RunningAppProcessInfo info : runningApps) {
+                if (info.pid == pid) return info.processName;
+            }
+        }
+
+        return null;
     }
 }

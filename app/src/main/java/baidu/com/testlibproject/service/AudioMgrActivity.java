@@ -28,10 +28,10 @@ public class AudioMgrActivity extends Activity implements View.OnClickListener, 
     }
 
     private void initView() {
-        mPlayBtn = (Button) findViewById(R.id.play_btn);
-        mVolumeUpBtn = (Button) findViewById(R.id.volume_up);
-        mVolumeDownBtn = (Button) findViewById(R.id.volume_down);
-        mMuteBtn = (ToggleButton) findViewById(R.id.mute_btn);
+        mPlayBtn = findViewById(R.id.play_btn);
+        mVolumeUpBtn = findViewById(R.id.volume_up);
+        mVolumeDownBtn = findViewById(R.id.volume_down);
+        mMuteBtn = findViewById(R.id.mute_btn);
         mPlayBtn.setOnClickListener(this);
         mVolumeUpBtn.setOnClickListener(this);
         mVolumeDownBtn.setOnClickListener(this);

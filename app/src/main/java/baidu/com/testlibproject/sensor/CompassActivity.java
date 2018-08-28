@@ -11,7 +11,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
 import baidu.com.testlibproject.FeatureConfig;
-import baidu.com.testlibproject.LogHelper;
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.R;
 
 public class CompassActivity extends Activity implements SensorEventListener {
@@ -40,7 +40,7 @@ public class CompassActivity extends Activity implements SensorEventListener {
     }
 
     private void initView() {
-        mCompass = (ImageView) findViewById(R.id.compass);
+        mCompass = findViewById(R.id.compass);
     }
 
     private void initData() {

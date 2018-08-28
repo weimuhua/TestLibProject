@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 
 import baidu.com.testlibproject.FeatureConfig;
 import baidu.com.testlibproject.IMainService;
-import baidu.com.testlibproject.LogHelper;
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.service.stub.SubInterfaceAStub;
 import baidu.com.testlibproject.service.stub.SubInterfaceBStub;
 import baidu.com.testlibproject.service.stub.SubInterfaceCStub;
@@ -51,5 +51,11 @@ public class MainService extends Service {
     public IBinder onBind(Intent intent) {
         if (DEBUG) LogHelper.d(TAG, "MainService onBind");
         return mBinder;
+    }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        super.onTaskRemoved(rootIntent);
+        if (DEBUG) LogHelper.d(TAG, "onTaskRemoved");
     }
 }

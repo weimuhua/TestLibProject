@@ -12,11 +12,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
 import java.util.Map;
 
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.commontools.utils.ProcessUtils;
 import baidu.com.testlibproject.App;
 import baidu.com.testlibproject.BuildConfig;
 import baidu.com.testlibproject.Constants;
-import baidu.com.testlibproject.LogHelper;
 
 /**
  * Created by Wayne on 2017/3/26.

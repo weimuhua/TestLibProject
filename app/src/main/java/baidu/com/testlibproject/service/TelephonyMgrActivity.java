@@ -24,7 +24,7 @@ public class TelephonyMgrActivity extends Activity {
     }
 
     private void initView() {
-        mListView = (ListView) findViewById(R.id.telephony_listview);
+        mListView = findViewById(R.id.telephony_listview);
     }
 
     private void initData() {

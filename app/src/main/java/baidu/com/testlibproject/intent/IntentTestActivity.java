@@ -20,7 +20,7 @@ import java.util.List;
 
 import baidu.com.commontools.threadpool.MhThreadPool;
 import baidu.com.testlibproject.FeatureConfig;
-import baidu.com.testlibproject.LogHelper;
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.R;
 
 public class IntentTestActivity extends Activity implements Handler.Callback, AdapterView.OnItemClickListener {
@@ -45,7 +45,7 @@ public class IntentTestActivity extends Activity implements Handler.Callback, Ad
     }
 
     private void initView() {
-        mListView = (ListView) findViewById(R.id.contract_list_view);
+        mListView = findViewById(R.id.contract_list_view);
         mListView.setOnItemClickListener(this);
     }
 

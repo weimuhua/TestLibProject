@@ -2,7 +2,6 @@ package baidu.com.testlibproject.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import baidu.com.testlibproject.FeatureConfig;
-import baidu.com.testlibproject.LogHelper;
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.R;
 
 public class PopupWindowActivity extends Activity implements ImageView.OnClickListener {
@@ -36,7 +35,7 @@ public class PopupWindowActivity extends Activity implements ImageView.OnClickLi
     }
 
     private void initView() {
-        mSettingImg = (ImageView) findViewById(R.id.titlebar_setting_img);
+        mSettingImg = findViewById(R.id.titlebar_setting_img);
         mSettingImg.setOnClickListener(this);
 
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -46,9 +45,9 @@ public class PopupWindowActivity extends Activity implements ImageView.OnClickLi
         mContentView.setLayoutParams(params);
         mPopupWindow = new PopupWindow(mContentView, LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
-        mTextView1 = (TextView) mContentView.findViewById(R.id.popup_window_inside_tv1);
-        mTextView2 = (TextView) mContentView.findViewById(R.id.popup_window_inside_tv2);
-        mTextView3 = (TextView) mContentView.findViewById(R.id.popup_window_inside_tv3);
+        mTextView1 = mContentView.findViewById(R.id.popup_window_inside_tv1);
+        mTextView2 = mContentView.findViewById(R.id.popup_window_inside_tv2);
+        mTextView3 = mContentView.findViewById(R.id.popup_window_inside_tv3);
         mTextView1.setOnClickListener(this);
         mTextView2.setOnClickListener(this);
         mTextView3.setOnClickListener(this);

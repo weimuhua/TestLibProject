@@ -47,15 +47,15 @@ public class TestSpinnerActivity extends Activity implements Handler.Callback, A
     }
 
     private void initView() {
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        Spinner spinner = findViewById(R.id.spinner);
         String[] strArr = new String[]{
                 "Baidu", "AliBaBa", "Tencent", "JingDong"
         };
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.main_activity_item, strArr);
         spinner.setAdapter(adapter);
 
-        mGallery = (Gallery) findViewById(R.id.gallery);
-        mImageView = (ImageView) findViewById(R.id.gallery_select_img);
+        mGallery = findViewById(R.id.gallery);
+        mImageView = findViewById(R.id.gallery_select_img);
     }
 
     private void initData() {

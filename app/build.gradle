@@ -31,12 +31,17 @@ android {
             signingConfig signingConfigs.release
         }
     }
+    compileOptions {
+        sourceCompatibility rootProject.ext.sourceCompatibility
+        targetCompatibility rootProject.ext.targetCompatibility
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:' + rootProject.ext.SUPPORT_V7_VER
-    compile project(':CommonTools')
-    compile 'com.android.support:support-annotations:26.0.0-alpha1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:' + rootProject.ext.SUPPORT_V7_VER
+    implementation project(':CommonTools')
+    implementation 'com.android.support:support-annotations:27.1.1'
 }

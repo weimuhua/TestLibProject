@@ -9,6 +9,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +29,11 @@ public class TestGridViewActivity extends Activity {
 
     private static final int MSG_LOAD_ALL_APP_DONE = 1;
 
+    private static final int PAGE_SIZE = 20;
+
     private Context mCxt;
-    private GridView mGridView;
-    private GridViewAdapter mAdapter;
+    private ViewPager mViewPager;
+    private MAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +45,7 @@ public class TestGridViewActivity extends Activity {
     }
 
     private void initView() {
-        mGridView = (GridView) findViewById(R.id.grid_view);
+        mViewPager = findViewById(R.id.view_pager);
     }
 
     private void initData() {
@@ -53,6 +57,7 @@ public class TestGridViewActivity extends Activity {
                 List<PackageInfo> adapterDataList = new ArrayList<>();
                 List<String> appNameList = new ArrayList<>();
                 List<Drawable> appIconList = new ArrayList<>();
+
                 for (PackageInfo info : infoList) {
                     if ((info.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
                         appNameList.add(info.applicationInfo.loadLabel(pm).toString());
@@ -60,7 +65,23 @@ public class TestGridViewActivity extends Activity {
                         adapterDataList.add(info);
                     }
                 }
-                mAdapter = new GridViewAdapter(mCxt, adapterDataList, appNameList, appIconList);
+
+                List<View> views = new ArrayList<>();
+                List<PackageInfo> tempList = new ArrayList<>(adapterDataList);
+                for (int i = 0; i < tempList.size(); i++) {
+                    if ((i != 0 && i % PAGE_SIZE == 0) || i == tempList.size() - 1) {
+                        int curIndex = views.size() * PAGE_SIZE;
+
+                        View view = LayoutInflater.from(mCxt).inflate(R.layout.layout_gridview, null);
+                        GridView gridView = view.findViewById(R.id.grid_view);
+                        gridView.setAdapter(new GridViewAdapter(mCxt,
+                                adapterDataList.subList(curIndex, i),
+                                appNameList.subList(curIndex, i),
+                                appIconList.subList(curIndex, i)));
+                        views.add(view);
+                    }
+                }
+                mAdapter = new MAdapter(views);
                 mHandler.sendEmptyMessage(MSG_LOAD_ALL_APP_DONE);
             }
         });
@@ -71,7 +92,7 @@ public class TestGridViewActivity extends Activity {
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_LOAD_ALL_APP_DONE:
-                    mGridView.setAdapter(mAdapter);
+                    mViewPager.setAdapter(mAdapter);
                     break;
             }
             return false;
@@ -114,15 +135,45 @@ public class TestGridViewActivity extends Activity {
                 LayoutInflater inflater = LayoutInflater.from(mContext);
                 convertView = inflater.inflate(R.layout.grid_view_item, null);
             }
-            TextView tv = (TextView) convertView.findViewById(R.id.app_name);
+            TextView tv = convertView.findViewById(R.id.app_name);
             if (position <= mAppNameList.size()) {
                 tv.setText(mAppNameList.get(position));
             }
-            ImageView imageView = (ImageView) convertView.findViewById(R.id.app_icon);
+            ImageView imageView = convertView.findViewById(R.id.app_icon);
             if (position <= mAppIconList.size()) {
                 imageView.setImageDrawable(mAppIconList.get(position));
             }
             return convertView;
+        }
+    }
+
+    private class MAdapter extends PagerAdapter {
+
+        private List<View> mViews;
+
+        public MAdapter(List<View> views) {
+            mViews = views;
+        }
+
+        @Override
+        public int getCount() {
+            return mViews.size();
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            container.addView(mViews.get(position));
+            return mViews.get(position);
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View) object);
         }
     }
 }

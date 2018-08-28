@@ -1,9 +1,9 @@
 package baidu.com.testlibproject.ui;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -12,7 +12,7 @@ import baidu.com.testlibproject.R;
 import baidu.com.testlibproject.SimpleAdapter;
 import baidu.com.testlibproject.service.NotificationActivity;
 
-public class UiTestActivity extends Activity implements AdapterView.OnItemClickListener {
+public class UiTestActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private static final int INTENT_AUTO_COMPLETE_TEXTVIEW = 0;
     private static final int INTENT_TEST_GRID_VIEW_ACTIVITY = 1;
@@ -24,6 +24,10 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
     private static final int INTENT_POPUP_WINDOW_ACTIVITY = 7;
     private static final int INTENT_ACTION_BAR_ACTIVITY = 8;
     private static final int INTENT_CONFIGURATION_TEST = 9;
+    private static final int INTENT_CONSTRAIN_LAYOUT_ACTIVITY = 10;
+    private static final int INTENT_TEST_WEBVIEW_ACTIVITY = 11;
+    private static final int INTENT_TEST_VIDEO_VIEW_ACTIVITY = 12;
+    private static final int INTENT_TEST_SURFACE_VIEW_ACTIVITY = 13;
 
     private ListView mListView;
 
@@ -36,7 +40,7 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
     }
 
     private void initView() {
-        mListView = (ListView) findViewById(R.id.list_view);
+        mListView = findViewById(R.id.list_view);
     }
 
     private void initData() {
@@ -78,6 +82,18 @@ public class UiTestActivity extends Activity implements AdapterView.OnItemClickL
                 break;
             case INTENT_CONFIGURATION_TEST:
                 startActivity(new Intent(this, ConfigurationTest.class));
+                break;
+            case INTENT_CONSTRAIN_LAYOUT_ACTIVITY:
+                startActivity(new Intent(this, ConstrainLayoutActivity.class));
+                break;
+            case INTENT_TEST_WEBVIEW_ACTIVITY:
+                startActivity(new Intent(this, WebViewActivity.class));
+                break;
+            case INTENT_TEST_VIDEO_VIEW_ACTIVITY:
+                startActivity(new Intent(this, VideoViewActivity.class));
+                break;
+            case INTENT_TEST_SURFACE_VIEW_ACTIVITY:
+                startActivity(new Intent(this, SurfaceViewActivity.class));
                 break;
             default:
                 break;
