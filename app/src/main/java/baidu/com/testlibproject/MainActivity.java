@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import baidu.com.commontools.threadpool.MhThreadPool;
 import baidu.com.commontools.utils.LogHelper;
@@ -55,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         mContext = this;
 
+        ((TextView) findViewById(R.id.textview)).setText(String.valueOf(Character.toChars(Integer.parseInt("1F601", 16))));
+
         ClassLoader classLoader = getClassLoader();
         if (classLoader != null) {
             Log.i(TAG, "[onCreate] classLoader " + " : " + classLoader.toString());
@@ -67,6 +70,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         initView();
         initData();
         testProvider();
+    }
+
+    private void testRuntimeMemory() {
+        long totalMemory = Runtime.getRuntime().totalMemory();
+        long freeMemory = Runtime.getRuntime().freeMemory();
+        long maxMemory = Runtime.getRuntime().maxMemory();
+        LogHelper.d(TAG, "totalMemory=" + getValue(totalMemory));
+        LogHelper.d(TAG, "freeMemory=" + getValue(freeMemory));
+        LogHelper.d(TAG, "maxMemory=" + getValue(maxMemory));
+    }
+
+    private String getValue(long value) {
+        return Long.toString(value / (1024));
     }
 
     @Override
