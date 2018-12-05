@@ -2,10 +2,12 @@ package baidu.com.testlibproject.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.DynamicDrawableSpan;
 import android.text.style.ImageSpan;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import baidu.com.commontools.utils.LogHelper;
@@ -23,7 +25,7 @@ public class ImageSpanActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        TextView tv1 = findViewById(R.id.text_view1);
+        EditText tv1 = findViewById(R.id.text_view1);
         TextView tv2 = findViewById(R.id.text_view2);
         TextView tv3 = findViewById(R.id.text_view3);
         String text1 = " 测试文字前面插入图片";
@@ -32,19 +34,25 @@ public class ImageSpanActivity extends AppCompatActivity {
 
         SpannableString span1 = new SpannableString(text1);
         MyImageSpan imageSpan1 = new MyImageSpan(this, R.mipmap.emoji_100, DynamicDrawableSpan.ALIGN_BOTTOM);
+        MyImageSpan imageSpana = new MyImageSpan(this, R.mipmap.emoji_100, DynamicDrawableSpan.ALIGN_BOTTOM);
         imageSpan1.setEmoticonId(10001);
         span1.setSpan(imageSpan1, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        span1.setSpan(imageSpana, span1.length() - 2, span1.length() - 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tv1.setText(span1);
 
-        MyImageSpan[] imageSpans = span1.getSpans(0, span1.length() - 1, MyImageSpan.class);
+        Editable text = tv1.getText();
+        MyImageSpan[] imageSpans = text.getSpans(0, span1.length() - 1, MyImageSpan.class);
         LogHelper.d(TAG, "imageSpans size = " + imageSpans.length);
         for (MyImageSpan span : imageSpans) {
             LogHelper.d(TAG, "getEmoticonId = " + span.getEmoticonId());
+            LogHelper.d(TAG, "start = " + text.getSpanStart(span));
+            LogHelper.d(TAG, "end = " + text.getSpanEnd(span));
         }
-        tv1.setText(span1);
+        LogHelper.d(TAG, "span1 = " + span1);
 
-
-        SpannableString span2 = new SpannableString(text2);
-        ImageSpan imageSpan2 = new ImageSpan(this, R.mipmap.emoji_100, DynamicDrawableSpan.ALIGN_BOTTOM);
+        SpannableString span2 = new SpannableString("测试文字 中间插入图片");
+        ImageSpan imageSpan2 = new ImageSpan(this,
+                R.mipmap.emoji_100, DynamicDrawableSpan.ALIGN_BOTTOM);
         span2.setSpan(imageSpan2, 4, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv2.setText(span2);
 
