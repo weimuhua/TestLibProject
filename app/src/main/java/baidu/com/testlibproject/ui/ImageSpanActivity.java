@@ -8,9 +8,12 @@ import android.text.style.DynamicDrawableSpan;
 import android.text.style.ImageSpan;
 import android.widget.TextView;
 
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.R;
 
 public class ImageSpanActivity extends AppCompatActivity {
+
+    private static final String TAG = "ImageSpanActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +31,15 @@ public class ImageSpanActivity extends AppCompatActivity {
         String text3 = "测试文字后面插入图片 ";
 
         SpannableString span1 = new SpannableString(text1);
-        ImageSpan imageSpan1 = new ImageSpan(this, R.mipmap.emoji_100, DynamicDrawableSpan.ALIGN_BOTTOM);
+        MyImageSpan imageSpan1 = new MyImageSpan(this, R.mipmap.emoji_100, DynamicDrawableSpan.ALIGN_BOTTOM);
+        imageSpan1.setEmoticonId(10001);
         span1.setSpan(imageSpan1, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        MyImageSpan[] imageSpans = span1.getSpans(0, span1.length() - 1, MyImageSpan.class);
+        LogHelper.d(TAG, "imageSpans size = " + imageSpans.length);
+        for (MyImageSpan span : imageSpans) {
+            LogHelper.d(TAG, "getEmoticonId = " + span.getEmoticonId());
+        }
         tv1.setText(span1);
 
 
