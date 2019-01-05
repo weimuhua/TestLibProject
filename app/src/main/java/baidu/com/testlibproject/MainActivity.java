@@ -30,7 +30,7 @@ import baidu.com.testlibproject.ui.UiTestActivity;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    private static final String TAG = "MainActivity|TAG";
+    private static final String TAG = "MainActivityTAG";
     private static final boolean DEBUG = FeatureConfig.DEBUG;
 
     private static final int INTENT_TEST_UI_ACTIVITY = 0;
