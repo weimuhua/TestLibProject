@@ -16,7 +16,7 @@ import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.BuildConfig;
 import dalvik.system.DexClassLoader;
 
-public class test {
+public class Test {
 
     private static final boolean DEBUG = BuildConfig.DEBUG;
     private static final String TAG = "test";
