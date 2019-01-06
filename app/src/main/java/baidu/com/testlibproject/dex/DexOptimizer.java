@@ -9,15 +9,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import dalvik.system.BaseDexClassLoader;
+import dalvik.system.DexFile;
 
 public class DexOptimizer {
 
     private static final String TAG = "DexOptimizer";
+
+    private static final String DEX_SUFFIX = ".dex";
+    private static final String ODEX_SUFFIX = ".odex";
 
     public interface ResultCallback {
         void onSuccess();
@@ -25,11 +32,24 @@ public class DexOptimizer {
         void onFailed(Throwable thr);
     }
 
-    public void optimizeDex(Context cxt, File apkFile, File optimizedDir) {
+    public void optimizeDexByClassLoader(Context cxt, File apkFile, File optimizedDir) {
         Log.d(TAG, "begin optimizeDex");
         long time = System.currentTimeMillis();
         ClassLoader classLoader = new BaseDexClassLoader(apkFile.getAbsolutePath(),
                 optimizedDir, null, cxt.getClassLoader());
+        Log.d(TAG, "optimizeDex done, cost = " + (System.currentTimeMillis() - time));
+    }
+
+    public void optimizeDex(List<File> dexFiles, File optimizedDir) {
+        Log.d(TAG, "begin optimizeDex");
+        long time = System.currentTimeMillis();
+        try {
+            for (File dexFile : dexFiles) {
+                DexFile.loadDex(dexFile.getParent(), optimizedPathFor(dexFile, optimizedDir), 0);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "interpretDex2Oat err!", e);
+        }
         Log.d(TAG, "optimizeDex done, cost = " + (System.currentTimeMillis() - time));
     }
 
@@ -38,16 +58,17 @@ public class DexOptimizer {
         try {
             targetISA = getCurrentInstructionSet();
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "get instruction err!", e);
         }
         Log.d(TAG, "optimizeDex, targetISA = " + targetISA);
         long time = System.currentTimeMillis();
         try {
             for (File dexFile : dexFiles) {
-                interpretDex2Oat(dexFile.getAbsolutePath(), optimizedDir.getAbsolutePath(), targetISA);
+                interpretDex2Oat(dexFile.getAbsolutePath(),
+                        optimizedPathFor(dexFile, optimizedDir), targetISA);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Log.e(TAG, "interpretDex2Oat err!", e);
             if (cb != null) {
                 cb.onFailed(e);
             }
@@ -109,6 +130,56 @@ public class DexOptimizer {
         } catch (InterruptedException e) {
             throw new IOException("dex2oat is interrupted, msg: " + e.getMessage(), e);
         }
+    }
+
+    public static List<File> getDexFile(File apkFile) throws IOException {
+        List<File> dexFiles = new ArrayList<>();
+        ZipFile zipFile = new ZipFile(apkFile.getAbsolutePath());
+        Enumeration em = zipFile.entries();
+        while (em.hasMoreElements()) {
+            ZipEntry entry = (ZipEntry) em.nextElement();
+            File file = new File(apkFile.getAbsolutePath() + File.separator + entry.getName());
+            if (file.getName().endsWith(DEX_SUFFIX)) {
+                dexFiles.add(file);
+            }
+        }
+        zipFile.close();
+        return dexFiles;
+    }
+
+    private static String optimizedPathFor(File path, File optimizedDirectory) throws Exception {
+        if (Build.VERSION.SDK_INT > 25) {
+            // dex_location = /foo/bar/baz.jar
+            // odex_location = /foo/bar/oat/<isa>/baz.odex
+
+            String currentInstructionSet = getCurrentInstructionSet();
+
+            File parentFile = path.getParentFile();
+            String fileName = path.getName();
+            int index = fileName.lastIndexOf('.');
+            if (index > 0) {
+                fileName = fileName.substring(0, index);
+            }
+
+            return parentFile.getAbsolutePath() + "/oat/"
+                    + currentInstructionSet + "/" + fileName + ODEX_SUFFIX;
+        }
+
+        String fileName = path.getName();
+        if (!fileName.endsWith(DEX_SUFFIX)) {
+            int lastDot = fileName.lastIndexOf(".");
+            if (lastDot < 0) {
+                fileName += DEX_SUFFIX;
+            } else {
+                StringBuilder sb = new StringBuilder(lastDot + 4);
+                sb.append(fileName, 0, lastDot);
+                sb.append(DEX_SUFFIX);
+                fileName = sb.toString();
+            }
+        }
+
+        File result = new File(optimizedDirectory, fileName);
+        return result.getPath();
     }
 
     private static class StreamConsumer {

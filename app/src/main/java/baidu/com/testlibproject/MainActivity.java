@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.io.File;
+import java.util.List;
 
 import baidu.com.commontools.threadpool.MhThreadPool;
 import baidu.com.commontools.utils.LogHelper;
@@ -60,10 +62,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         initView();
         initData();
         testProvider();
+        Log.d(TAG, "File dir = " + mContext.getFilesDir());
 
         MhThreadPool.getInstance().addBkgTask(() -> {
-            new DexOptimizer().optimizeDex(mContext, new File(
-                    "/data/local/tmp/app-debug.apk"), mContext.getCacheDir());
+            try {
+                File apkFile = new File(mContext.getCacheDir() +"/mobileqq_android.apk");
+                List<File> dexFiles = DexOptimizer.getDexFile(apkFile);
+
+                //use ClassLoader, get cache file
+                new DexOptimizer().optimizeDexByClassLoader(mContext, apkFile, mContext.getCacheDir());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 
