@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 List<File> dexFiles = DexOptimizer.getDexFile(apkFile);
 
                 //use ClassLoader, get cache file
-                new DexOptimizer().optimizeDexByClassLoader(mContext, apkFile, mContext.getCacheDir());
+                new DexOptimizer().optimizeDexByClassLoader(mContext, apkFile, mContext.getDir("cache", MODE_PRIVATE));
             } catch (Exception e) {
                 e.printStackTrace();
             }
