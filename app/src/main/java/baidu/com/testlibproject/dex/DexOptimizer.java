@@ -53,7 +53,7 @@ public class DexOptimizer {
         Log.d(TAG, "optimizeDex done, cost = " + (System.currentTimeMillis() - time));
     }
 
-    public void optimizeDex(List<File> dexFiles, File optimizedDir, ResultCallback cb) {
+    public void optimizeDexByShellCommand(List<File> dexFiles, File optimizedDir, ResultCallback cb) {
         String targetISA = null;
         try {
             targetISA = getCurrentInstructionSet();

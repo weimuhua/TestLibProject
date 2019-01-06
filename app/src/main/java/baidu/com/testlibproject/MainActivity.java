@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import baidu.com.commontools.threadpool.MhThreadPool;
@@ -66,11 +67,29 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         MhThreadPool.getInstance().addBkgTask(() -> {
             try {
-                File apkFile = new File(mContext.getCacheDir() +"/mobileqq_android.apk");
+                File apkFile = new File(mContext.getCacheDir() + "/mobileqq_android.apk");
                 List<File> dexFiles = DexOptimizer.getDexFile(apkFile);
+                File optimizedDir = mContext.getDir("cache", MODE_PRIVATE);
 
                 //use ClassLoader, get cache file
-                new DexOptimizer().optimizeDexByClassLoader(mContext, apkFile, mContext.getDir("cache", MODE_PRIVATE));
+//                new DexOptimizer().optimizeDexByClassLoader(mContext, apkFile, optimizedDir);
+
+                //user shell command, get cache file
+                //实践证明，用命令行来执行dex2oat得到的oat文件小了很多，需要研究下为何
+                List<File> list = new ArrayList<>();
+                list.add(apkFile);
+                new DexOptimizer().optimizeDexByShellCommand(list, optimizedDir,
+                        new DexOptimizer.ResultCallback() {
+                            @Override
+                            public void onSuccess() {
+                                Log.d(TAG, "optimizeDexByShellCommand onSuccess");
+                            }
+
+                            @Override
+                            public void onFailed(Throwable thr) {
+                                Log.e(TAG, "optimizeDexByShellCommand onFailed", thr);
+                            }
+                        });
             } catch (Exception e) {
                 e.printStackTrace();
             }
