@@ -12,9 +12,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.io.File;
+
 import baidu.com.commontools.threadpool.MhThreadPool;
 import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.db.StationDbFactory;
+import baidu.com.testlibproject.dex.DexOptimizer;
 import baidu.com.testlibproject.intent.IntentTestActivity;
 import baidu.com.testlibproject.plugin.PluginActivity;
 import baidu.com.testlibproject.sensor.CameraActivity;
@@ -57,6 +60,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         initView();
         initData();
         testProvider();
+
+        MhThreadPool.getInstance().addBkgTask(() -> {
+            new DexOptimizer().optimizeDex(mContext, new File(
+                    "/data/local/tmp/app-debug.apk"), mContext.getCacheDir());
+        });
     }
 
     @Override
