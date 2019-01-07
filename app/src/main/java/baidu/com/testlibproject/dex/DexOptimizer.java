@@ -40,12 +40,12 @@ public class DexOptimizer {
         Log.d(TAG, "optimizeDex done, cost = " + (System.currentTimeMillis() - time));
     }
 
-    public void optimizeDex(List<File> dexFiles, File optimizedDir) {
+    public void optimizeDexByDexFile(List<File> dexFiles, File optimizedDir) {
         Log.d(TAG, "begin optimizeDex");
         long time = System.currentTimeMillis();
         try {
             for (File dexFile : dexFiles) {
-                DexFile.loadDex(dexFile.getParent(), optimizedPathFor(dexFile, optimizedDir), 0);
+                DexFile.loadDex(dexFile.getAbsolutePath(), optimizedPathFor(dexFile, optimizedDir), 0);
             }
         } catch (Exception e) {
             Log.e(TAG, "interpretDex2Oat err!", e);

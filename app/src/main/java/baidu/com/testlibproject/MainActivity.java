@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import baidu.com.commontools.threadpool.MhThreadPool;
+import baidu.com.commontools.utils.FileUtils;
 import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.db.StationDbFactory;
 import baidu.com.testlibproject.dex.DexOptimizer;
@@ -63,33 +65,47 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         initView();
         initData();
         testProvider();
-        Log.d(TAG, "File dir = " + mContext.getFilesDir());
 
         MhThreadPool.getInstance().addBkgTask(() -> {
             try {
                 File apkFile = new File(mContext.getCacheDir() + "/mobileqq_android.apk");
-                List<File> dexFiles = DexOptimizer.getDexFile(apkFile);
+                if (!apkFile.exists()) {
+                    File srcFile = new File(Environment.getExternalStorageDirectory() + "/mobileqq_android.apk");
+                    if (srcFile.exists()) {
+                        FileUtils.copy(srcFile, apkFile);
+                    }
+                }
+                if (!apkFile.exists()) {
+                    Log.e(TAG, "apk file not exists, return");
+                    return;
+                }
+
+                List<File> list = new ArrayList<>();
+                list.add(apkFile);
                 File optimizedDir = mContext.getDir("cache", MODE_PRIVATE);
 
                 //use ClassLoader, get cache file
 //                new DexOptimizer().optimizeDexByClassLoader(mContext, apkFile, optimizedDir);
 
+
                 //user shell command, get cache file
                 //实践证明，用命令行来执行dex2oat得到的oat文件小了很多，需要研究下为何
-                List<File> list = new ArrayList<>();
-                list.add(apkFile);
-                new DexOptimizer().optimizeDexByShellCommand(list, optimizedDir,
-                        new DexOptimizer.ResultCallback() {
-                            @Override
-                            public void onSuccess() {
-                                Log.d(TAG, "optimizeDexByShellCommand onSuccess");
-                            }
+//                new DexOptimizer().optimizeDexByShellCommand(list, optimizedDir,
+//                        new DexOptimizer.ResultCallback() {
+//                            @Override
+//                            public void onSuccess() {
+//                                Log.d(TAG, "optimizeDexByShellCommand onSuccess");
+//                            }
+//
+//                            @Override
+//                            public void onFailed(Throwable thr) {
+//                                Log.e(TAG, "optimizeDexByShellCommand onFailed", thr);
+//                            }
+//                        });
 
-                            @Override
-                            public void onFailed(Throwable thr) {
-                                Log.e(TAG, "optimizeDexByShellCommand onFailed", thr);
-                            }
-                        });
+
+                //user DexFile
+                new DexOptimizer().optimizeDexByDexFile(list, optimizedDir);
             } catch (Exception e) {
                 e.printStackTrace();
             }
