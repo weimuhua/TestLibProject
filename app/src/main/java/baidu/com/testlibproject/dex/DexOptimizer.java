@@ -40,7 +40,7 @@ public class DexOptimizer {
         Log.d(TAG, "optimizeDex done, cost = " + (System.currentTimeMillis() - time));
     }
 
-    public void optimizeDexByDexFile(List<File> dexFiles, File optimizedDir) {
+    public void optimizeDexByDexFile(List<File> dexFiles, File optimizedDir, ResultCallback cb) {
         Log.d(TAG, "begin optimizeDex");
         long time = System.currentTimeMillis();
         try {
@@ -49,8 +49,14 @@ public class DexOptimizer {
             }
         } catch (Exception e) {
             Log.e(TAG, "interpretDex2Oat err!", e);
+            if (cb != null) {
+                cb.onFailed(e);
+            }
         }
         Log.d(TAG, "optimizeDex done, cost = " + (System.currentTimeMillis() - time));
+        if (cb != null) {
+            cb.onSuccess();
+        }
     }
 
     public void optimizeDexByShellCommand(List<File> dexFiles, File optimizedDir, ResultCallback cb) {
@@ -74,10 +80,10 @@ public class DexOptimizer {
             }
         }
 
+        Log.d(TAG, "optimizeDex done, cost = " + (System.currentTimeMillis() - time));
         if (cb != null) {
             cb.onSuccess();
         }
-        Log.d(TAG, "optimizeDex done, cost = " + (System.currentTimeMillis() - time));
     }
 
     private static String getCurrentInstructionSet() throws Exception {

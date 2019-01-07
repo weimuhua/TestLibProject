@@ -35,6 +35,7 @@ import baidu.com.testlibproject.service.SmsMgrActivity;
 import baidu.com.testlibproject.service.TelephonyMgrActivity;
 import baidu.com.testlibproject.service.VibratorActivity;
 import baidu.com.testlibproject.ui.UiTestActivity;
+import dalvik.system.DexClassLoader;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -84,28 +85,33 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 list.add(apkFile);
                 File optimizedDir = mContext.getDir("cache", MODE_PRIVATE);
 
+                DexOptimizer.ResultCallback callback = new DexOptimizer.ResultCallback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d(TAG, "optimize onSuccess");
+                        new DexClassLoader(apkFile.getAbsolutePath(), optimizedDir.getAbsolutePath(),
+                                null, mContext.getClassLoader());
+                        Log.d(TAG, "create DexClassLoader done.");
+                    }
+
+                    @Override
+                    public void onFailed(Throwable thr) {
+                        Log.e(TAG, "optimize fail", thr);
+                    }
+                };
+
+
                 //use ClassLoader, get cache file
 //                new DexOptimizer().optimizeDexByClassLoader(mContext, apkFile, optimizedDir);
 
 
                 //user shell command, get cache file
                 //实践证明，用命令行来执行dex2oat得到的oat文件小了很多，需要研究下为何
-//                new DexOptimizer().optimizeDexByShellCommand(list, optimizedDir,
-//                        new DexOptimizer.ResultCallback() {
-//                            @Override
-//                            public void onSuccess() {
-//                                Log.d(TAG, "optimizeDexByShellCommand onSuccess");
-//                            }
-//
-//                            @Override
-//                            public void onFailed(Throwable thr) {
-//                                Log.e(TAG, "optimizeDexByShellCommand onFailed", thr);
-//                            }
-//                        });
+//                new DexOptimizer().optimizeDexByShellCommand(list, optimizedDir, callback);
 
 
                 //user DexFile
-                new DexOptimizer().optimizeDexByDexFile(list, optimizedDir);
+                new DexOptimizer().optimizeDexByDexFile(list, optimizedDir, callback);
             } catch (Exception e) {
                 e.printStackTrace();
             }
