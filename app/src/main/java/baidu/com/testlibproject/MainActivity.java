@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +13,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import baidu.com.commontools.threadpool.MhThreadPool;
+import baidu.com.commontools.utils.FileUtils;
 import baidu.com.commontools.utils.LogHelper;
+import baidu.com.testlibproject.db.StationDbFactory;
+import baidu.com.testlibproject.dex.DexOptimizer;
 import baidu.com.testlibproject.intent.IntentTestActivity;
 import baidu.com.testlibproject.plugin.PluginActivity;
 import baidu.com.testlibproject.sensor.CameraActivity;
@@ -26,10 +34,11 @@ import baidu.com.testlibproject.service.SmsMgrActivity;
 import baidu.com.testlibproject.service.TelephonyMgrActivity;
 import baidu.com.testlibproject.service.VibratorActivity;
 import baidu.com.testlibproject.ui.UiTestActivity;
+import dalvik.system.DexClassLoader;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    private static final String TAG = "MainActivity|TAG";
+    private static final String TAG = "MainActivityTAG";
     private static final boolean DEBUG = FeatureConfig.DEBUG;
 
     private static final int INTENT_TEST_UI_ACTIVITY = 0;
@@ -53,18 +62,59 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         mContext = this;
 
-        ClassLoader classLoader = getClassLoader();
-        if (classLoader != null) {
-            Log.i(TAG, "[onCreate] classLoader " + " : " + classLoader.toString());
-            while (classLoader.getParent() != null) {
-                classLoader = classLoader.getParent();
-                Log.i(TAG, "[onCreate] classLoader " + " : " + classLoader.toString());
-            }
-        }
-
         initView();
         initData();
         testProvider();
+
+        MhThreadPool.getInstance().addBkgTask(() -> {
+            try {
+                File apkFile = new File(mContext.getCacheDir() + "/mobileqq_android.apk");
+                if (!apkFile.exists()) {
+                    File srcFile = new File(Environment.getExternalStorageDirectory() + "/mobileqq_android.apk");
+                    if (srcFile.exists()) {
+                        FileUtils.copy(srcFile, apkFile);
+                    }
+                }
+                if (!apkFile.exists()) {
+                    Log.e(TAG, "apk file not exists, return");
+                    return;
+                }
+
+                List<File> list = new ArrayList<>();
+                list.add(apkFile);
+                File optimizedDir = mContext.getDir("cache", MODE_PRIVATE);
+
+                DexOptimizer.ResultCallback callback = new DexOptimizer.ResultCallback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d(TAG, "optimize onSuccess");
+                        new DexClassLoader(apkFile.getAbsolutePath(), optimizedDir.getAbsolutePath(),
+                                null, mContext.getClassLoader());
+                        Log.d(TAG, "create DexClassLoader done.");
+                    }
+
+                    @Override
+                    public void onFailed(Throwable thr) {
+                        Log.e(TAG, "optimize fail", thr);
+                    }
+                };
+
+
+                //use ClassLoader, get cache file
+//                new DexOptimizer().optimizeDexByClassLoader(mContext, apkFile, optimizedDir);
+
+
+                //user shell command, get cache file
+                //实践证明，用命令行来执行dex2oat得到的oat文件小了很多，需要研究下为何
+//                new DexOptimizer().optimizeDexByShellCommand(list, optimizedDir, callback);
+
+
+                //user DexFile
+                new DexOptimizer().optimizeDexByDexFile(list, optimizedDir, callback);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @Override
