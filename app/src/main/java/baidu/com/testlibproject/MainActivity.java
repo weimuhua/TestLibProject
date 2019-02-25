@@ -167,6 +167,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void testProvider() {
+        ClassLoader classLoader = getClassLoader();
+        if (DEBUG) {
+            LogHelper.d(TAG, "classLoader = " + classLoader + " hashCode = " + classLoader.hashCode());
+        }
+
+
         ContentResolver resolver = mContext.getContentResolver();
         Uri url = Uri.withAppendedPath(Constants.DB_AUTHORITY_URI, StationDbFactory.class.getName() + "/" + "test");
         resolver.query(url, null, null, null, null);

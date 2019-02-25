@@ -6,9 +6,9 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.FeatureConfig;
 import baidu.com.testlibproject.IMainService;
-import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.service.stub.SubInterfaceAStub;
 import baidu.com.testlibproject.service.stub.SubInterfaceBSub;
 import baidu.com.testlibproject.service.stub.SubInterfaceCSub;
@@ -43,6 +43,11 @@ public class MainService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        ClassLoader classLoader = getClassLoader();
+        if (DEBUG) {
+            LogHelper.d(TAG, "classLoader = " + classLoader + " hashCode = " + classLoader.hashCode());
+        }
+
         if (DEBUG) LogHelper.d(TAG, "MainService onCreate");
     }
 
