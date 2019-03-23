@@ -166,6 +166,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void testProvider() {
+        ClassLoader classLoader = getClassLoader();
+        if (DEBUG) {
+            LogHelper.d(TAG, "classLoader = " + classLoader + " hashCode = " + classLoader.hashCode());
+        }
+
+
         ContentResolver resolver = mContext.getContentResolver();
         if (DEBUG) {
             LogHelper.d(TAG, "ContentResolver call!");

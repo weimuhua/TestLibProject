@@ -3,12 +3,11 @@ package baidu.com.testlibproject.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.FeatureConfig;
 import baidu.com.testlibproject.IMainService;
-import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.service.stub.SubInterfaceAStub;
 import baidu.com.testlibproject.service.stub.SubInterfaceBStub;
 import baidu.com.testlibproject.service.stub.SubInterfaceCStub;
@@ -20,22 +19,22 @@ public class MainService extends Service {
 
     private IMainService.Stub mBinder = new IMainService.Stub() {
         @Override
-        public IBinder getInterfaceA() throws RemoteException {
+        public IBinder getInterfaceA() {
             return new SubInterfaceAStub();
         }
 
         @Override
-        public IBinder getInterfaceB() throws RemoteException {
+        public IBinder getInterfaceB() {
             return new SubInterfaceBStub();
         }
 
         @Override
-        public IBinder getInterfaceC() throws RemoteException {
+        public IBinder getInterfaceC() {
             return new SubInterfaceCStub();
         }
 
         @Override
-        public int add(int a, int b) throws RemoteException {
+        public int add(int a, int b) {
             return a + b;
         }
     };
@@ -43,6 +42,11 @@ public class MainService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        ClassLoader classLoader = getClassLoader();
+        if (DEBUG) {
+            LogHelper.d(TAG, "classLoader = " + classLoader + " hashCode = " + classLoader.hashCode());
+        }
+
         if (DEBUG) LogHelper.d(TAG, "MainService onCreate");
     }
 

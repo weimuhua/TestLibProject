@@ -10,17 +10,17 @@ import baidu.com.testlibproject.ISubInterfaceB;
 
 public class SubInterfaceBStub extends ISubInterfaceB.Stub {
     @Override
-    public void methodA2() throws RemoteException {
+    public void methodA2() {
 
     }
 
     @Override
-    public void methodB2() throws RemoteException {
+    public void methodB2() {
 
     }
 
     @Override
-    public void methodC2() throws RemoteException {
+    public void methodC2() {
 
     }
 }
