@@ -14,17 +14,17 @@ public class SubInterfaceAStub extends ISubInterfaceA.Stub {
     private static final String TAG = "SubInterfaceAStub";
 
     @Override
-    public void methodA1() throws RemoteException {
+    public void methodA1() {
         Log.d(TAG, "methodA1 invoked!");
     }
 
     @Override
-    public void methodB1() throws RemoteException {
+    public void methodB1() {
         Log.d(TAG, "methodB1 invoked!");
     }
 
     @Override
-    public void methodC1() throws RemoteException {
+    public void methodC1() {
         Log.d(TAG, "methodC1 invoked!");
     }
 }

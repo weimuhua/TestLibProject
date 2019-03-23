@@ -20,22 +20,22 @@ public class MainService extends Service {
 
     private IMainService.Stub mBinder = new IMainService.Stub() {
         @Override
-        public IBinder getInterfaceA() throws RemoteException {
+        public IBinder getInterfaceA() {
             return new SubInterfaceAStub();
         }
 
         @Override
-        public IBinder getInterfaceB() throws RemoteException {
+        public IBinder getInterfaceB() {
             return new SubInterfaceBSub();
         }
 
         @Override
-        public IBinder getInterfaceC() throws RemoteException {
+        public IBinder getInterfaceC() {
             return new SubInterfaceCSub();
         }
 
         @Override
-        public int add(int a, int b) throws RemoteException {
+        public int add(int a, int b) {
             return a + b;
         }
     };
