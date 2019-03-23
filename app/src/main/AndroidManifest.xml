@@ -109,6 +109,10 @@
             android:name=".ui.WebViewActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.LocalWebViewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name=".data.DataBaseProvider"

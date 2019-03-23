@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Js Test</title>
+
+    <script>
+         function callAndroid(){
+            setInterval("forceTest()", 10);
+         }
+
+         function forceTest() {
+            document.location = "js://jsbridge/test?arg1=111&arg2=222";
+         }
+
+         function callback(){
+            document.location = "js://jsbridge/callback"
+         }
+    </script>
+</head>
+
+<!-- 点击按钮则调用callAndroid（）方法  -->
+<body>
+<button type="button" id="button1" onclick="callAndroid()">点击调用Android代码</button>
+</body>
+</html>
