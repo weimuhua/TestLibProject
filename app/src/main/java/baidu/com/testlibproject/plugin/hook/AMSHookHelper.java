@@ -21,10 +21,13 @@ public class AMSHookHelper {
      * <p/>
      * 进而骗过AMS
      * @throws ClassNotFoundException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
      * @throws IllegalAccessException
      * @throws NoSuchFieldException
      */
     public static void hookActivityManagerNative() throws ClassNotFoundException,
+            NoSuchMethodException, InvocationTargetException,
             IllegalAccessException, NoSuchFieldException {
 
         Class<?> activityManagerNativeClass = Class.forName("android.app.ActivityManagerNative");
@@ -52,6 +55,7 @@ public class AMSHookHelper {
     }
 
     public static void stopHookActivityManagerNative() throws ClassNotFoundException,
+            NoSuchMethodException, InvocationTargetException,
             IllegalAccessException, NoSuchFieldException {
 
         Class<?> activityManagerNativeClass = Class.forName("android.app.ActivityManagerNative");
