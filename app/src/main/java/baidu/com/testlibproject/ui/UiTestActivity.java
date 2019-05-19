@@ -30,6 +30,7 @@ public class UiTestActivity extends AppCompatActivity implements AdapterView.OnI
     private static final int INTENT_TEST_SURFACE_VIEW_ACTIVITY = 13;
     private static final int INTENT_TEST_IMAGESPAN_ACTIVITY = 14;
     private static final int INTENT_TEST_LOCAL_WEBVIEW_ACTIVITY = 15;
+    private static final int INTENT_TEST_KOTLIN_CODE_ACTIVITY = 16;
 
     private ListView mListView;
 
@@ -102,6 +103,9 @@ public class UiTestActivity extends AppCompatActivity implements AdapterView.OnI
                 break;
             case INTENT_TEST_LOCAL_WEBVIEW_ACTIVITY:
                 startActivity(new Intent(this, LocalWebViewActivity.class));
+                break;
+            case INTENT_TEST_KOTLIN_CODE_ACTIVITY:
+                startActivity(new Intent(this, KotlinActivity.class));
                 break;
             default:
                 break;

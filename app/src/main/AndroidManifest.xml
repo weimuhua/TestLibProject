@@ -149,6 +149,10 @@
             android:name=".ui.SurfaceViewActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.KotlinActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity android:name=".ui.ImageSpanActivity">
         </activity>
     </application>
