@@ -36,7 +36,9 @@ import baidu.com.testlibproject.service.TelephonyMgrActivity;
 import baidu.com.testlibproject.service.VibratorActivity;
 import baidu.com.testlibproject.ui.UiTestActivity;
 import dalvik.system.DexClassLoader;
+import me.wayne.annotation.PluginCenterHolder;
 
+@PluginCenterHolder
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private static final String TAG = "MainActivityTAG";

@@ -1,4 +1,8 @@
 include ':app'
+include ':annotation'
+include ':processor'
 include ':CommonTools'
 
 project(':CommonTools').projectDir = file('submodules/CommonTools')
+project(':processor').projectDir = file('submodules/processor')
+project(':annotation').projectDir = file('submodules/annotation')

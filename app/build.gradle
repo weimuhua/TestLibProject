@@ -41,10 +41,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation project(':CommonTools')
+    implementation project(':annotation')
+    annotationProcessor project(':processor')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support:appcompat-v7:' + rootProject.ext.SUPPORT_V7_VER
-    implementation project(':CommonTools')
     implementation 'com.android.support:support-annotations:27.1.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
