@@ -3,6 +3,7 @@ package baidu.com.testlibproject.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +12,7 @@ import android.widget.ListView;
 import baidu.com.testlibproject.R;
 import baidu.com.testlibproject.SimpleAdapter;
 import baidu.com.testlibproject.service.NotificationActivity;
+import baidu.com.testlibproject.ui.lifecycle.MyLifecycleComponent;
 
 public class UiTestActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -40,6 +42,8 @@ public class UiTestActivity extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.ui_test_layout);
         initView();
         initData();
+
+        getLifecycle().addObserver(new MyLifecycleComponent());
     }
 
     private void initView() {
@@ -110,5 +114,15 @@ public class UiTestActivity extends AppCompatActivity implements AdapterView.OnI
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
