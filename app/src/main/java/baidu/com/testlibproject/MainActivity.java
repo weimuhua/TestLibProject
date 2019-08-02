@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         initView();
         initData();
         testProvider();
+        printExternalDir();
 
         MhThreadPool.getInstance().addBkgTask(() -> {
             try {
@@ -178,6 +179,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ContentResolver resolver = mContext.getContentResolver();
         Uri url = Uri.withAppendedPath(Constants.DB_AUTHORITY_URI, StationDbFactory.class.getName() + "/" + "test");
         resolver.query(url, null, null, null, null);
+    }
+
+    private void printExternalDir() {
+        Log.i(TAG, "getExternalCacheDir = " + mContext.getExternalCacheDir().getAbsolutePath());
+        Log.i(TAG, "getExternalFilesDir = " + mContext.getExternalFilesDir(Environment.DIRECTORY_MUSIC).getAbsolutePath());
+        Log.i(TAG, "getExternalFilesDir = " + mContext.getExternalFilesDir(Environment.DIRECTORY_PODCASTS).getAbsolutePath());
+        Log.i(TAG, "getExternalFilesDir = " + mContext.getExternalFilesDir(Environment.DIRECTORY_RINGTONES).getAbsolutePath());
+        Log.i(TAG, "getExternalFilesDir = " + mContext.getExternalFilesDir(Environment.DIRECTORY_ALARMS).getAbsolutePath());
+        Log.i(TAG, "getExternalFilesDir = " + mContext.getExternalFilesDir(Environment.DIRECTORY_NOTIFICATIONS).getAbsolutePath());
+        Log.i(TAG, "getExternalFilesDir = " + mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath());
+        Log.i(TAG, "getExternalFilesDir = " + mContext.getExternalFilesDir(Environment.DIRECTORY_MOVIES).getAbsolutePath());
+        Log.i(TAG, "getExternalFilesDir = " + mContext.getExternalFilesDir(null).getAbsolutePath());
     }
 
     @Override
