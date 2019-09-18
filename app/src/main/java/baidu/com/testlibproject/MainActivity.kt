@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         }
 
         val strArr = resources.getStringArray(R.array.activity_item)
-        val adapter = SimpleAdapter(mContext)
+        val adapter = SimpleAdapter(mContext!!)
         adapter.setStrArr(strArr)
         mListView!!.adapter = adapter
         mListView!!.onItemClickListener = this
