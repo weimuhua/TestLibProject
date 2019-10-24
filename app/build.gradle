@@ -13,6 +13,10 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField("boolean", "DEBUG_LOG", rootProject.ext.DEBUG_LOG)
+
+        packagingOptions {
+            exclude 'META-INF/proguard/coroutines.pro'
+        }
     }
     signingConfigs {
         release {
@@ -49,4 +53,8 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:' + rootProject.ext.SUPPORT_V7_VER
     implementation 'com.android.support:support-annotations:27.1.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //                                       👇 依赖协程核心库
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines"
+    //                                       👇 依赖当前平台所对应的平台库
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines"
 }
