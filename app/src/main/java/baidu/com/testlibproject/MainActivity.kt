@@ -1,5 +1,8 @@
+@file:Suppress("ConstantConditionIf", "DEPRECATION")
+
 package baidu.com.testlibproject
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -14,7 +17,7 @@ import android.widget.ListView
 import baidu.com.commontools.threadpool.MhThreadPool
 import baidu.com.commontools.utils.FileUtils
 import baidu.com.commontools.utils.LogHelper
-import baidu.com.testlibproject.coroutines.CoroutinesTest
+import baidu.com.testlibproject.coroutines.coroutinesExample1
 import baidu.com.testlibproject.db.StationDbFactory
 import baidu.com.testlibproject.dex.DexOptimizer
 import baidu.com.testlibproject.intent.IntentTestActivity
@@ -43,8 +46,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         setContentView(R.layout.activity_main)
         mContext = this
 
-        val test = CoroutinesTest()
-        test.main()
+        coroutinesExample1()
 
         initView()
         initData()
@@ -56,7 +58,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                 try {
                     val apkFile = File(mContext!!.cacheDir.toString() + "/mobileqq_android.apk")
                     if (!apkFile.exists()) {
-                        val srcFile = File(Environment.getExternalStorageDirectory().toString() + "/mobileqq_android.apk")
+                        val srcFile = File(Environment.getExternalStorageDirectory().toString()
+                                + "/mobileqq_android.apk")
                         if (srcFile.exists()) {
                             FileUtils.copy(srcFile, apkFile)
                         }
@@ -102,22 +105,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         })
     }
 
-    override fun onStart() {
-        super.onStart()
-        if (DEBUG) LogHelper.d(TAG, "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (DEBUG) LogHelper.d(TAG, "onResume")
-    }
-
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        if (DEBUG) LogHelper.d(TAG, "onWindowFocusChanged, hasFocus : $hasFocus")
-    }
-
-
     private fun initView() {
         mListView = findViewById(R.id.list_view)
     }
@@ -160,6 +147,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         }
     }
 
+    @SuppressLint("Recycle")
     private fun testProvider() {
         val classLoader = classLoader
         if (DEBUG) {
@@ -202,19 +190,18 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
     companion object {
+        private const val TAG = "MainActivityTAG"
+        private const val DEBUG = FeatureConfig.DEBUG
 
-        private val TAG = "MainActivityTAG"
-        private val DEBUG = FeatureConfig.DEBUG
-
-        private val INTENT_TEST_UI_ACTIVITY = 0
-        private val INTENT_TEST_INTENT_ACTIVITY = 1
-        private val INTENT_TELEPHONY_MANAGER = 2
-        private val INTENT_SMS_MANAGER = 3
-        private val INTENT_AUDIO_MANAGER = 4
-        private val INTENT_VIBRATOR_ACTIVITY = 5
-        private val INTENT_COMPASS_ACTIVITY = 6
-        private val INTENT_LOCATION_MANAGER = 7
-        private val INTENT_CAMERA_ACTIVITY = 8
-        private val INTENT_PLUGIN_ACTIVITY = 9
+        private const val INTENT_TEST_UI_ACTIVITY = 0
+        private const val INTENT_TEST_INTENT_ACTIVITY = 1
+        private const val INTENT_TELEPHONY_MANAGER = 2
+        private const val INTENT_SMS_MANAGER = 3
+        private const val INTENT_AUDIO_MANAGER = 4
+        private const val INTENT_VIBRATOR_ACTIVITY = 5
+        private const val INTENT_COMPASS_ACTIVITY = 6
+        private const val INTENT_LOCATION_MANAGER = 7
+        private const val INTENT_CAMERA_ACTIVITY = 8
+        private const val INTENT_PLUGIN_ACTIVITY = 9
     }
 }
