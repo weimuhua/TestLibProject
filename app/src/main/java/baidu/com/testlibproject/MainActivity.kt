@@ -17,7 +17,7 @@ import android.widget.ListView
 import baidu.com.commontools.threadpool.MhThreadPool
 import baidu.com.commontools.utils.FileUtils
 import baidu.com.commontools.utils.LogHelper
-import baidu.com.testlibproject.coroutines.coroutinesExample1
+import baidu.com.testlibproject.coroutines.coroutinesExample2
 import baidu.com.testlibproject.db.StationDbFactory
 import baidu.com.testlibproject.dex.DexOptimizer
 import baidu.com.testlibproject.intent.IntentTestActivity
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         setContentView(R.layout.activity_main)
         mContext = this
 
-        coroutinesExample1()
+        coroutinesExample2()
 
         initView()
         initData()
