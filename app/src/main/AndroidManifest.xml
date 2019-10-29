@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="baidu.com.testlibproject"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="baidu.com.testlibproject">
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -26,6 +26,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".coroutines.CoroutinesActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -153,8 +154,7 @@
             android:name=".ui.KotlinActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.ImageSpanActivity">
-        </activity>
+        <activity android:name=".ui.ImageSpanActivity"></activity>
     </application>
 
 </manifest>
