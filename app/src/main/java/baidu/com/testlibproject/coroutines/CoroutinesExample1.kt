@@ -61,3 +61,19 @@ fun coroutinesExample5() {
     Log.d(TAG,"4")
     Log.d(TAG,"5")
 }
+
+fun coroutinesExample6(){
+    GlobalScope.launch {
+        Log.d(TAG,"world!")
+        Log.d(TAG,"current Coroutines Job: ${coroutineContext[Job]}")
+    }
+    Log.d(TAG,"Hello")
+}
+
+fun coroutinesExample7(){
+    GlobalScope.launch(CoroutineName("HelloCoroutines")){
+        Log.d(TAG,"world!")
+        Log.d(TAG,"CoroutinesName: ${coroutineContext[CoroutineName]}")
+    }
+    Log.d(TAG,"Hello")
+}
