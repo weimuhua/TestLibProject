@@ -12,7 +12,7 @@ class ProgressBarActivity : AppCompatActivity() {
 
     private lateinit var progressBar: ProgressBar
     private var animator: ObjectAnimator? = null
-    private var countdownTime = 30L
+    private var countdownTime = 15L
     private val uiHandler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,10 +31,12 @@ class ProgressBarActivity : AppCompatActivity() {
             override fun run() {
                 if (countdownTime > 0) {
                     countdownTime--
-                    uiHandler.postDelayed(this, 200)
+                    uiHandler.postDelayed(this, 1000)
+                } else {
+                    progressBar.progressDrawable = null
                 }
             }
-        }, 200)
+        }, 1000)
     }
 
     override fun onDestroy() {
