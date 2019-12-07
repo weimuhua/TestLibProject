@@ -31,6 +31,7 @@
         <item>ImageSpan</item>
         <item>LocalWebView</item>
         <item>kotlin</item>
+        <item>ProgressBar</item>
     </array>
     <array name="auto_complete_arr">
         <item>\&#064;163.com</item>

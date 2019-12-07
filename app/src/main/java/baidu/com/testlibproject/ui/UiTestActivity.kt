@@ -39,30 +39,63 @@ class UiTestActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         when (position) {
-            INTENT_AUTO_COMPLETE_TEXTVIEW -> startActivity(Intent(this, TestAutoCompleteTvActivity::class.java))
-            INTENT_TEST_GRID_VIEW_ACTIVITY -> startActivity(Intent(this, TestGridViewActivity::class.java))
-            INTENT_TEST_SPINNER_ACTIVITY -> startActivity(Intent(this, TestSpinnerActivity::class.java))
-            INTENT_TEST_TOAST_ACTIVITY -> startActivity(Intent(this, TestToastActivity::class.java))
-            INTENT_TEST_DATE_TIME_PICKET -> startActivity(Intent(this, DateTimePickerActivity::class.java))
-            INTENT_SEARCH_VIEW_ACTIVITY -> startActivity(Intent(this, SearchViewActivity::class.java))
-            INTENT_NOTIFICATION_TEST -> startActivity(Intent(this, NotificationActivity::class.java))
-            INTENT_POPUP_WINDOW_ACTIVITY -> startActivity(Intent(this, PopupWindowActivity::class.java))
-            INTENT_ACTION_BAR_ACTIVITY -> startActivity(Intent(this, TestActionBarActivity::class.java))
-            INTENT_CONFIGURATION_TEST -> startActivity(Intent(this, ConfigurationTest::class.java))
-            INTENT_CONSTRAIN_LAYOUT_ACTIVITY -> startActivity(Intent(this, ConstrainLayoutActivity::class.java))
-            INTENT_TEST_WEBVIEW_ACTIVITY -> startActivity(Intent(this, WebViewActivity::class.java))
-            INTENT_TEST_VIDEO_VIEW_ACTIVITY -> startActivity(Intent(this, VideoViewActivity::class.java))
-            INTENT_TEST_SURFACE_VIEW_ACTIVITY -> startActivity(Intent(this, SurfaceViewActivity::class.java))
-            INTENT_TEST_IMAGESPAN_ACTIVITY -> startActivity(Intent(this, ImageSpanActivity::class.java))
-            INTENT_TEST_LOCAL_WEBVIEW_ACTIVITY -> startActivity(Intent(this, LocalWebViewActivity::class.java))
-            INTENT_TEST_KOTLIN_CODE_ACTIVITY -> startActivity(Intent(this, KotlinActivity::class.java))
-            else -> {
+            INTENT_AUTO_COMPLETE_TEXTVIEW -> {
+                startActivity(Intent(this, TestAutoCompleteTvActivity::class.java))
+            }
+            INTENT_TEST_GRID_VIEW_ACTIVITY -> {
+                startActivity(Intent(this, TestGridViewActivity::class.java))
+            }
+            INTENT_TEST_SPINNER_ACTIVITY -> {
+                startActivity(Intent(this, TestSpinnerActivity::class.java))
+            }
+            INTENT_TEST_TOAST_ACTIVITY -> {
+                startActivity(Intent(this, TestToastActivity::class.java))
+            }
+            INTENT_TEST_DATE_TIME_PICKET -> {
+                startActivity(Intent(this, DateTimePickerActivity::class.java))
+            }
+            INTENT_SEARCH_VIEW_ACTIVITY -> {
+                startActivity(Intent(this, SearchViewActivity::class.java))
+            }
+            INTENT_NOTIFICATION_TEST -> {
+                startActivity(Intent(this, NotificationActivity::class.java))
+            }
+            INTENT_POPUP_WINDOW_ACTIVITY -> {
+                startActivity(Intent(this, PopupWindowActivity::class.java))
+            }
+            INTENT_ACTION_BAR_ACTIVITY -> {
+                startActivity(Intent(this, TestActionBarActivity::class.java))
+            }
+            INTENT_CONFIGURATION_TEST -> {
+                startActivity(Intent(this, ConfigurationTest::class.java))
+            }
+            INTENT_CONSTRAIN_LAYOUT_ACTIVITY -> {
+                startActivity(Intent(this, ConstrainLayoutActivity::class.java))}
+            INTENT_TEST_WEBVIEW_ACTIVITY -> {
+                startActivity(Intent(this, WebViewActivity::class.java))
+            }
+            INTENT_TEST_VIDEO_VIEW_ACTIVITY -> {
+                startActivity(Intent(this, VideoViewActivity::class.java))
+            }
+            INTENT_TEST_SURFACE_VIEW_ACTIVITY -> {
+                startActivity(Intent(this, SurfaceViewActivity::class.java))
+            }
+            INTENT_TEST_IMAGESPAN_ACTIVITY -> {
+                startActivity(Intent(this, ImageSpanActivity::class.java))
+            }
+            INTENT_TEST_LOCAL_WEBVIEW_ACTIVITY -> {
+                startActivity(Intent(this, LocalWebViewActivity::class.java))
+            }
+            INTENT_TEST_KOTLIN_CODE_ACTIVITY -> {
+                startActivity(Intent(this, KotlinActivity::class.java))
+            }
+            INTENT_TEST_ROUND_PROGRESSBAR_ACTIVITY -> {
+                startActivity(Intent(this, ProgressBarActivity::class.java))
             }
         }
     }
 
     companion object {
-
         private const val INTENT_AUTO_COMPLETE_TEXTVIEW = 0
         private const val INTENT_TEST_GRID_VIEW_ACTIVITY = 1
         private const val INTENT_TEST_SPINNER_ACTIVITY = 2
@@ -80,5 +113,6 @@ class UiTestActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         private const val INTENT_TEST_IMAGESPAN_ACTIVITY = 14
         private const val INTENT_TEST_LOCAL_WEBVIEW_ACTIVITY = 15
         private const val INTENT_TEST_KOTLIN_CODE_ACTIVITY = 16
+        private const val INTENT_TEST_ROUND_PROGRESSBAR_ACTIVITY = 17
     }
 }

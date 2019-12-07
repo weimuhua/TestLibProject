@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     private var mContext: Context? = null
 
     private var mListView: ListView? = null
-
     private val coroutinesScope = CoroutineScope(Dispatchers.IO)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,8 +118,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
             INTENT_CAMERA_ACTIVITY -> startActivity(Intent(mContext, CameraActivity::class.java))
             INTENT_PLUGIN_ACTIVITY -> startActivity(Intent(mContext, PluginActivity::class.java))
             INTENT_COROUTINES_ACTIVITY -> startActivity(Intent(mContext, CoroutinesActivity::class.java))
-            else -> {
-            }
         }
     }
 
