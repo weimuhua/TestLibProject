@@ -5,30 +5,30 @@
             android:fromDegrees="270"
             android:toDegrees="270">
             <shape
-                android:innerRadiusRatio="2.55"
                 android:shape="ring"
-                android:thickness="15dp"
+                android:innerRadius="115dp"
+                android:thickness="10dp"
                 android:useLevel="true">
                 <solid android:color="#ff008f" />
             </shape>
         </rotate>
     </item>
-    <item android:bottom="211dp">
+    <item android:bottom="240dp">
         <shape
-            android:innerRadiusRatio="1000"
+            android:innerRadius="0dp"
             android:shape="ring"
-            android:thickness="7dp"
+            android:thickness="5dp"
             android:useLevel="false">
             <solid android:color="@android:color/holo_green_light" />
         </shape>
     </item>
     <item>
         <rotate>
-            <inset android:insetBottom="211dp">
+            <inset android:insetBottom="240dp">
                 <shape
-                    android:innerRadiusRatio="1000"
+                    android:innerRadius="0dp"
                     android:shape="ring"
-                    android:thickness="7dp"
+                    android:thickness="5dp"
                     android:useLevel="false">
                     <solid android:color="@android:color/holo_blue_light" />
                 </shape>

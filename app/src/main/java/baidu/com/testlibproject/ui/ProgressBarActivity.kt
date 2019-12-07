@@ -24,7 +24,7 @@ class ProgressBarActivity : AppCompatActivity() {
         progressBar.progress = 100
         animator = ObjectAnimator
                 .ofInt(progressBar, "progress", 0)
-                .setDuration(90 * 1000)
+                .setDuration(countdownTime * 1000)
         progressBar.interpolator = LinearInterpolator()
         animator!!.start()
         uiHandler.postDelayed(object : Runnable {
