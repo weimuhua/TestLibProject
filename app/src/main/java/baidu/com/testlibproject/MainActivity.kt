@@ -29,7 +29,7 @@ import me.wayne.annotation.PluginCenterHolder
 @PluginCenterHolder
 class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
-    private var mContext: Context? = null
+    private lateinit var mContext: Context
 
     private var mListView: ListView? = null
     private val coroutinesScope = CoroutineScope(Dispatchers.IO)
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     private fun initData() {
         val strArr = resources.getStringArray(R.array.activity_item)
-        val adapter = SimpleAdapter(mContext!!)
+        val adapter = SimpleAdapter(mContext)
         adapter.setStrArr(strArr)
         mListView!!.adapter = adapter
         mListView!!.onItemClickListener = this
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         }
 
 
-        val resolver = mContext!!.contentResolver
+        val resolver = mContext.contentResolver
         val url = Uri.withAppendedPath(Constants.DB_AUTHORITY_URI, StationDbFactory::class.java.name + "/" + "test")
         resolver.query(url, null, null, null, null)
     }
