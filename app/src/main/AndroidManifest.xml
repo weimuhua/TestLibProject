@@ -25,7 +25,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning, LockedOrientationActivity">
         <activity android:name=".coroutines.CoroutinesActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -157,8 +157,11 @@
         <activity
             android:name=".ui.ProgressBarActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity android:name=".ui.ImageSpanActivity" />
+        <activity
+            android:name=".ui.MyFragmentActivity"
+            android:excludeFromRecents="false" />
     </application>
 
 </manifest>

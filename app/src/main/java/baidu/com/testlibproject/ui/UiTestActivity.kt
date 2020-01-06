@@ -92,6 +92,9 @@ class UiTestActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
             INTENT_TEST_ROUND_PROGRESSBAR_ACTIVITY -> {
                 startActivity(Intent(this, ProgressBarActivity::class.java))
             }
+            INTENT_TEST_COMMIT_FRAGMENT_ACTIVITY -> {
+                startActivity(Intent(this, MyFragmentActivity::class.java))
+            }
         }
     }
 
@@ -114,5 +117,6 @@ class UiTestActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         private const val INTENT_TEST_LOCAL_WEBVIEW_ACTIVITY = 15
         private const val INTENT_TEST_KOTLIN_CODE_ACTIVITY = 16
         private const val INTENT_TEST_ROUND_PROGRESSBAR_ACTIVITY = 17
+        private const val INTENT_TEST_COMMIT_FRAGMENT_ACTIVITY = 18;
     }
 }

@@ -32,6 +32,7 @@
         <item>LocalWebView</item>
         <item>kotlin</item>
         <item>ProgressBar</item>
+        <item>Fragment</item>
     </array>
     <array name="auto_complete_arr">
         <item>\&#064;163.com</item>
