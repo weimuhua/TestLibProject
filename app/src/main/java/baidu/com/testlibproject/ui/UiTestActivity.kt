@@ -3,11 +3,10 @@ package baidu.com.testlibproject.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
-
+import androidx.appcompat.app.AppCompatActivity
 import baidu.com.testlibproject.R
 import baidu.com.testlibproject.SimpleAdapter
 import baidu.com.testlibproject.service.NotificationActivity

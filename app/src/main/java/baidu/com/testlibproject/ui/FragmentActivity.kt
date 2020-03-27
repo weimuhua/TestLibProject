@@ -1,9 +1,9 @@
 package baidu.com.testlibproject.ui
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import android.util.SparseArray
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import baidu.com.commontools.utils.LogHelper
 import baidu.com.testlibproject.R
 import java.util.*

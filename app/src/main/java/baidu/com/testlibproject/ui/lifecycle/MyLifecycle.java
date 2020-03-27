@@ -1,8 +1,9 @@
 package baidu.com.testlibproject.ui.lifecycle;
 
-import android.arch.lifecycle.LifecycleObserver;
 import android.content.Intent;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleObserver;
 
 public interface MyLifecycle extends LifecycleObserver {
 

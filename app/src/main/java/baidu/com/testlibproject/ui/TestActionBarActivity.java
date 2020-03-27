@@ -1,15 +1,16 @@
 package baidu.com.testlibproject.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import baidu.com.testlibproject.FeatureConfig;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import baidu.com.commontools.utils.LogHelper;
+import baidu.com.testlibproject.FeatureConfig;
 import baidu.com.testlibproject.R;
 
 public class TestActionBarActivity extends AppCompatActivity {

@@ -3,9 +3,9 @@ package baidu.com.testlibproject.ui
 import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
 import android.view.animation.LinearInterpolator
 import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import baidu.com.testlibproject.R
 
 class ProgressBarActivity : AppCompatActivity() {

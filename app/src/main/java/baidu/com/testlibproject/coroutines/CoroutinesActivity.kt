@@ -4,7 +4,7 @@ package baidu.com.testlibproject.coroutines
 
 import android.os.Bundle
 import android.os.RemoteException
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import baidu.com.commontools.utils.LogHelper
 import baidu.com.testlibproject.FeatureConfig
 import baidu.com.testlibproject.ISubInterfaceA

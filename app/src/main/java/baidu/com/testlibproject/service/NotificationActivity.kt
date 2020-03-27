@@ -6,9 +6,9 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.NotificationCompat.Builder
 import android.view.View
 import android.widget.Button
+import androidx.core.app.NotificationCompat.Builder
 import baidu.com.testlibproject.MainActivity
 import baidu.com.testlibproject.R
 

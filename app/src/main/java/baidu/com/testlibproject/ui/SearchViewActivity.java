@@ -2,11 +2,12 @@ package baidu.com.testlibproject.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.SearchView;
 
 import baidu.com.testlibproject.R;
 

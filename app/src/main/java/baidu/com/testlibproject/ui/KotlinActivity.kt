@@ -1,7 +1,7 @@
 package baidu.com.testlibproject.ui
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import baidu.com.commontools.utils.LogHelper
 import baidu.com.testlibproject.R
 

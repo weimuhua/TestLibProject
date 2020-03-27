@@ -1,7 +1,6 @@
 package baidu.com.testlibproject.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -9,6 +8,8 @@ import android.text.style.DynamicDrawableSpan;
 import android.text.style.ImageSpan;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.R;
