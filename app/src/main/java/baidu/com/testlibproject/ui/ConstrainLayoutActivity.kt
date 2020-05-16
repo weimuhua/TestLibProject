@@ -1,7 +1,6 @@
 package baidu.com.testlibproject.ui
 
 import android.app.Activity
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -42,12 +41,9 @@ class ConstrainLayoutActivity : Activity() {
         }
     }
 
-    private lateinit var mContext: Context
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_constrain_layout)
-        mContext = this
         spinner_tv.setOnClickListener { spinner.performClick() }
         val adapter = ArrayAdapter(this,
                 android.R.layout.simple_list_item_1, TEST_PROGRAM_ARRAY)
@@ -96,13 +92,13 @@ class ConstrainLayoutActivity : Activity() {
     }
 
     private fun addConstraintBasic() {
-        val subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_basic,
+        val subView = LayoutInflater.from(this).inflate(R.layout.layout_constraint_basic,
                 frame_layout, false)
         frame_layout.addView(subView)
     }
 
     private fun addConstraintGoneMargin() {
-        val subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_margin,
+        val subView = LayoutInflater.from(this).inflate(R.layout.layout_constraint_margin,
                 frame_layout, false)
         val normalMarginBtn = subView.findViewById<Button>(R.id.normal_margin_btn)
         val normalTvB = subView.findViewById<TextView>(R.id.normal_tv_b)
@@ -126,31 +122,31 @@ class ConstrainLayoutActivity : Activity() {
     }
 
     private fun addConstraintBias() {
-        val subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_bias,
+        val subView = LayoutInflater.from(this).inflate(R.layout.layout_constraint_bias,
                 frame_layout, false)
         frame_layout.addView(subView)
     }
 
     private fun addConstraintRatio() {
-        val subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_ratio,
+        val subView = LayoutInflater.from(this).inflate(R.layout.layout_constraint_ratio,
                 frame_layout, false)
         frame_layout.addView(subView)
     }
 
     private fun addConstraintChains() {
-        val subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_chains,
+        val subView = LayoutInflater.from(this).inflate(R.layout.layout_constraint_chains,
                 frame_layout, false)
         frame_layout.addView(subView)
     }
 
     private fun addConstraintGuideLine() {
-        val subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_guideline,
+        val subView = LayoutInflater.from(this).inflate(R.layout.layout_constraint_guideline,
                 frame_layout, false)
         frame_layout.addView(subView)
     }
 
     private fun addConstraintDimension() {
-        val subView = LayoutInflater.from(mContext).inflate(R.layout.layout_constraint_dimension,
+        val subView = LayoutInflater.from(this).inflate(R.layout.layout_constraint_dimension,
                 frame_layout, false)
         frame_layout.addView(subView)
     }
