@@ -22,6 +22,7 @@ import baidu.com.testlibproject.sensor.CameraActivity
 import baidu.com.testlibproject.sensor.CompassActivity
 import baidu.com.testlibproject.sensor.LocationMgrActivity
 import baidu.com.testlibproject.service.*
+import baidu.com.testlibproject.test.KotlinSingleton
 import baidu.com.testlibproject.ui.UiTestActivity
 import kotlinx.coroutines.*
 import me.wayne.annotation.PluginCenterHolder
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mContext = this
+        KotlinSingleton.getInstance(this).gogogo()
 
         coroutinesExample4()
 
