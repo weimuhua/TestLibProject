@@ -46,15 +46,12 @@ class SimpleAdapter : BaseAdapter {
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var convertView = convertView
-        val inflater = LayoutInflater.from(mCxt)
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.main_activity_item, parent, false)
-        }
+        val view = convertView ?: LayoutInflater.from(mCxt)
+                .inflate(R.layout.main_activity_item, parent, false)
         if (mStrArr != null && position <= mStrArr!!.size) {
-            (convertView!!.findViewById<View>(R.id.item_textview) as TextView).text = mStrArr!![position]
+            (view.findViewById<View>(R.id.item_textview) as TextView).text = mStrArr!![position]
         }
-        convertView!!.tag = position
-        return convertView
+        view!!.tag = position
+        return view
     }
 }

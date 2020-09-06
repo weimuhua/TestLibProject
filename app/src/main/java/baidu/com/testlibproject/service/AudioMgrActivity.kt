@@ -54,6 +54,7 @@ class AudioMgrActivity : Activity(), View.OnClickListener, CompoundButton.OnChec
         if (buttonView === mMuteBtn) {
             val am = getSystemService(Context.AUDIO_SERVICE) as AudioManager
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                @Suppress("DEPRECATION")
                 am.setStreamMute(AudioManager.STREAM_MUSIC, isChecked)
             } else {
                 val direction = if (isChecked) AudioManager.ADJUST_MUTE else AudioManager.ADJUST_UNMUTE

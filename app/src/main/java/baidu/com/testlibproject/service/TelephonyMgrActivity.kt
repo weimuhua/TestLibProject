@@ -1,5 +1,6 @@
 package baidu.com.testlibproject.service
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
@@ -24,6 +25,8 @@ class TelephonyMgrActivity : Activity() {
         mListView = findViewById(R.id.telephony_listview)
     }
 
+    @Suppress("DEPRECATION")
+    @SuppressLint("HardwareIds")
     private fun initData() {
         val tm = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         val desArr = resources.getStringArray(R.array.telephony_arr)

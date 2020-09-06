@@ -51,8 +51,8 @@ class MyFragmentActivity : FragmentActivity() {
             val f2 = fm.javaClass.getDeclaredField("mActive")
             f.isAccessible = true
             f2.isAccessible = true
-            val fragments = f[fm] as ArrayList<Fragment>
-            val fragments2 = f2[fm] as SparseArray<Fragment>
+            val fragments = f[fm] as ArrayList<*>
+            val fragments2 = f2[fm] as SparseArray<*>
             fragments.clear()
             fragments2.clear()
         } catch (e: IllegalArgumentException) {
