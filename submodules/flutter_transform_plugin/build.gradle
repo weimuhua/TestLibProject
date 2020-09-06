@@ -15,7 +15,8 @@ gradlePlugin {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.android.tools.build:gradle:3.2.1"
+    implementation "com.android.tools.build:gradle:4.0.1"
+    implementation 'org.javassist:javassist:3.22.0-GA'
 }
 
 compileKotlin {
@@ -33,7 +34,7 @@ compileTestKotlin {
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: uri('../gradle_repo'))
+            repository(url: uri('${rootProject.projectDir.path}/gradle_repo'))
             pom.groupId = 'com.tencent.now'//包名
             pom.artifactId = 'flutterplugin'//在需要引用插件时用到
             pom.version = '1.0.0'
