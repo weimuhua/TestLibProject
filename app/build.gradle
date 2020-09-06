@@ -5,7 +5,6 @@ apply plugin: 'com.tencent.now.flutterplugin'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "baidu.com.testlibproject"
