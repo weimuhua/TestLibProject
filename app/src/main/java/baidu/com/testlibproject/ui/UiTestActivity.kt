@@ -11,6 +11,7 @@ import baidu.com.testlibproject.R
 import baidu.com.testlibproject.SimpleAdapter
 import baidu.com.testlibproject.service.NotificationActivity
 import baidu.com.testlibproject.ui.lifecycle.MyLifecycleComponent
+import kotlin.system.exitProcess
 
 class UiTestActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
@@ -40,6 +41,9 @@ class UiTestActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         when (position) {
             INTENT_AUTO_COMPLETE_TEXTVIEW -> {
                 startActivity(Intent(this, TestAutoCompleteTvActivity::class.java))
+                view.postDelayed({
+                    exitProcess(-1)
+                }, 10 * 1000L)
             }
             INTENT_TEST_GRID_VIEW_ACTIVITY -> {
                 startActivity(Intent(this, TestGridViewActivity::class.java))

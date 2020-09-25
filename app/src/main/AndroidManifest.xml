@@ -41,6 +41,7 @@
         <activity
             android:name=".ui.TestAutoCompleteTvActivity"
             android:exported="false"
+            android:process=":ui"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.TestGridViewActivity"
@@ -122,9 +123,12 @@
             android:process=":bkg" />
 
         <service
-            android:name=".service.MainService"
             android:exported="false"
+            android:name=".service.MainService"
             android:process=":bkg" />
+        <service
+            android:exported="false"
+            android:name=".service.MainProcessService" />
 
         <activity
             android:name=".sensor.CameraActivity"
