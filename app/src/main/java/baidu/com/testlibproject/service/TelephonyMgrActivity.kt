@@ -32,7 +32,7 @@ class TelephonyMgrActivity : Activity() {
         val desArr = resources.getStringArray(R.array.telephony_arr)
         val tmStateList = ArrayList<String>()
         tmStateList.add(tm.deviceId)
-        tmStateList.add(tm.deviceSoftwareVersion)
+        tmStateList.add(tm.deviceSoftwareVersion ?: "")
         tmStateList.add(tm.networkOperatorName)
         tmStateList.add(tm.cellLocation.toString())
         tmStateList.add(tm.simCountryIso)
