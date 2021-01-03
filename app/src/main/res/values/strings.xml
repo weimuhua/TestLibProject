@@ -94,4 +94,5 @@
     <string name="load_jar">load apk file</string>
     <string name="start_activity">start non-registered activity</string>
     <string name="start_plugin_activity">start plugin activity</string>
+    <string name="hello_world_string">HELLO_WORLD</string>
 </resources>
