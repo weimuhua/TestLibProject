@@ -17,7 +17,7 @@ buildscript {
         maven(uri("./gradle_repo"))
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:4.1.2")
+        classpath("com.android.tools.build:gradle:7.0.0")
         classpath("com.tencent.now:flutterplugin:1.0.0")
         classpath(kotlin("gradle-plugin", version = kotlinVersion))
     }
