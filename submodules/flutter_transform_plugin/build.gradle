@@ -8,7 +8,7 @@ gradlePlugin {
     plugins {
         shadow {
             id = "com.tencent.now.flutterplugin"
-            implementationClass = "GradlePlugin"
+            implementationClass = "com.tencent.now.GradlePlugin"
         }
     }
 }
