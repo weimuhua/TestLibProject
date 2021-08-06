@@ -1,8 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    val kotlinVersion = "1.4.31"
-    extra["kotlin_version"] = kotlinVersion
+    val kotlin_version = "1.4.31"
+    extra["kotlin_version"] = kotlin_version
     extra["kotlin_coroutines"] = "1.3.3"
     extra["DEBUG_LOG"] = "true"
     extra["SUPPORT_V7_VER"] = "true"
@@ -19,7 +19,7 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:7.0.0")
         classpath("com.tencent.now:flutterplugin:1.0.0")
-        classpath(kotlin("gradle-plugin", version = kotlinVersion))
+        classpath(kotlin("gradle-plugin", version = "$kotlin_version"))
     }
 }
 
