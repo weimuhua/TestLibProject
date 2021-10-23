@@ -8,18 +8,18 @@ plugins {
 apply(plugin = "com.tencent.now.flutterplugin")
 
 android {
-    compileSdkVersion(rootProject.extra["compileSdkVersion"] as Int)
-
+    compileSdk = rootProject.extra["compileSdkVersion"] as Int
     defaultConfig {
         applicationId = "baidu.com.testlibproject"
-        minSdkVersion(rootProject.extra["minSdkVersion"] as Int)
-        targetSdkVersion(rootProject.extra["targetSdkVersion"] as Int)
+        minSdk = rootProject.extra["minSdkVersion"] as Int
+        targetSdk = rootProject.extra["targetSdkVersion"] as Int
         versionCode = 1
         versionName = "1.0"
         buildConfigField("boolean", "DEBUG_LOG", rootProject.extra["DEBUG_LOG"].toString())
 
         packagingOptions {
-            exclude("META-INF/proguard/coroutines.pro")
+            resources.excludes.add("META-INF/proguard/coroutines.pro")
+            resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
         }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -55,19 +55,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
-        useIR = true
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = rootProject.extra["compose_version"] as String
-        kotlinCompilerVersion = "1.5.21"
-    }
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
     }
 }
 
@@ -81,7 +74,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview:${rootProject.extra["compose_version"]}")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
     implementation("androidx.activity:activity-compose:1.3.1")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${rootProject.extra["compose_version"]}")
+
     annotationProcessor(project(":processor"))
     implementation("androidx.constraintlayout:constraintlayout:2.1.1")
     implementation("com.android.support:appcompat-v7:" + rootProject.extra["SUPPORT_V7_VER"])
@@ -97,5 +90,6 @@ dependencies {
     testImplementation("org.mockito:mockito-core:3.5.11")
     testImplementation("org.robolectric:robolectric:4.5.1")
     testImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${rootProject.extra["compose_version"]}")
     debugImplementation("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_version"]}")
 }
