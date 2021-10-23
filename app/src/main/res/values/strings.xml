@@ -12,6 +12,7 @@
         <item>Camera</item>
         <item>Plugin</item>
         <item>Coroutines</item>
+        <item>ComposeUI</item>
     </array>
     <array name="ui_test_item">
         <item>AutoCompleteTextView</item>

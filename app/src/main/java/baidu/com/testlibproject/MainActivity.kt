@@ -13,6 +13,7 @@ import android.widget.AdapterView
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import baidu.com.commontools.utils.LogHelper
+import baidu.com.testlibproject.composeui.ComposeUIActivity
 import baidu.com.testlibproject.coroutines.CoroutinesActivity
 import baidu.com.testlibproject.coroutines.coroutinesExample4
 import baidu.com.testlibproject.db.StationDbFactory
@@ -30,15 +31,14 @@ import me.wayne.annotation.PluginCenterHolder
 @PluginCenterHolder
 class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
-    private lateinit var mContext: Context
-
-    private var mListView: ListView? = null
+    private lateinit var context: Context
+    private lateinit var listView: ListView
     private val coroutinesScope = CoroutineScope(Dispatchers.IO)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mContext = this
+        context = this
         KotlinSingleton.getInstance(this).gogogo()
 
         coroutinesExample4()
@@ -49,15 +49,17 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
     private fun initView() {
-        mListView = findViewById(R.id.list_view)
+        listView = findViewById(R.id.list_view)
     }
 
     private fun initData() {
-        val strArr = resources.getStringArray(R.array.activity_item)
-        val adapter = SimpleAdapter(mContext)
-        adapter.setStrArr(strArr)
-        mListView!!.adapter = adapter
-        mListView!!.onItemClickListener = this
+        val adapter = SimpleAdapter(context).apply {
+            setStrArr(resources.getStringArray(R.array.activity_item))
+        }
+        listView.let {
+            it.adapter = adapter
+            it.onItemClickListener = this
+        }
 
         coroutinesScope.launch {
             testService()
@@ -69,10 +71,10 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
             LogHelper.d(TAG, "This code runs in Coroutines, current thread = " + Thread.currentThread())
         }
         try {
-            val result = MainServiceClient.getInstance(mContext).add(2, 3, true)
+            val result = MainServiceClient.getInstance(context).add(2, 3, true)
             if (DEBUG) LogHelper.d(TAG, "Service add, result : $result")
 
-            val subBinderA = MainServiceClient.getInstance(mContext).getSubInterfaceA(true)
+            val subBinderA = MainServiceClient.getInstance(context).getSubInterfaceA(true)
             val subInterfaceA = ISubInterfaceA.Stub.asInterface(subBinderA)
             subInterfaceA.methodA1()
             subInterfaceA.methodB1()
@@ -96,8 +98,9 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         }
 
 
-        val resolver = mContext.contentResolver
-        val url = Uri.withAppendedPath(Constants.DB_AUTHORITY_URI, StationDbFactory::class.java.name + "/" + "test")
+        val resolver = context.contentResolver
+        val url = Uri.withAppendedPath(Constants.DB_AUTHORITY_URI,
+            StationDbFactory::class.java.name + "/" + "test")
         resolver.query(url, null, null, null, null)
     }
 
@@ -109,17 +112,18 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         when (position) {
-            INTENT_TEST_UI_ACTIVITY -> startActivity(Intent(mContext, UiTestActivity::class.java))
-            INTENT_TEST_INTENT_ACTIVITY -> startActivity(Intent(mContext, IntentTestActivity::class.java))
-            INTENT_TELEPHONY_MANAGER -> startActivity(Intent(mContext, TelephonyMgrActivity::class.java))
-            INTENT_SMS_MANAGER -> startActivity(Intent(mContext, SmsMgrActivity::class.java))
-            INTENT_AUDIO_MANAGER -> startActivity(Intent(mContext, AudioMgrActivity::class.java))
-            INTENT_VIBRATOR_ACTIVITY -> startActivity(Intent(mContext, VibratorActivity::class.java))
-            INTENT_COMPASS_ACTIVITY -> startActivity(Intent(mContext, CompassActivity::class.java))
-            INTENT_LOCATION_MANAGER -> startActivity(Intent(mContext, LocationMgrActivity::class.java))
-            INTENT_CAMERA_ACTIVITY -> startActivity(Intent(mContext, CameraActivity::class.java))
-            INTENT_PLUGIN_ACTIVITY -> startActivity(Intent(mContext, PluginActivity::class.java))
-            INTENT_COROUTINES_ACTIVITY -> startActivity(Intent(mContext, CoroutinesActivity::class.java))
+            INTENT_TEST_UI_ACTIVITY -> startActivity(Intent(context, UiTestActivity::class.java))
+            INTENT_TEST_INTENT_ACTIVITY -> startActivity(Intent(context, IntentTestActivity::class.java))
+            INTENT_TELEPHONY_MANAGER -> startActivity(Intent(context, TelephonyMgrActivity::class.java))
+            INTENT_SMS_MANAGER -> startActivity(Intent(context, SmsMgrActivity::class.java))
+            INTENT_AUDIO_MANAGER -> startActivity(Intent(context, AudioMgrActivity::class.java))
+            INTENT_VIBRATOR_ACTIVITY -> startActivity(Intent(context, VibratorActivity::class.java))
+            INTENT_COMPASS_ACTIVITY -> startActivity(Intent(context, CompassActivity::class.java))
+            INTENT_LOCATION_MANAGER -> startActivity(Intent(context, LocationMgrActivity::class.java))
+            INTENT_CAMERA_ACTIVITY -> startActivity(Intent(context, CameraActivity::class.java))
+            INTENT_PLUGIN_ACTIVITY -> startActivity(Intent(context, PluginActivity::class.java))
+            INTENT_COROUTINES_ACTIVITY -> startActivity(Intent(context, CoroutinesActivity::class.java))
+            INTENT_COMPOSE_UI_ACTIVITY -> startActivity(Intent(context, ComposeUIActivity::class.java))
         }
     }
 
@@ -138,5 +142,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         private const val INTENT_CAMERA_ACTIVITY = 8
         private const val INTENT_PLUGIN_ACTIVITY = 9
         private const val INTENT_COROUTINES_ACTIVITY = 10
+        private const val INTENT_COMPOSE_UI_ACTIVITY = 11
     }
 }
