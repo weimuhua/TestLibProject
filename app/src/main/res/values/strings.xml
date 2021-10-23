@@ -79,7 +79,6 @@
     <string name="font_green">font_green</string>
     <string name="font_blue">font_blue</string>
     <array name="telephony_arr">
-        <item>设备编号：</item>
         <item>系统平台编号：</item>
         <item>网络运营商：</item>
         <item>所在位置：</item>
@@ -95,4 +94,5 @@
     <string name="start_activity">start non-registered activity</string>
     <string name="start_plugin_activity">start plugin activity</string>
     <string name="hello_world_string">HELLO_WORLD</string>
+    <string name="no_permission_toast_text">未授予权限</string>
 </resources>

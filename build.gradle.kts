@@ -8,7 +8,7 @@ buildscript {
     extra["SUPPORT_V7_VER"] = "true"
     extra["compileSdkVersion"] = 30
     extra["minSdkVersion"] = 21
-    extra["targetSdkVersion"] = 22
+    extra["targetSdkVersion"] = 23
     extra["sourceCompatibility"] = JavaVersion.VERSION_1_8
     extra["targetCompatibility"] = JavaVersion.VERSION_1_8
 
