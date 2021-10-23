@@ -177,6 +177,11 @@
         <activity
             android:name=".ui.MyFragmentActivity"
             android:excludeFromRecents="false" />
+        <activity
+            android:name="baidu.com.testlibproject.composeui.MyComposeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_my_compose"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

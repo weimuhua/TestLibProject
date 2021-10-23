@@ -11,6 +11,7 @@ buildscript {
     extra["targetSdkVersion"] = 23
     extra["sourceCompatibility"] = JavaVersion.VERSION_1_8
     extra["targetCompatibility"] = JavaVersion.VERSION_1_8
+    val compose_version by extra("1.0.1")
 
     repositories {
         maven("https://mirrors.tencent.com/nexus/repository/maven-public/")
@@ -19,7 +20,7 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:7.0.3")
         classpath("com.tencent.now:flutterplugin:1.0.0")
-        classpath(kotlin("gradle-plugin", version = kotlin_version))
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21")
     }
 }
 

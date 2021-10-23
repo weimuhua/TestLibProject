@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">TestLibProject</string>
     <array name="activity_item">
         <item>UI</item>
         <item>Intent</item>
@@ -51,7 +50,6 @@
         <item>Bruce Wayne</item>
         <item>Kevin Durant</item>
     </array>
-    <string name="show_toast">show toast</string>
     <array name="search_view_arr">
         <item>abc</item>
         <item>abcabc</item>
@@ -61,6 +59,15 @@
         <item>fsdfimdd</item>
         <item>hinfhinl</item>
     </array>
+    <array name="telephony_arr">
+        <item>系统平台编号：</item>
+        <item>网络运营商：</item>
+        <item>所在位置：</item>
+        <item>SIM卡国别：</item>
+        <item>SIM卡序列号：</item>
+    </array>
+    <string name="app_name">TestLibProject</string>
+    <string name="show_toast">show toast</string>
     <string name="search">search</string>
     <string name="send_no_btn">发送通知</string>
     <string name="cancel_no_btn">取消通知</string>
@@ -79,13 +86,6 @@
     <string name="font_red">font_red</string>
     <string name="font_green">font_green</string>
     <string name="font_blue">font_blue</string>
-    <array name="telephony_arr">
-        <item>系统平台编号：</item>
-        <item>网络运营商：</item>
-        <item>所在位置：</item>
-        <item>SIM卡国别：</item>
-        <item>SIM卡序列号：</item>
-    </array>
     <string name="play_music">play music</string>
     <string name="volume_up">volume up</string>
     <string name="volume_down">volume down</string>
@@ -96,4 +96,5 @@
     <string name="start_plugin_activity">start plugin activity</string>
     <string name="hello_world_string">HELLO_WORLD</string>
     <string name="no_permission_toast_text">未授予权限</string>
+    <string name="title_activity_my_compose">MyComposeActivity</string>
 </resources>
