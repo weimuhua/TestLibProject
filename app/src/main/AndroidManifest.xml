@@ -26,6 +26,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning, LockedOrientationActivity">
+
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
+
         <activity android:name=".coroutines.CoroutinesActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
