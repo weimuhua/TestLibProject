@@ -57,18 +57,18 @@ dependencies {
     implementation(project(":CommonTools"))
     implementation(project(":annotation"))
     annotationProcessor(project(":processor"))
-    implementation("androidx.constraintlayout:constraintlayout:1.1.3")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.1")
     implementation("com.android.support:appcompat-v7:" + rootProject.extra["SUPPORT_V7_VER"])
-    implementation("androidx.annotation:annotation:1.0.0")
+    implementation("androidx.annotation:annotation:1.2.0")
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${rootProject.extra["kotlin_coroutines"]}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${rootProject.extra["kotlin_coroutines"]}")
 
     // Required -- JUnit 4 framework
-    testImplementation("junit:junit:4.13.1")
-    testImplementation("androidx.test:core:1.3.0")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("androidx.test:core:1.4.0")
     // Optional -- Mockito framework
     testImplementation("org.mockito:mockito-core:3.5.11")
-    testImplementation("org.robolectric:robolectric:4.5-alpha-3")
-    testImplementation("androidx.test.ext:junit:1.1.2")
+    testImplementation("org.robolectric:robolectric:4.5.1")
+    testImplementation("androidx.test.ext:junit:1.1.3")
 }
