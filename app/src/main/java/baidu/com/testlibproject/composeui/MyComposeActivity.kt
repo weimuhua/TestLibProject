@@ -3,12 +3,23 @@ package baidu.com.testlibproject.composeui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import baidu.com.testlibproject.composeui.ui.theme.TestLibProjectTheme
+import coil.compose.rememberImagePainter
 
 class MyComposeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +28,7 @@ class MyComposeActivity : ComponentActivity() {
             TestLibProjectTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Jetpack Compose")
+                    MessageCard(Message("wayne", "this is my way"))
                 }
             }
         }
@@ -25,14 +36,33 @@ class MyComposeActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun MessageCard(msg: Message) {
+    Row() {
+        Image(
+            painter = rememberImagePainter("http://thirdqq.qlogo.cn/qqapp/101490787/2293D757B1A1F326A620663724D8E1BE/640"),
+            contentDescription = null,
+            modifier = Modifier
+                .size(60.dp)
+                .clip(CircleShape)
+        )
+
+        Spacer(modifier = Modifier.size(10.dp))
+
+        Column() {
+            Text(text = msg.author)
+            Spacer(modifier = Modifier.size(5.dp))
+            Text(text = msg.body)
+        }
+    }
 }
+
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun PreviewMessageCard() {
     TestLibProjectTheme {
-        Greeting("Android")
+        MessageCard(Message("wayne", "this is my way"))
     }
 }
+
+data class Message(val author: String, val body: String)

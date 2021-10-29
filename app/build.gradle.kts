@@ -69,6 +69,7 @@ dependencies {
     implementation(project(":CommonTools"))
     implementation(project(":annotation"))
     implementation("com.google.android.material:material:1.4.0")
+    implementation("io.coil-kt:coil-compose:1.4.0")
     implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
     implementation("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
     implementation("androidx.compose.ui:ui-tooling-preview:${rootProject.extra["compose_version"]}")
