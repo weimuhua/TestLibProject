@@ -178,6 +178,10 @@
             android:exported="false"
             android:label="@string/title_activity_my_compose"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="baidu.com.testlibproject.composeui.ComposeMainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_my_compose" />
     </application>
 
 </manifest>

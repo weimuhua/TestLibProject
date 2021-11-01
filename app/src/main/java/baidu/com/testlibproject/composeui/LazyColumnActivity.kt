@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import baidu.com.testlibproject.composeui.ui.theme.MyAppTopBar
 import baidu.com.testlibproject.composeui.ui.theme.TestLibProjectTheme
 import coil.compose.rememberImagePainter
 
@@ -25,12 +27,16 @@ class MyComposeActivity : ComponentActivity() {
             TestLibProjectTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    val columnSize = 100
-                    val messages = mutableListOf<Message>()
-                    for (i in 0 until columnSize) {
-                        messages.add(i, Message("wayne", "this is my way"))
+                    Scaffold(topBar = {
+                        MyAppTopBar()
+                    }) {
+                        val columnSize = 100
+                        val messages = mutableListOf<Message>()
+                        for (i in 0 until columnSize) {
+                            messages.add(i, Message("wayne", "this is my way"))
+                        }
+                        MessageList(messages)
                     }
-                    MessageList(messages)
                 }
             }
         }
