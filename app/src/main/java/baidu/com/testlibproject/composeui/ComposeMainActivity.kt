@@ -27,12 +27,22 @@ import baidu.com.testlibproject.composeui.ui.theme.MyAppTopBar
 import baidu.com.testlibproject.composeui.ui.theme.TestLibProjectTheme
 import coil.compose.rememberImagePainter
 
-private const val TAG = "ComposeMainActivity"
 
 class ComposeMainActivity : ComponentActivity() {
 
+    companion object {
+        private const val LAZY_COLUMN_ACTIVITY = "LazyColumn"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val listBean = ActivityBean(LAZY_COLUMN_ACTIVITY) {
+            onClick(LAZY_COLUMN_ACTIVITY)
+        }
+        val activityBeans = mutableListOf<ActivityBean>().apply {
+            add(listBean)
+        }
 
         setContent {
             TestLibProjectTheme {
@@ -41,22 +51,16 @@ class ComposeMainActivity : ComponentActivity() {
                     Scaffold(topBar = {
                         MyAppTopBar()
                     }) {
-                        val listBean = ActivityBean("ComposeList") {
-                            startActivity(
-                                Intent(
-                                    this@ComposeMainActivity,
-                                    MyComposeActivity::class.java
-                                )
-                            )
-                        }
-                        val activityBeans = mutableListOf<ActivityBean>().apply {
-                            add(listBean)
-                        }
-
                         ActivityList(activityBeans = activityBeans)
                     }
                 }
             }
+        }
+    }
+
+    private fun onClick(title: String) {
+        if (LAZY_COLUMN_ACTIVITY == title) {
+            startActivity(Intent(this, MyComposeActivity::class.java))
         }
     }
 
