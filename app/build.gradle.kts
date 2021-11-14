@@ -26,6 +26,9 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        ndk {
+            abiFilters.add("armeabi-v7a")
+        }
     }
     signingConfigs {
         register("release") {
