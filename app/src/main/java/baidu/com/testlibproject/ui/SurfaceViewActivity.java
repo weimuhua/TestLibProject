@@ -9,6 +9,7 @@ import android.view.SurfaceView;
 
 import java.io.IOException;
 
+import baidu.com.commontools.utils.LogHelper;
 import baidu.com.testlibproject.R;
 
 public class SurfaceViewActivity extends Activity {
@@ -29,21 +30,17 @@ public class SurfaceViewActivity extends Activity {
         surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
+                LogHelper.i(TAG, "surfaceCreated: " + holder);
                 mMediaPlayer = new MediaPlayer();
                 mMediaPlayer.setSurface(holder.getSurface());
 
 //                String path = "android.resource://" + getPackageName() + "/" + R.raw.vid_bigbuckbunny;
-                String path = "http://mediatest.qq.com/qqstocdnd?filekey=828a9844a4f1369517949a9e1b4bc0ac" +
-                        "&fileid=3062020103045b3059020100041231343431313531393838353039313631363102030f424" +
-                        "1020424253db702045a1e7917042038323861393834346134663133363935313739343961396531623" +
-                        "4626330616302010002020902020300c3520201000400&bid=10011&setnum=50002&authkey=30400" +
-                        "201010439303702010102010102040dc3f35002030f4241020424253db7020424253db702030f4df90" +
-                        "20429253db702010002045a26621502047ec0a34a0400&filetype=2306";
+                String path = "http://adsmind.gdtimg.com/ads_svp_video__0b6bwyaaeaaaw4aclqlymrpbvnqeak3aaasa.f40.mp4?dis_k=79c09f652c171a890b45e0c443cf3a48&dis_t=1584932735";
                 try {
                     mMediaPlayer.setDataSource(SurfaceViewActivity.this, Uri.parse(path));
                     mMediaPlayer.prepare();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                   LogHelper.w(TAG, "prepare fail ", e);
                 }
 
                 mSurfaceCreated = true;
@@ -53,10 +50,12 @@ public class SurfaceViewActivity extends Activity {
 
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+                LogHelper.i(TAG, "surfaceChanged: " + holder);
             }
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
+                LogHelper.i(TAG, "surfaceDestroyed: " + holder);
             }
         });
     }
