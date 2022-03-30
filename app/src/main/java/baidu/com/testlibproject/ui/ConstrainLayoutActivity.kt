@@ -5,14 +5,10 @@ import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.AdapterView
+import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import baidu.com.testlibproject.R
-import kotlinx.android.synthetic.main.activity_constrain_layout.*
 
 class ConstrainLayoutActivity : Activity() {
 
@@ -41,10 +37,14 @@ class ConstrainLayoutActivity : Activity() {
         }
     }
 
+    private lateinit var spinner: Spinner
+    private lateinit var spinnerTv: TextView
+    private lateinit var frameLayout: FrameLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_constrain_layout)
-        spinner_tv.setOnClickListener { spinner.performClick() }
+        spinnerTv.setOnClickListener { spinner.performClick() }
         val adapter = ArrayAdapter(this,
                 android.R.layout.simple_list_item_1, TEST_PROGRAM_ARRAY)
         spinner.adapter = adapter
@@ -52,8 +52,8 @@ class ConstrainLayoutActivity : Activity() {
         spinner.onItemSelectedListener = object : OnItemSelectedListener {
             @RequiresApi(api = Build.VERSION_CODES.N)
             override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-                spinner_tv.text = TEST_PROGRAM_ARRAY[position]
-                frame_layout.removeAllViews()
+                spinnerTv.text = TEST_PROGRAM_ARRAY[position]
+                frameLayout.removeAllViews()
                 when (id) {
                     0L -> {
                         addConstraintBasic()
@@ -86,20 +86,20 @@ class ConstrainLayoutActivity : Activity() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                spinner_tv.text = ""
+                spinnerTv.text = ""
             }
         }
     }
 
     private fun addConstraintBasic() {
         val subView = LayoutInflater.from(this).inflate(R.layout.layout_constraint_basic,
-                frame_layout, false)
-        frame_layout.addView(subView)
+                frameLayout, false)
+        frameLayout.addView(subView)
     }
 
     private fun addConstraintGoneMargin() {
         val subView = LayoutInflater.from(this).inflate(R.layout.layout_constraint_margin,
-                frame_layout, false)
+                frameLayout, false)
         val normalMarginBtn = subView.findViewById<Button>(R.id.normal_margin_btn)
         val normalTvB = subView.findViewById<TextView>(R.id.normal_tv_b)
         normalMarginBtn.setOnClickListener {
@@ -118,50 +118,50 @@ class ConstrainLayoutActivity : Activity() {
                 goneTvB.visibility = View.VISIBLE
             }
         }
-        frame_layout.addView(subView)
+        frameLayout.addView(subView)
     }
 
     private fun addConstraintBias() {
         val subView = LayoutInflater.from(this).inflate(R.layout.layout_constraint_bias,
-                frame_layout, false)
-        frame_layout.addView(subView)
+                frameLayout, false)
+        frameLayout.addView(subView)
     }
 
     private fun addConstraintRatio() {
         val subView = LayoutInflater.from(this).inflate(R.layout.layout_constraint_ratio,
-                frame_layout, false)
-        frame_layout.addView(subView)
+                frameLayout, false)
+        frameLayout.addView(subView)
     }
 
     private fun addConstraintChains() {
         val subView = LayoutInflater.from(this).inflate(R.layout.layout_constraint_chains,
-                frame_layout, false)
-        frame_layout.addView(subView)
+                frameLayout, false)
+        frameLayout.addView(subView)
     }
 
     private fun addConstraintGuideLine() {
         val subView = LayoutInflater.from(this).inflate(R.layout.layout_constraint_guideline,
-                frame_layout, false)
-        frame_layout.addView(subView)
+                frameLayout, false)
+        frameLayout.addView(subView)
     }
 
     private fun addConstraintDimension() {
         val subView = LayoutInflater.from(this).inflate(R.layout.layout_constraint_dimension,
-                frame_layout, false)
-        frame_layout.addView(subView)
+                frameLayout, false)
+        frameLayout.addView(subView)
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private fun addRelativeLayoutTest() {
         val testLayout = ConstraintLayoutTestLayout(this)
         testLayout.testRelativeLayout()
-        frame_layout.addView(testLayout)
+        frameLayout.addView(testLayout)
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private fun addConstraintLayoutTest() {
         val testLayout = ConstraintLayoutTestLayout(this)
         testLayout.testConstraintLayout()
-        frame_layout.addView(testLayout)
+        frameLayout.addView(testLayout)
     }
 }

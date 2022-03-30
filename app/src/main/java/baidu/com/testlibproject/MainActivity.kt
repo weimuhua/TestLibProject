@@ -13,7 +13,6 @@ import android.widget.AdapterView
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import baidu.com.commontools.utils.LogHelper
-import baidu.com.testlibproject.composeui.ComposeMainActivity
 import baidu.com.testlibproject.coroutines.CoroutinesActivity
 import baidu.com.testlibproject.coroutines.coroutinesExample4
 import baidu.com.testlibproject.db.StationDbFactory
@@ -123,7 +122,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
             INTENT_CAMERA_ACTIVITY -> startActivity(Intent(context, CameraActivity::class.java))
             INTENT_PLUGIN_ACTIVITY -> startActivity(Intent(context, PluginActivity::class.java))
             INTENT_COROUTINES_ACTIVITY -> startActivity(Intent(context, CoroutinesActivity::class.java))
-            INTENT_COMPOSE_UI_ACTIVITY -> startActivity(Intent(context, ComposeMainActivity::class.java))
         }
     }
 
