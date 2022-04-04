@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import baidu.com.commontools.threadpool.MhThreadPool
 import baidu.com.commontools.utils.LogHelper
 import baidu.com.testlibproject.R
 
@@ -60,6 +61,15 @@ class AudioRecordDemoActivity : AppCompatActivity() {
                     recorder.startRecording()
                     isRecording = true
 
+                    MhThreadPool.getInstance().addBkgTask {
+                        val audioData = ByteArray(bufferSize)
+                        // 持续读取音频数据到字节数组, 再将字节数组写入文件
+                        while (isRecording) {
+                            val time = System.currentTimeMillis()
+                            recorder.read(audioData, 0, audioData.size)
+                            LogHelper.v(TAG, "read PCM data, cost=${System.currentTimeMillis() - time}")
+                        }
+                    }
                 } catch (e: java.lang.IllegalStateException) {
                     LogHelper.w(TAG, "startRecording fail", e)
                 }
@@ -72,6 +82,7 @@ class AudioRecordDemoActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
                 try {
+                    isRecording = false
                     recorder.stop()
                 } catch (e: java.lang.IllegalStateException) {
                     LogHelper.w(TAG, "stop fail", e)
@@ -122,7 +133,7 @@ class AudioRecordDemoActivity : AppCompatActivity() {
         private const val TAG = "AudioRecordDemoActivity"
         private const val REQUEST_CODE = 1001
         private const val SOURCE = MediaRecorder.AudioSource.MIC
-        private const val SAMPLE_RATE = 44100 // 采样频率为 44100 Hz
+        private const val SAMPLE_RATE = 16000
         private const val CHANNEL_IN_MONO = AudioFormat.CHANNEL_IN_MONO // 单声道
         private const val ENCODING_PCM_16BIT = AudioFormat.ENCODING_PCM_16BIT //量化精度为 16 位
     }
