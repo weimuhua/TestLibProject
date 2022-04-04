@@ -3,11 +3,15 @@ package baidu.com.testlibproject.audio
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.media.AudioFormat
+import android.media.AudioRecord
+import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import baidu.com.commontools.utils.LogHelper
 import baidu.com.testlibproject.R
 
 class AudioRecordDemoActivity : AppCompatActivity() {
@@ -15,6 +19,10 @@ class AudioRecordDemoActivity : AppCompatActivity() {
     private var hasPermission = false
     private lateinit var recordBtn: Button
     private lateinit var stopBtn: Button
+
+    private var bufferSize = 0
+    private var isRecording = false
+    private lateinit var recorder: AudioRecord
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +39,9 @@ class AudioRecordDemoActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (REQUEST_CODE == requestCode) {
             hasPermission = checkHasPermission()
+            if (hasPermission) {
+                initRecorder()
+            }
         }
     }
 
@@ -38,17 +49,46 @@ class AudioRecordDemoActivity : AppCompatActivity() {
     private fun initView() {
         recordBtn = findViewById<Button>(R.id.record_btn).apply {
             text = "RECORD"
+            setOnClickListener {
+                if (!hasPermission) {
+                    throw IllegalStateException("cannot record cause has no permission...")
+                }
+                if (isRecording) {
+                    return@setOnClickListener
+                }
+                try {
+                    recorder.startRecording()
+                    isRecording = true
+
+                } catch (e: java.lang.IllegalStateException) {
+                    LogHelper.w(TAG, "startRecording fail", e)
+                }
+            }
         }
         stopBtn = findViewById<Button>(R.id.stop_btn).apply {
             text = "STOP"
+            setOnClickListener {
+                if (!isRecording) {
+                    return@setOnClickListener
+                }
+                try {
+                    recorder.stop()
+                } catch (e: java.lang.IllegalStateException) {
+                    LogHelper.w(TAG, "stop fail", e)
+                }
+            }
         }
     }
 
     private fun checkPermission() {
         hasPermission = checkHasPermission()
 
-        if (!hasPermission && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), REQUEST_CODE)
+        if (hasPermission) {
+            initRecorder()
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), REQUEST_CODE)
+            }
         }
     }
 
@@ -59,7 +99,31 @@ class AudioRecordDemoActivity : AppCompatActivity() {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
+    @SuppressLint("MissingPermission")
+    private fun initRecorder() {
+        try {
+            bufferSize =
+                AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_IN_MONO, ENCODING_PCM_16BIT)
+            recorder =
+                AudioRecord(SOURCE, SAMPLE_RATE, CHANNEL_IN_MONO, ENCODING_PCM_16BIT, bufferSize)
+        } catch (e: IllegalArgumentException) {
+            LogHelper.e(TAG, "create recorder fail ", e)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (this::recorder.isInitialized) {
+            recorder.release()
+        }
+    }
+
     companion object {
+        private const val TAG = "AudioRecordDemoActivity"
         private const val REQUEST_CODE = 1001
+        private const val SOURCE = MediaRecorder.AudioSource.MIC
+        private const val SAMPLE_RATE = 44100 // 采样频率为 44100 Hz
+        private const val CHANNEL_IN_MONO = AudioFormat.CHANNEL_IN_MONO // 单声道
+        private const val ENCODING_PCM_16BIT = AudioFormat.ENCODING_PCM_16BIT //量化精度为 16 位
     }
 }
