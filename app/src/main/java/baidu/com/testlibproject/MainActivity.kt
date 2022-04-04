@@ -13,6 +13,7 @@ import android.widget.AdapterView
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import baidu.com.commontools.utils.LogHelper
+import baidu.com.testlibproject.audio.AudioRecordDemoActivity
 import baidu.com.testlibproject.composeui.ComposeMainActivity
 import baidu.com.testlibproject.coroutines.CoroutinesActivity
 import baidu.com.testlibproject.coroutines.coroutinesExample4
@@ -124,6 +125,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
             INTENT_PLUGIN_ACTIVITY -> startActivity(Intent(context, PluginActivity::class.java))
             INTENT_COROUTINES_ACTIVITY -> startActivity(Intent(context, CoroutinesActivity::class.java))
             INTENT_COMPOSE_UI_ACTIVITY -> startActivity(Intent(context, ComposeMainActivity::class.java))
+            INTENT_AUDIO_RECORD_DEMO_ACTIVITY -> startActivity(Intent(context, AudioRecordDemoActivity::class.java))
         }
     }
 
@@ -143,5 +145,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         private const val INTENT_PLUGIN_ACTIVITY = 9
         private const val INTENT_COROUTINES_ACTIVITY = 10
         private const val INTENT_COMPOSE_UI_ACTIVITY = 11
+        private const val INTENT_AUDIO_RECORD_DEMO_ACTIVITY = 12
     }
 }
