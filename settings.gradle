@@ -1,16 +1,19 @@
 pluginManagement {
     repositories {
-        gradlePluginPortal()
         maven { url "https://mirrors.tencent.com/nexus/repository/maven-public/" }
         maven { url "./gradle_repo" }
-        mavenCentral()
+        maven { url "https://maven.aliyun.com/repository/google"}
+        maven { url "https://maven.aliyun.com/repository/gradle-plugin"}
+        maven { url "https://maven.aliyun.com/repository/jcenter"}
     }
 }
 dependencyResolutionManagement {
     repositories {
         maven { url "https://mirrors.tencent.com/nexus/repository/maven-public/" }
         maven { url "./gradle_repo" }
-        mavenCentral()
+        maven { url "https://maven.aliyun.com/repository/google"}
+        maven { url "https://maven.aliyun.com/repository/gradle-plugin"}
+        maven { url "https://maven.aliyun.com/repository/jcenter"}
     }
 }
 rootProject.name = "TestLibProject"
