@@ -44,6 +44,10 @@ class ConstrainLayoutActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_constrain_layout)
+        spinnerTv = findViewById(R.id.spinner_tv)
+        spinner = findViewById(R.id.spinner)
+        frameLayout = findViewById(R.id.frame_layout)
+
         spinnerTv.setOnClickListener { spinner.performClick() }
         val adapter = ArrayAdapter(this,
                 android.R.layout.simple_list_item_1, TEST_PROGRAM_ARRAY)
