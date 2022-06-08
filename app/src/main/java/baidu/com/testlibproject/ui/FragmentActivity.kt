@@ -2,6 +2,7 @@ package baidu.com.testlibproject.ui
 
 import android.os.Bundle
 import android.util.SparseArray
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import baidu.com.commontools.utils.LogHelper
@@ -28,6 +29,10 @@ class MyFragmentActivity : FragmentActivity() {
         setContentView(R.layout.layout_my_fragment_activity)
         savedInstanceState?.apply {
             clearFragments()
+        }
+        val showBtn = findViewById<View>(R.id.show_dialog_fragment_btn)
+        showBtn.setOnClickListener {
+            BottomDialogFragment.showDialog(supportFragmentManager)
         }
     }
 
