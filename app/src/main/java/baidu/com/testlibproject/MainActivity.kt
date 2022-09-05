@@ -2,10 +2,11 @@
 
 package baidu.com.testlibproject
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.RemoteException
@@ -13,6 +14,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import baidu.com.commontools.utils.LogHelper
 import baidu.com.testlibproject.audio.AudioRecordDemoActivity
 import baidu.com.testlibproject.composeui.ComposeMainActivity
@@ -27,6 +29,8 @@ import baidu.com.testlibproject.sensor.LocationMgrActivity
 import baidu.com.testlibproject.service.*
 import baidu.com.testlibproject.test.KotlinSingleton
 import baidu.com.testlibproject.ui.UiTestActivity
+import com.anggrayudi.storage.media.MediaStoreCompat
+import com.anggrayudi.storage.media.MediaType
 import com.tencent.mmkv.MMKV
 import kotlinx.coroutines.*
 import me.wayne.annotation.PluginCenterHolder
@@ -38,6 +42,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     private lateinit var listView: ListView
     private val coroutinesScope = CoroutineScope(Dispatchers.IO)
 
+    @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -50,11 +55,31 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         initData()
         testProvider()
         testMmkv()
+        testLoadAudioFiles()
+    }
+
+    override fun onBackPressed() {
+        finish()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         coroutinesScope.cancel()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQ_CODE) {
+            if (hasPermission()) {
+                coroutinesScope.launch {
+                    loadAllAudioFilesByLib()
+                }
+            }
+        }
     }
 
     private fun initView() {
@@ -205,10 +230,36 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         }
     }
 
+    private fun testLoadAudioFiles() {
+        if (hasPermission()) {
+            coroutinesScope.launch {
+                loadAllAudioFilesByLib()
+            }
+        } else {
+            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQ_CODE)
+        }
+    }
+
+    private fun loadAllAudioFilesByLib() {
+        val list = MediaStoreCompat.fromMediaType(this, MediaType.AUDIO)
+        val legalExtensionList = listOf("mp4", "MP4", "mp3", "MP3", "m4a")
+        val newList = list.filter {
+            legalExtensionList.contains(it.extension) && !it.absolutePath.contains("ringtone")
+        }
+        for (file in newList) {
+            LogHelper.i(TAG, "audio file: ${file.baseName}, ${file.extension}, ${file.absolutePath}")
+        }
+    }
+
+    private fun hasPermission() = ContextCompat.checkSelfPermission(
+        this, Manifest.permission.READ_EXTERNAL_STORAGE
+    ) == PackageManager.PERMISSION_GRANTED
+
     companion object {
         private const val TAG = "MainActivityTAG"
         private const val DEBUG = FeatureConfig.DEBUG
 
+        private const val REQ_CODE = 1001
         private const val INTENT_TEST_UI_ACTIVITY = 0
         private const val INTENT_TEST_INTENT_ACTIVITY = 1
         private const val INTENT_TELEPHONY_MANAGER = 2
