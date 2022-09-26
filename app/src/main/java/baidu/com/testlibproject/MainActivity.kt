@@ -13,6 +13,7 @@ import android.os.RemoteException
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import baidu.com.commontools.utils.LogHelper
@@ -56,6 +57,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         testProvider()
         testMmkv()
         testLoadAudioFiles()
+        testPickAudioFile()
     }
 
     override fun onBackPressed() {
@@ -248,6 +250,23 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         }
         for (file in newList) {
             LogHelper.i(TAG, "audio file: ${file.baseName}, ${file.extension}, ${file.absolutePath}")
+        }
+    }
+
+    private fun testPickAudioFile() {
+        val requestAudioFile = 123456
+        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+            type = "audio/*;video/*"
+        }
+//        val intent = Intent(
+//            Intent.ACTION_PICK,
+//            android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+//        )
+
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivityForResult(intent, requestAudioFile)
+        } else {
+            Toast.makeText(this, "cannot handle ACTION_GET_CONTENT", Toast.LENGTH_SHORT).show()
         }
     }
 
