@@ -46,6 +46,7 @@ android {
         kotlinCompilerExtensionVersion "${rootProject.ext.compose_version}"
         kotlinCompilerVersion "${rootProject.ext.kotlin_version}"
     }
+    namespace 'baidu.com.testlibproject'
 }
 
 dependencies {
