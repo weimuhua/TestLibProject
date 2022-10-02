@@ -11,7 +11,7 @@ ext {
     kotlin_coroutines = "1.6.0"
     DEBUG_LOG = "true"
     SUPPORT_V7_VER = "true"
-    compileSdkVersion = 31
+    compileSdkVersion = 33
     minSdkVersion = 21
     targetSdkVersion = 23
 }
