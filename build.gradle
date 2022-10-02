@@ -13,7 +13,7 @@ ext {
     SUPPORT_V7_VER = "true"
     compileSdkVersion = 33
     minSdkVersion = 21
-    targetSdkVersion = 23
+    targetSdkVersion = 30
 }
 
 task clean(type: Delete) {
