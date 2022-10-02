@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         testProvider()
         testMmkv()
         testLoadAudioFiles()
-        testPickAudioFile()
     }
 
     override fun onBackPressed() {
