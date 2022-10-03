@@ -68,6 +68,19 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         coroutinesScope.cancel()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 123456 && resultCode == RESULT_OK) {
+            val selectedImageUri = data?.data
+            LogHelper.i(TAG, "selectedImageUri $selectedImageUri")
+            if (selectedImageUri == null) {
+                return
+            }
+
+            LogHelper.i(TAG, "selectedImageUri type ${contentResolver.getType(selectedImageUri)}")
+        }
+    }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -255,7 +268,9 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     private fun testPickAudioFile() {
         val requestAudioFile = 123456
         val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
-            type = "audio/*;video/*"
+            type = "*/*"
+            putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("video/*", "audio/*"))
+            addCategory(Intent.CATEGORY_OPENABLE)
         }
 //        val intent = Intent(
 //            Intent.ACTION_PICK,
