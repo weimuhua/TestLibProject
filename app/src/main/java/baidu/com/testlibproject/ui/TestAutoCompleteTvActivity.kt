@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
+import baidu.com.commontools.threadpool.MhThreadPool
 import baidu.com.commontools.utils.LogHelper
 import baidu.com.testlibproject.R
 import baidu.com.testlibproject.service.MainProcessService
@@ -16,7 +17,9 @@ class TestAutoCompleteTvActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.test_auto_complete_tv_layout)
 
-        bindMainService()
+        MhThreadPool.getInstance().addUiTask {
+            bindMainService()
+        }
     }
 
     private fun bindMainService() {
