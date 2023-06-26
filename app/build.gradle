@@ -41,7 +41,6 @@ android {
 
     buildFeatures {
         compose true
-        aidl true
     }
     composeOptions {
         kotlinCompilerExtensionVersion "${rootProject.ext.compose_version}"
