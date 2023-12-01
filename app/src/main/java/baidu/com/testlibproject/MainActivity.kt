@@ -34,9 +34,11 @@ import baidu.com.testlibproject.test.KotlinSingleton
 import baidu.com.testlibproject.ui.UiTestActivity
 import com.anggrayudi.storage.media.MediaStoreCompat
 import com.anggrayudi.storage.media.MediaType
+import com.example.nativelib.NativeLib
 import com.tencent.mmkv.MMKV
 import kotlinx.coroutines.*
 import me.wayne.annotation.PluginCenterHolder
+import kotlin.system.measureTimeMillis
 
 @PluginCenterHolder
 class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -112,6 +114,12 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         }
 
         coroutinesScope.launch {
+            val cost = measureTimeMillis {
+                val nativeLib = NativeLib()
+                LogHelper.i(TAG, "native str ${nativeLib.stringFromJNI()}")
+            }
+            LogHelper.i(TAG, "get native str cost $cost")
+
             testService()
         }
     }

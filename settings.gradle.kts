@@ -22,8 +22,11 @@ include(":annotation")
 include(":processor")
 include(":CommonTools")
 include(":flutter_transform_plugin")
+include(":nativelib")
 
 project(":CommonTools").projectDir = file("submodules/CommonTools")
 project(":processor").projectDir = file("submodules/processor")
 project(":annotation").projectDir = file("submodules/annotation")
+project(":nativelib").projectDir = file("submodules/nativelib")
 project(":flutter_transform_plugin").projectDir = file("submodules/flutter_transform_plugin")
+
