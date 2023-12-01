@@ -116,9 +116,13 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         coroutinesScope.launch {
             val cost = measureTimeMillis {
                 val nativeLib = NativeLib()
+                val a = 66
+                val b = 22
                 LogHelper.i(TAG, "native str ${nativeLib.stringFromJNI()}")
+                LogHelper.i(TAG, "addNative, $a + $b = ${nativeLib.addNative(a, b)}")
+                LogHelper.i(TAG, "subtractNative, $a - $b = ${nativeLib.subtractNative(a, b)}")
             }
-            LogHelper.i(TAG, "get native str cost $cost")
+            LogHelper.i(TAG, "invoke native cost $cost")
 
             testService()
         }
